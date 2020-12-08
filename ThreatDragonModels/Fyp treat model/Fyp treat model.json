@@ -1,0 +1,17 @@
+{
+  "summary": {
+    "title": "Fyp treat model",
+    "owner": "Louise Kilheeney",
+    "description": "this is a mobile app development of a Bookclub. This project will involve the planning, design, implementation, and testing of a mobile app to track a Bookclub’s “books”. This app should allow tracking of books read and reviews, as well as recommendations,\nand could include links to other “bookclubs”.  also allow members of book clubs to communicate with each other using messaging feature."
+  },
+  "detail": {
+    "contributors": [],
+    "diagrams": [
+      {
+        "title": "BookClub Diagram",
+        "thumbnail": "./public/content/images/thumbnail.jpg",
+        "id": 0
+      }
+    ]
+  }
+}
