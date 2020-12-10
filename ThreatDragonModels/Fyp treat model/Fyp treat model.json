@@ -84,8 +84,8 @@
                 "height": 80
               },
               "position": {
-                "x": 482,
-                "y": 415
+                "x": 485,
+                "y": 414
               },
               "angle": 0,
               "id": "260799c0-3f4a-47ef-b8fc-eacf4eb16ea3",
@@ -94,35 +94,30 @@
               "threats": [
                 {
                   "ruleId": "4adaa48a-0345-4533-a189-64c98c4420dd",
-                  "title": "Generic tampering threat",
+                  "title": "tampering threat to the Datebase",
                   "type": "Tampering",
                   "status": "Open",
                   "severity": "Medium",
-                  "description": "A generic tampering threat"
-                },
-                {
-                  "ruleId": "87bc37e2-798e-4d68-bb96-feb1da26da48",
-                  "title": "Generic repudiation threat",
-                  "type": "Repudiation",
-                  "status": "Open",
-                  "severity": "Medium",
-                  "description": "A generic repudiation threat"
+                  "description": "Risk of users data of the books they have read and their reviews and their personal data be modified which violates the integrity",
+                  "mitigation": "Adding permission so only users with the correct permission can see ant personal details of the account."
                 },
                 {
                   "ruleId": "13000296-b17d-4b72-9cc4-f5cc33f80e4c",
-                  "title": "Generic informtion disclosure threat",
+                  "title": "informtion disclosure threat to the Database",
                   "type": "Information disclosure",
-                  "status": "Open",
-                  "severity": "Medium",
-                  "description": "A generic information disclosure threat"
+                  "status": "Mitigated",
+                  "severity": "Low",
+                  "description": "Risk of disclosing information to an authorized user, which violates confidentiality",
+                  "mitigation": "Passwords are stored as encryptions and adding settings that only users with permission can see this information"
                 },
                 {
                   "ruleId": "edb05d76-a695-455f-947b-7d67b78bc31d",
-                  "title": "Generic DoS threat",
+                  "title": "DoS threat to the Database",
                   "type": "Denial of service",
-                  "status": "Open",
+                  "status": "Mitigated",
                   "severity": "Medium",
-                  "description": "A generic DoS threat"
+                  "description": "DoS threat of a hacker making too many requests either trying to log in which would slow the system.",
+                  "mitigation": "have a set quota of times a user can log in before a cooling-off period."
                 }
               ],
               "attrs": {
@@ -238,19 +233,21 @@
               "threats": [
                 {
                   "ruleId": "b2a6d40d-d3f8-4750-8e4d-c02cc84b13dc",
-                  "title": "Generic spoofing threat",
+                  "title": "spoofing threat",
                   "type": "Spoofing",
-                  "status": "Open",
-                  "severity": "Medium",
-                  "description": "A generic spoofing threat"
+                  "status": "Mitigated",
+                  "severity": "Low",
+                  "description": "treat of  hacker logging in as another user without their knowledge",
+                  "mitigation": "passwords are a mixture of letters and numbers and have to be over 6 characters."
                 },
                 {
                   "ruleId": "87bc37e2-798e-4d68-bb96-feb1da26da48",
-                  "title": "Generic repudiation threat",
+                  "title": "repudiation threat",
                   "type": "Repudiation",
                   "status": "Open",
                   "severity": "Medium",
-                  "description": "A generic repudiation threat"
+                  "description": "A generic repudiation threat",
+                  "mitigation": "addin secure logging"
                 }
               ],
               "attrs": {
@@ -276,8 +273,16 @@
               },
               "vertices": [
                 {
+                  "x": 539,
+                  "y": 120
+                },
+                {
                   "x": 547,
                   "y": 137
+                },
+                {
+                  "x": 539,
+                  "y": 155
                 }
               ],
               "id": "db5653c9-3388-4f25-8ca8-505de86a5749",
@@ -396,7 +401,7 @@
                 },
                 {
                   "ruleId": "87bc37e2-798e-4d68-bb96-feb1da26da48",
-                  "title": "Generic repudiation threat",
+                  "title": "repudiation threat",
                   "type": "Repudiation",
                   "status": "Open",
                   "severity": "Medium",
@@ -411,14 +416,6 @@
                   "severity": "Medium",
                   "description": "disclosing information to an authorized user, which violates confidentiality.",
                   "mitigation": "only users with the correct permission can see their own data."
-                },
-                {
-                  "ruleId": "edb05d76-a695-455f-947b-7d67b78bc31d",
-                  "title": "DoS threat",
-                  "type": "Denial of service",
-                  "status": "Open",
-                  "severity": "Medium",
-                  "description": "A generic DoS threat"
                 }
               ],
               "attrs": {
@@ -444,8 +441,16 @@
               },
               "vertices": [
                 {
+                  "x": 639,
+                  "y": 222
+                },
+                {
                   "x": 690,
                   "y": 207
+                },
+                {
+                  "x": 749,
+                  "y": 175
                 }
               ],
               "id": "94f6a008-ba1e-4bb1-9539-bbdf7a71e1fd",
@@ -492,51 +497,21 @@
               "threats": [
                 {
                   "ruleId": "b2a6d40d-d3f8-4750-8e4d-c02cc84b13dc",
-                  "title": "Generic spoofing threat",
+                  "title": "spoofing threat",
                   "type": "Spoofing",
                   "status": "Open",
                   "severity": "Medium",
-                  "description": "A generic spoofing threat"
+                  "description": "Risk of the wrong user receiving the wrong message",
+                  "mitigation": "using passwords to ensure a secure connection from person to person."
                 },
                 {
                   "ruleId": "4adaa48a-0345-4533-a189-64c98c4420dd",
-                  "title": "Generic tampering threat",
+                  "title": "tampering threat",
                   "type": "Tampering",
                   "status": "Open",
                   "severity": "Medium",
-                  "description": "A generic tampering threat"
-                },
-                {
-                  "ruleId": "87bc37e2-798e-4d68-bb96-feb1da26da48",
-                  "title": "Generic repudiation threat",
-                  "type": "Repudiation",
-                  "status": "Open",
-                  "severity": "Medium",
-                  "description": "A generic repudiation threat"
-                },
-                {
-                  "ruleId": "13000296-b17d-4b72-9cc4-f5cc33f80e4c",
-                  "title": "Generic informtion disclosure threat",
-                  "type": "Information disclosure",
-                  "status": "Open",
-                  "severity": "Medium",
-                  "description": "A generic information disclosure threat"
-                },
-                {
-                  "ruleId": "edb05d76-a695-455f-947b-7d67b78bc31d",
-                  "title": "Generic DoS threat",
-                  "type": "Denial of service",
-                  "status": "Open",
-                  "severity": "Medium",
-                  "description": "A generic DoS threat"
-                },
-                {
-                  "ruleId": "c1377855-ea20-4c97-8861-f95c364fb8d2",
-                  "title": "Generic elevation threat",
-                  "type": "Elevation of privilege",
-                  "status": "Open",
-                  "severity": "Medium",
-                  "description": "A generic elevation threat"
+                  "description": "Messages are modified by a hacker before been stored in a database",
+                  "mitigation": "Only given users with permission to alter their messages"
                 }
               ],
               "attrs": {
@@ -671,8 +646,20 @@
                   "y": 458
                 },
                 {
+                  "x": 359,
+                  "y": 419
+                },
+                {
+                  "x": 353,
+                  "y": 376
+                },
+                {
                   "x": 358,
                   "y": 352
+                },
+                {
+                  "x": 409,
+                  "y": 316
                 }
               ],
               "id": "318f356d-115a-4b93-a014-7f2a78db7734",
@@ -693,6 +680,16 @@
               ],
               "z": 19,
               "hasOpenThreats": false,
+              "threats": [
+                {
+                  "status": "Mitigated",
+                  "severity": "Low",
+                  "title": "spoofing threat",
+                  "type": "Spoofing",
+                  "description": "the person impersonating another person and modify the settings of the user leading to them getting a lot of notications",
+                  "mitigation": "users have a secure password"
+                }
+              ],
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
@@ -746,56 +743,42 @@
                 "height": 80
               },
               "position": {
-                "x": 79,
-                "y": 387
+                "x": 81,
+                "y": 386
               },
               "angle": 0,
               "id": "86e7df2a-48cc-4e46-9711-beec99c06bfe",
               "z": 21,
-              "hasOpenThreats": true,
+              "hasOpenThreats": false,
               "threats": [
                 {
                   "ruleId": "4adaa48a-0345-4533-a189-64c98c4420dd",
-                  "title": "Generic tampering threat",
+                  "title": "tampering threat - modify books stored in the database",
                   "type": "Tampering",
-                  "status": "Open",
-                  "severity": "Medium",
-                  "description": "A generic tampering threat"
-                },
-                {
-                  "ruleId": "87bc37e2-798e-4d68-bb96-feb1da26da48",
-                  "title": "Generic repudiation threat",
-                  "type": "Repudiation",
-                  "status": "Open",
-                  "severity": "Medium",
-                  "description": "A generic repudiation threat"
+                  "status": "Mitigated",
+                  "severity": "Low",
+                  "description": "Risk of users data of the books they have read and their reviews be modified which violates integrity",
+                  "mitigation": "having a secure log in system with passwords and usernames"
                 },
                 {
                   "ruleId": "13000296-b17d-4b72-9cc4-f5cc33f80e4c",
-                  "title": "Generic informtion disclosure threat",
+                  "title": "informtion disclosure threat to book collection",
                   "type": "Information disclosure",
-                  "status": "Open",
+                  "status": "Mitigated",
                   "severity": "Medium",
-                  "description": "A generic information disclosure threat"
-                },
-                {
-                  "ruleId": "edb05d76-a695-455f-947b-7d67b78bc31d",
-                  "title": "Generic DoS threat",
-                  "type": "Denial of service",
-                  "status": "Open",
-                  "severity": "Medium",
-                  "description": "A generic DoS threat"
+                  "description": "an attacker can extract user data by exploiting bugs like SQL injection to read the books DB table",
+                  "mitigation": "Only users with the correct permission will be able to see a list of books in their own collection and of any bookclub, there are a member of"
                 }
               ],
               "attrs": {
                 ".element-shape": {
-                  "class": "element-shape hasOpenThreats isInScope"
+                  "class": "element-shape hasNoOpenThreats isInScope"
                 },
                 "text": {
                   "text": "Book collection"
                 },
                 ".element-text": {
-                  "class": "element-text hasOpenThreats isInScope"
+                  "class": "element-text hasNoOpenThreats isInScope"
                 }
               }
             },
@@ -809,6 +792,10 @@
                 "id": "86e7df2a-48cc-4e46-9711-beec99c06bfe"
               },
               "vertices": [
+                {
+                  "x": 271,
+                  "y": 231
+                },
                 {
                   "x": 188,
                   "y": 253
@@ -900,8 +887,12 @@
                   "y": 319
                 },
                 {
-                  "x": 235,
-                  "y": 352
+                  "x": 197,
+                  "y": 309
+                },
+                {
+                  "x": 246,
+                  "y": 346
                 },
                 {
                   "x": 254,
@@ -911,11 +902,53 @@
               "id": "67796f3e-c6d6-4947-9780-edb326d86983",
               "z": 24,
               "attrs": {}
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "86e7df2a-48cc-4e46-9711-beec99c06bfe"
+              },
+              "target": {
+                "id": "260799c0-3f4a-47ef-b8fc-eacf4eb16ea3"
+              },
+              "vertices": [
+                {
+                  "x": 360,
+                  "y": 551
+                }
+              ],
+              "id": "056293a9-713a-4eca-be28-48b9717db4b3",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.5926469581839288,
+                    "offset": 15.708983487360712
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "book collection\nstored in Database",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 25,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
             }
           ]
         },
         "size": {
-          "height": 590,
+          "height": 645.2814331054688,
           "width": 1173.8634033203125
         }
       }
