@@ -233,7 +233,7 @@
               "threats": [
                 {
                   "ruleId": "b2a6d40d-d3f8-4750-8e4d-c02cc84b13dc",
-                  "title": "spoofing threat",
+                  "title": "Spoofing threat",
                   "type": "Spoofing",
                   "status": "Mitigated",
                   "severity": "Low",
