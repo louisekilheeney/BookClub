@@ -20,60 +20,60 @@
                 "height": 100
               },
               "position": {
-                "x": 453,
+                "x": 454,
                 "y": 188
               },
               "angle": 0,
               "id": "405a3dfc-1d69-41cb-a927-8908cdc6b693",
               "z": 2,
-              "hasOpenThreats": true,
+              "hasOpenThreats": false,
               "threats": [
                 {
                   "ruleId": "b2a6d40d-d3f8-4750-8e4d-c02cc84b13dc",
-                  "title": "spoofing threat",
+                  "title": "Authentication",
                   "type": "Spoofing",
-                  "status": "Open",
+                  "status": "Mitigated",
                   "severity": "High",
                   "description": "Authentication",
                   "mitigation": "using passwords which have to be 6 characters long and a mixture of letters and numbers"
                 },
                 {
                   "ruleId": "4adaa48a-0345-4533-a189-64c98c4420dd",
-                  "title": "tampering threat",
+                  "title": "modifing users data",
                   "type": "Tampering",
-                  "status": "Open",
+                  "status": "Mitigated",
                   "severity": "Medium",
                   "description": "tampering threat where users book collections are modified which violates the integrity of the application",
                   "mitigation": "only users with permission can join a book club or update their book collection"
                 },
                 {
                   "ruleId": "13000296-b17d-4b72-9cc4-f5cc33f80e4c",
-                  "title": "informtion disclosure threat",
+                  "title": "users information was disclosed to an unauthorized user",
                   "type": "Information disclosure",
-                  "status": "Open",
+                  "status": "Mitigated",
                   "severity": "Medium",
                   "description": "An information disclosure threat - users information was disclosed to an unauthorized user",
                   "mitigation": "add encryption to the password so only the user of an account can see there own information"
                 },
                 {
                   "ruleId": "c1377855-ea20-4c97-8861-f95c364fb8d2",
-                  "title": "elevation threat",
+                  "title": "Autherntization",
                   "type": "Elevation of privilege",
-                  "status": "Open",
+                  "status": "Mitigated",
                   "severity": "Low",
                   "description": "An elevation threat -  Autherntization - allow users to have permission to add the book to the collection or to join a bookclub",
-                  "mitigation": "gives user permissions"
+                  "mitigation": "implement user permissions"
                 }
               ],
               "attrs": {
                 ".element-shape": {
-                  "class": "element-shape hasOpenThreats isInScope"
+                  "class": "element-shape hasNoOpenThreats isInScope"
                 },
                 "text": {
                   "text": "android/IOS\napplication"
                 },
                 ".element-text": {
-                  "class": "element-text hasOpenThreats isInScope"
+                  "class": "element-text hasNoOpenThreats isInScope"
                 }
               }
             },
@@ -108,16 +108,24 @@
                   "status": "Mitigated",
                   "severity": "Low",
                   "description": "Risk of disclosing information to an authorized user, which violates confidentiality",
-                  "mitigation": "Passwords are stored as encryptions and adding settings that only users with permission can see this information"
+                  "mitigation": "Passwords are stored as encryptions and adding settings that only users with permission can see this information, Expire and replace the DB credentials regularly."
                 },
                 {
                   "ruleId": "edb05d76-a695-455f-947b-7d67b78bc31d",
-                  "title": "DoS threat to the Database",
+                  "title": "login time error",
                   "type": "Denial of service",
                   "status": "Mitigated",
                   "severity": "Medium",
                   "description": "DoS threat of a hacker making too many requests either trying to log in which would slow the system.",
                   "mitigation": "have a set quota of times a user can log in before a cooling-off period."
+                },
+                {
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "title": "Unauthorised access",
+                  "type": "Information disclosure",
+                  "description": "A hacker could make a query call on the DB",
+                  "mitigation": "Require all queries to be authenticated."
                 }
               ],
               "attrs": {
@@ -229,36 +237,27 @@
               "angle": 0,
               "id": "1e46da9b-f3f0-44a7-91b2-157ec057793f",
               "z": 9,
-              "hasOpenThreats": true,
+              "hasOpenThreats": false,
               "threats": [
                 {
                   "ruleId": "b2a6d40d-d3f8-4750-8e4d-c02cc84b13dc",
-                  "title": "Spoofing threat",
+                  "title": "login error",
                   "type": "Spoofing",
                   "status": "Mitigated",
                   "severity": "Low",
                   "description": "treat of  hacker logging in as another user without their knowledge",
                   "mitigation": "passwords are a mixture of letters and numbers and have to be over 6 characters."
-                },
-                {
-                  "ruleId": "87bc37e2-798e-4d68-bb96-feb1da26da48",
-                  "title": "repudiation threat",
-                  "type": "Repudiation",
-                  "status": "Open",
-                  "severity": "Medium",
-                  "description": "A generic repudiation threat",
-                  "mitigation": "addin secure logging"
                 }
               ],
               "attrs": {
                 ".element-shape": {
-                  "class": "element-shape hasOpenThreats isInScope"
+                  "class": "element-shape hasNoOpenThreats isInScope"
                 },
                 "text": {
                   "text": "Android/IOS users"
                 },
                 ".element-text": {
-                  "class": "element-text hasOpenThreats isInScope"
+                  "class": "element-text hasNoOpenThreats isInScope"
                 }
               }
             },
@@ -382,8 +381,8 @@
                 "height": 80
               },
               "position": {
-                "x": 873,
-                "y": 12
+                "x": 874,
+                "y": 13
               },
               "angle": 0,
               "id": "1b53fff2-2a1f-4abb-8765-87331197078d",
@@ -392,16 +391,16 @@
               "threats": [
                 {
                   "ruleId": "4adaa48a-0345-4533-a189-64c98c4420dd",
-                  "title": "tampering threat",
+                  "title": "modifying message",
                   "type": "Tampering",
                   "status": "Open",
                   "severity": "Medium",
-                  "description": "A tampering threat where the information on the messages may be modified between the sender and receiver",
-                  "mitigation": "only users with the permission would be able to view or modify the messages"
+                  "description": "A tampering threat where the information on the messages may be modified between the sender and receiver,  causing incorrect processing by the Background Worker",
+                  "mitigation": "Validate the message signature at the Background Worker and reject any message with a missing or invalid signature. Log any failed messages."
                 },
                 {
                   "ruleId": "87bc37e2-798e-4d68-bb96-feb1da26da48",
-                  "title": "repudiation threat",
+                  "title": "network error",
                   "type": "Repudiation",
                   "status": "Open",
                   "severity": "Medium",
@@ -410,12 +409,28 @@
                 },
                 {
                   "ruleId": "13000296-b17d-4b72-9cc4-f5cc33f80e4c",
-                  "title": "informtion disclosure threat",
+                  "title": "confidentiality",
                   "type": "Information disclosure",
                   "status": "Open",
                   "severity": "Medium",
                   "description": "disclosing information to an authorized user, which violates confidentiality.",
                   "mitigation": "only users with the correct permission can see their own data."
+                },
+                {
+                  "status": "Mitigated",
+                  "severity": "Low",
+                  "title": "Message Secrecy",
+                  "type": "Information disclosure",
+                  "description": "The data flow between the  Application and the Background Worker,  end-to-end secrecy cannot be provided at the transport layer. Messages could be read by an attacker at rest in the Message Queue.",
+                  "mitigation": "Use message level encryption for high sensitivity data in messages."
+                },
+                {
+                  "status": "Mitigated",
+                  "severity": "High",
+                  "title": "Fake Messages",
+                  "type": "Spoofing",
+                  "description": "hacker places fake messages in the queue",
+                  "mitigation": "Restrict access to the queue to the IP addresses of the Web Server and Background Worker."
                 }
               ],
               "attrs": {
@@ -487,7 +502,7 @@
                 "height": 100
               },
               "position": {
-                "x": 1030,
+                "x": 1031,
                 "y": 204
               },
               "angle": 0,
@@ -497,7 +512,7 @@
               "threats": [
                 {
                   "ruleId": "b2a6d40d-d3f8-4750-8e4d-c02cc84b13dc",
-                  "title": "spoofing threat",
+                  "title": "user confidence",
                   "type": "Spoofing",
                   "status": "Open",
                   "severity": "Medium",
@@ -506,12 +521,20 @@
                 },
                 {
                   "ruleId": "4adaa48a-0345-4533-a189-64c98c4420dd",
-                  "title": "tampering threat",
+                  "title": "modifying messages",
                   "type": "Tampering",
                   "status": "Open",
                   "severity": "Medium",
                   "description": "Messages are modified by a hacker before been stored in a database",
                   "mitigation": "Only given users with permission to alter their messages"
+                },
+                {
+                  "status": "Open",
+                  "severity": "Medium",
+                  "title": "bad message",
+                  "type": "Denial of service",
+                  "description": "An attacker could generate a malicious message that the Background Worker cannot process",
+                  "mitigation": "Implement a bad message queue where messages are placed after a fixed number of retries"
                 }
               ],
               "attrs": {
@@ -739,7 +762,7 @@
                 "height": 80
               },
               "position": {
-                "x": 81,
+                "x": 80,
                 "y": 386
               },
               "angle": 0,
@@ -749,7 +772,7 @@
               "threats": [
                 {
                   "ruleId": "4adaa48a-0345-4533-a189-64c98c4420dd",
-                  "title": "tampering threat - modify books stored in the database",
+                  "title": "modify books stored in the database",
                   "type": "Tampering",
                   "status": "Mitigated",
                   "severity": "Low",
@@ -758,7 +781,7 @@
                 },
                 {
                   "ruleId": "13000296-b17d-4b72-9cc4-f5cc33f80e4c",
-                  "title": "informtion disclosure threat to book collection",
+                  "title": "Extracting DB of book collection",
                   "type": "Information disclosure",
                   "status": "Mitigated",
                   "severity": "Medium",
