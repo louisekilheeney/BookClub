@@ -1,0 +1,976 @@
+{
+  "summary": {
+    "title": "Fyp treat model",
+    "owner": "Louise Kilheeney",
+    "description": "this is a mobile app development of a Bookclub. This project will involve the planning, design, implementation, and testing of a mobile app to track a Bookclub’s “books”. This app should allow tracking of books read and reviews, as well as recommendations,\nand could include links to other “bookclubs”.  also allow members of book clubs to communicate with each other using messaging feature."
+  },
+  "detail": {
+    "contributors": [],
+    "diagrams": [
+      {
+        "title": "BookClub Diagram",
+        "thumbnail": "./public/content/images/thumbnail.jpg",
+        "id": 0,
+        "diagramJson": {
+          "cells": [
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 454,
+                "y": 188
+              },
+              "angle": 0,
+              "id": "405a3dfc-1d69-41cb-a927-8908cdc6b693",
+              "z": 2,
+              "hasOpenThreats": false,
+              "threats": [
+                {
+                  "ruleId": "b2a6d40d-d3f8-4750-8e4d-c02cc84b13dc",
+                  "title": "Authentication",
+                  "type": "Spoofing",
+                  "status": "Mitigated",
+                  "severity": "High",
+                  "description": "Authentication",
+                  "mitigation": "using passwords which have to be 6 characters long and a mixture of letters and numbers"
+                },
+                {
+                  "ruleId": "4adaa48a-0345-4533-a189-64c98c4420dd",
+                  "title": "modifing users data",
+                  "type": "Tampering",
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "description": "tampering threat where users book collections are modified which violates the integrity of the application",
+                  "mitigation": "only users with permission can join a book club or update their book collection"
+                },
+                {
+                  "ruleId": "13000296-b17d-4b72-9cc4-f5cc33f80e4c",
+                  "title": "users information was disclosed to an unauthorized user",
+                  "type": "Information disclosure",
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "description": "An information disclosure threat - users information was disclosed to an unauthorized user",
+                  "mitigation": "add encryption to the password so only the user of an account can see there own information"
+                },
+                {
+                  "ruleId": "c1377855-ea20-4c97-8861-f95c364fb8d2",
+                  "title": "Autherntization",
+                  "type": "Elevation of privilege",
+                  "status": "Mitigated",
+                  "severity": "Low",
+                  "description": "An elevation threat -  Autherntization - allow users to have permission to add the book to the collection or to join a bookclub",
+                  "mitigation": "implement user permissions"
+                }
+              ],
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "android/IOS\napplication"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Store",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 485,
+                "y": 414
+              },
+              "angle": 0,
+              "id": "260799c0-3f4a-47ef-b8fc-eacf4eb16ea3",
+              "z": 3,
+              "hasOpenThreats": true,
+              "threats": [
+                {
+                  "ruleId": "4adaa48a-0345-4533-a189-64c98c4420dd",
+                  "title": "tampering threat to the Datebase",
+                  "type": "Tampering",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "description": "Risk of users data of the books they have read and their reviews and their personal data be modified which violates the integrity",
+                  "mitigation": "Adding permission so only users with the correct permission can see ant personal details of the account."
+                },
+                {
+                  "ruleId": "13000296-b17d-4b72-9cc4-f5cc33f80e4c",
+                  "title": "informtion disclosure threat to the Database",
+                  "type": "Information disclosure",
+                  "status": "Mitigated",
+                  "severity": "Low",
+                  "description": "Risk of disclosing information to an authorized user, which violates confidentiality",
+                  "mitigation": "Passwords are stored as encryptions and adding settings that only users with permission can see this information, Expire and replace the DB credentials regularly."
+                },
+                {
+                  "ruleId": "edb05d76-a695-455f-947b-7d67b78bc31d",
+                  "title": "login time error",
+                  "type": "Denial of service",
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "description": "DoS threat of a hacker making too many requests either trying to log in which would slow the system.",
+                  "mitigation": "have a set quota of times a user can log in before a cooling-off period."
+                },
+                {
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "title": "Unauthorised access",
+                  "type": "Information disclosure",
+                  "description": "A hacker could make a query call on the DB",
+                  "mitigation": "Require all queries to be authenticated."
+                }
+              ],
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "FirestoreDatabase"
+                },
+                ".element-text": {
+                  "class": "element-text hasOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "405a3dfc-1d69-41cb-a927-8908cdc6b693"
+              },
+              "target": {
+                "id": "260799c0-3f4a-47ef-b8fc-eacf4eb16ea3"
+              },
+              "vertices": [
+                {
+                  "x": 578,
+                  "y": 332
+                }
+              ],
+              "id": "7c2342b5-e895-4cdb-91d6-b3816c502937",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.41008445002193855,
+                    "offset": -23.147540767494917
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "athorization user",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 7,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "260799c0-3f4a-47ef-b8fc-eacf4eb16ea3"
+              },
+              "target": {
+                "id": "405a3dfc-1d69-41cb-a927-8908cdc6b693"
+              },
+              "vertices": [
+                {
+                  "x": 502,
+                  "y": 367
+                }
+              ],
+              "id": "2800b354-506b-49ed-97de-f3ec4fa6af4f",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.573743871233766,
+                    "offset": -16.78549773917095
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "user authorized result\nreturned",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 8,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Actor",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 373,
+                "y": 1
+              },
+              "angle": 0,
+              "id": "1e46da9b-f3f0-44a7-91b2-157ec057793f",
+              "z": 9,
+              "hasOpenThreats": false,
+              "threats": [
+                {
+                  "ruleId": "b2a6d40d-d3f8-4750-8e4d-c02cc84b13dc",
+                  "title": "login error",
+                  "type": "Spoofing",
+                  "status": "Mitigated",
+                  "severity": "Low",
+                  "description": "treat of  hacker logging in as another user without their knowledge",
+                  "mitigation": "passwords are a mixture of letters and numbers and have to be over 6 characters."
+                }
+              ],
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Android/IOS users"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "1e46da9b-f3f0-44a7-91b2-157ec057793f"
+              },
+              "target": {
+                "id": "405a3dfc-1d69-41cb-a927-8908cdc6b693"
+              },
+              "vertices": [
+                {
+                  "x": 539,
+                  "y": 120
+                },
+                {
+                  "x": 547,
+                  "y": 137
+                },
+                {
+                  "x": 539,
+                  "y": 155
+                }
+              ],
+              "id": "db5653c9-3388-4f25-8ca8-505de86a5749",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.6537743120590748,
+                    "offset": 1.3230761612187711
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "Application Request",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 10,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "405a3dfc-1d69-41cb-a927-8908cdc6b693"
+              },
+              "target": {
+                "id": "1e46da9b-f3f0-44a7-91b2-157ec057793f"
+              },
+              "vertices": [
+                {
+                  "x": 404,
+                  "y": 142
+                }
+              ],
+              "id": "20f0e277-2764-417e-9474-33da96de3305",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.3223998080633354,
+                    "offset": 9.275834584643901
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "Application Responce",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 11,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Boundary",
+              "smooth": true,
+              "source": {
+                "x": 329,
+                "y": 151
+              },
+              "target": {
+                "x": 619,
+                "y": 133
+              },
+              "vertices": [
+                {
+                  "x": 466,
+                  "y": 96
+                }
+              ],
+              "id": "a34e5281-fe4d-4b7d-ae89-1653606049cd",
+              "z": 12,
+              "attrs": {}
+            },
+            {
+              "type": "tm.Store",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 874,
+                "y": 13
+              },
+              "angle": 0,
+              "id": "1b53fff2-2a1f-4abb-8765-87331197078d",
+              "z": 13,
+              "hasOpenThreats": true,
+              "threats": [
+                {
+                  "ruleId": "4adaa48a-0345-4533-a189-64c98c4420dd",
+                  "title": "modifying message",
+                  "type": "Tampering",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "description": "A tampering threat where the information on the messages may be modified between the sender and receiver,  causing incorrect processing by the Background Worker",
+                  "mitigation": "Validate the message signature at the Background Worker and reject any message with a missing or invalid signature. Log any failed messages."
+                },
+                {
+                  "ruleId": "87bc37e2-798e-4d68-bb96-feb1da26da48",
+                  "title": "network error",
+                  "type": "Repudiation",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "description": "an attacker can modify the data flowing over the network, what they do is that when they discover there are no logs, they input data into the logs to confuse the user.",
+                  "mitigation": "add secure logging to insure users' data is logged correctly so they have a copy as proof."
+                },
+                {
+                  "ruleId": "13000296-b17d-4b72-9cc4-f5cc33f80e4c",
+                  "title": "confidentiality",
+                  "type": "Information disclosure",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "description": "disclosing information to an authorized user, which violates confidentiality.",
+                  "mitigation": "only users with the correct permission can see their own data."
+                },
+                {
+                  "status": "Mitigated",
+                  "severity": "Low",
+                  "title": "Message Secrecy",
+                  "type": "Information disclosure",
+                  "description": "The data flow between the  Application and the Background Worker,  end-to-end secrecy cannot be provided at the transport layer. Messages could be read by an attacker at rest in the Message Queue.",
+                  "mitigation": "Use message level encryption for high sensitivity data in messages."
+                },
+                {
+                  "status": "Mitigated",
+                  "severity": "High",
+                  "title": "Fake Messages",
+                  "type": "Spoofing",
+                  "description": "hacker places fake messages in the queue",
+                  "mitigation": "Restrict access to the queue to the IP addresses of the Web Server and Background Worker."
+                }
+              ],
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Messages Queue"
+                },
+                ".element-text": {
+                  "class": "element-text hasOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "405a3dfc-1d69-41cb-a927-8908cdc6b693"
+              },
+              "target": {
+                "id": "1b53fff2-2a1f-4abb-8765-87331197078d"
+              },
+              "vertices": [
+                {
+                  "x": 639,
+                  "y": 222
+                },
+                {
+                  "x": 690,
+                  "y": 207
+                },
+                {
+                  "x": 749,
+                  "y": 175
+                }
+              ],
+              "id": "94f6a008-ba1e-4bb1-9539-bbdf7a71e1fd",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.5463475680804109,
+                    "offset": 8.353922304413075
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "push Message",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 14,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 1031,
+                "y": 204
+              },
+              "angle": 0,
+              "id": "51b8e63c-50f3-4d12-8ebe-d14ab517bf50",
+              "z": 15,
+              "hasOpenThreats": true,
+              "threats": [
+                {
+                  "ruleId": "b2a6d40d-d3f8-4750-8e4d-c02cc84b13dc",
+                  "title": "user confidence",
+                  "type": "Spoofing",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "description": "Risk of the wrong user receiving the wrong message",
+                  "mitigation": "using passwords to ensure a secure connection from person to person."
+                },
+                {
+                  "ruleId": "4adaa48a-0345-4533-a189-64c98c4420dd",
+                  "title": "modifying messages",
+                  "type": "Tampering",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "description": "Messages are modified by a hacker before been stored in a database",
+                  "mitigation": "Only given users with permission to alter their messages"
+                },
+                {
+                  "status": "Open",
+                  "severity": "Medium",
+                  "title": "bad message",
+                  "type": "Denial of service",
+                  "description": "An attacker could generate a malicious message that the Background Worker cannot process",
+                  "mitigation": "Implement a bad message queue where messages are placed after a fixed number of retries"
+                }
+              ],
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Background\nworker"
+                },
+                ".element-text": {
+                  "class": "element-text hasOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "1b53fff2-2a1f-4abb-8765-87331197078d"
+              },
+              "target": {
+                "id": "51b8e63c-50f3-4d12-8ebe-d14ab517bf50"
+              },
+              "vertices": [
+                {
+                  "x": 954,
+                  "y": 167
+                }
+              ],
+              "id": "f5cbb25c-cb61-473a-aa3b-06fe73ac9706",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.5013941040518828,
+                    "offset": -4.92806604799976
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "Message",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 16,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "51b8e63c-50f3-4d12-8ebe-d14ab517bf50"
+              },
+              "target": {
+                "id": "260799c0-3f4a-47ef-b8fc-eacf4eb16ea3"
+              },
+              "vertices": [],
+              "id": "c9f39244-d5a2-4108-a75c-a4be06b19e4b",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Update Database",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 17,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Boundary",
+              "smooth": true,
+              "source": {
+                "x": 821,
+                "y": 81
+              },
+              "target": {
+                "x": 1061,
+                "y": 106
+              },
+              "vertices": [
+                {
+                  "x": 847,
+                  "y": 101
+                },
+                {
+                  "x": 893,
+                  "y": 137
+                },
+                {
+                  "x": 957,
+                  "y": 141
+                }
+              ],
+              "id": "d6f23a7e-9a14-4c75-88a7-548dfe148362",
+              "z": 18,
+              "attrs": {}
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "260799c0-3f4a-47ef-b8fc-eacf4eb16ea3"
+              },
+              "target": {
+                "id": "405a3dfc-1d69-41cb-a927-8908cdc6b693"
+              },
+              "vertices": [
+                {
+                  "x": 382,
+                  "y": 458
+                },
+                {
+                  "x": 359,
+                  "y": 419
+                },
+                {
+                  "x": 353,
+                  "y": 376
+                },
+                {
+                  "x": 358,
+                  "y": 352
+                },
+                {
+                  "x": 409,
+                  "y": 316
+                }
+              ],
+              "id": "318f356d-115a-4b93-a014-7f2a78db7734",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.5037572979321717,
+                    "offset": 9.498351890871621
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "Push Notification",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 19,
+              "hasOpenThreats": false,
+              "threats": [
+                {
+                  "status": "Mitigated",
+                  "severity": "Low",
+                  "title": "spoofing threat",
+                  "type": "Spoofing",
+                  "description": "the person impersonating another person and modify the settings of the user leading to them getting a lot of notications",
+                  "mitigation": "users have a secure password"
+                }
+              ],
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Boundary",
+              "smooth": true,
+              "source": {
+                "x": 602,
+                "y": 363
+              },
+              "target": {
+                "x": 446,
+                "y": 357
+              },
+              "vertices": [
+                {
+                  "x": 601,
+                  "y": 345
+                },
+                {
+                  "x": 597,
+                  "y": 363
+                },
+                {
+                  "x": 516,
+                  "y": 386
+                },
+                {
+                  "x": 443,
+                  "y": 350
+                }
+              ],
+              "id": "4bf2f6f4-5afc-4fe3-8e81-5576b1e1a4f2",
+              "z": 20,
+              "attrs": {}
+            },
+            {
+              "type": "tm.Store",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 80,
+                "y": 386
+              },
+              "angle": 0,
+              "id": "86e7df2a-48cc-4e46-9711-beec99c06bfe",
+              "z": 21,
+              "hasOpenThreats": false,
+              "threats": [
+                {
+                  "ruleId": "4adaa48a-0345-4533-a189-64c98c4420dd",
+                  "title": "modify books stored in the database",
+                  "type": "Tampering",
+                  "status": "Mitigated",
+                  "severity": "Low",
+                  "description": "Risk of users data of the books they have read and their reviews be modified which violates integrity",
+                  "mitigation": "having a secure log in system with passwords and usernames"
+                },
+                {
+                  "ruleId": "13000296-b17d-4b72-9cc4-f5cc33f80e4c",
+                  "title": "Extracting DB of book collection",
+                  "type": "Information disclosure",
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "description": "an attacker can extract user data by exploiting bugs like SQL injection to read the books DB table",
+                  "mitigation": "Only users with the correct permission will be able to see a list of books in their own collection and of any bookclub, there are a member of"
+                }
+              ],
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Book collection"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "405a3dfc-1d69-41cb-a927-8908cdc6b693"
+              },
+              "target": {
+                "id": "86e7df2a-48cc-4e46-9711-beec99c06bfe"
+              },
+              "vertices": [
+                {
+                  "x": 271,
+                  "y": 231
+                },
+                {
+                  "x": 188,
+                  "y": 253
+                }
+              ],
+              "id": "d665d5bc-73ee-4443-a7a2-8b9d9eec0143",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.6389624580313228,
+                    "offset": -0.3852009512476998
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "Add Book Database",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 22,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "86e7df2a-48cc-4e46-9711-beec99c06bfe"
+              },
+              "target": {
+                "id": "405a3dfc-1d69-41cb-a927-8908cdc6b693"
+              },
+              "vertices": [
+                {
+                  "x": 290,
+                  "y": 288
+                }
+              ],
+              "id": "d8e486f9-5f9e-4ed2-a7a5-0151b7b8e4de",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.5511789310214914,
+                    "offset": 6.975754940104122
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "Display Book\ncollection",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 23,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Boundary",
+              "smooth": true,
+              "source": {
+                "x": 82,
+                "y": 330
+              },
+              "target": {
+                "x": 248,
+                "y": 394
+              },
+              "vertices": [
+                {
+                  "x": 100,
+                  "y": 319
+                },
+                {
+                  "x": 197,
+                  "y": 309
+                },
+                {
+                  "x": 246,
+                  "y": 346
+                },
+                {
+                  "x": 254,
+                  "y": 373
+                }
+              ],
+              "id": "67796f3e-c6d6-4947-9780-edb326d86983",
+              "z": 24,
+              "attrs": {}
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "86e7df2a-48cc-4e46-9711-beec99c06bfe"
+              },
+              "target": {
+                "id": "260799c0-3f4a-47ef-b8fc-eacf4eb16ea3"
+              },
+              "vertices": [
+                {
+                  "x": 360,
+                  "y": 551
+                }
+              ],
+              "id": "056293a9-713a-4eca-be28-48b9717db4b3",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.5739821242406306,
+                    "offset": -22.401118712863614
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "book collection\nstored in Database",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 25,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            }
+          ]
+        },
+        "size": {
+          "height": 645.2814331054688,
+          "width": 1173.8634033203125
+        }
+      }
+    ]
+  }
+}
