@@ -2,6 +2,7 @@ import * as firebase from 'firebase';
 import '@firebase/auth';
 import '@firebase/firestore';
 
+
 const firebaseConfig = {
   apiKey: 'AIzaSyCfR3joOErA5BFp1kTaU6-TaX8mZ3gbOjY',
   authDomain: 'bookclub-25b96.firebaseapp.com',

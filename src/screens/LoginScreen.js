@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
+import { AuthContext } from '../navigation/AuthProvider';
 
-export default function SignupScreen() {
+export default function LoginScreen({ navigation }) {
+  const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const {error} = useContext(AuthContext);
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Create an account</Text>
+      <Text style={styles.text}>Welcome to Books and Beyond</Text>
       <FormInput
         value={email}
         placeholderText='Email'
@@ -18,15 +22,22 @@ export default function SignupScreen() {
         autoCorrect={false}
       />
       <FormInput
-        value={password}
+        value={password, error}
         placeholderText='Password'
         onChangeText={userPassword => setPassword(userPassword)}
         secureTextEntry={true}
       />
-      <FormButton buttonTitle='Signup' onPress={() => alert('sign button')} />
+       <FormButton buttonTitle='Login' onPress={() => login(email, password)} />
+      <TouchableOpacity
+        style={styles.navButton}
+        onPress={() => navigation.navigate('Signup')}
+      >
+        <Text style={styles.navButtonText}>New user? Join here</Text>
+      </TouchableOpacity>
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f5f5f5',
@@ -37,5 +48,12 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     marginBottom: 10
+  },
+  navButton: {
+    marginTop: 15
+  },
+  navButtonText: {
+    fontSize: 20,
+    color: '#6646ee'
   }
 });
