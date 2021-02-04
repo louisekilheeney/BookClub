@@ -7,25 +7,28 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import PersonalAccount from '../screens/PersonalAccount';
 import SettingScreen from '../screens/SettingScreen';
+import BookClubAccount from '../screens/BookClubAccount';
+
+const Tab = createBottomTabNavigator();
+
+function MyTabs() {
+    return (
+        <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Personal" component={PersonalAccount} />
+        <Tab.Screen name="BookClub" component={BookClubAccount} />
+        <Tab.Screen name="Settings" component={SettingScreen} />
+        </Tab.Navigator>
+    );
+}
 
 export default function HomeScreen() {
-  const { user, logout } = useContext(AuthContext);
-  const navigation = useNavigation();
-  const Tab = createBottomTabNavigator();
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Welcome user {user.email}</Text>
-
-
-       <FormButton buttonTitle='Personal' onPress={() =>  navigation.navigate('PersonalAccount')} />
-       <FormButton buttonTitle='Bookclub' onPress={() => navigation.navigate("BookClubAccount")} />
-       <FormButton buttonTitle='Settings' onPress={() => navigation.navigate("SettingScreen")} />
-       <FormButton buttonTitle='Logout' onPress={() => logout()} />
-
-    </View>
-);
+        <MyTabs />
+    );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
