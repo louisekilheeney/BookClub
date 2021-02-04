@@ -8,7 +8,7 @@ export default function FormInput({ labelValue, placeholderText, ...rest }) {
       style={styles.input}
       numberOfLines={1}
       placeholder={placeholderText}
-      placeholderTextColor='#666'
+      placeholderTextColor='#070002'
       {...rest}
     />
   );

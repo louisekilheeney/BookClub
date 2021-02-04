@@ -11,8 +11,9 @@ export default function LoginScreen({ navigation }) {
   const {error} = useContext(AuthContext);
 
   return (
+
     <View style={styles.container}>
-      <Text style={styles.text}>Welcome to Books and Beyond</Text>
+      <Text style={styles.text}>Welcome to BookClub</Text>
       <FormInput
         value={email}
         placeholderText='Email'
@@ -28,32 +29,46 @@ export default function LoginScreen({ navigation }) {
         secureTextEntry={true}
       />
        <FormButton buttonTitle='Login' onPress={() => login(email, password)} />
+       <TouchableOpacity
+           style={styles.navButton}
+           onPress={() => navigation.navigate('ForgetPassword')}
+        >
+           <Text style={styles.navButtonText}>Forget Password?</Text>
+      </TouchableOpacity>
       <TouchableOpacity
         style={styles.navButton}
         onPress={() => navigation.navigate('Signup')}
       >
-        <Text style={styles.navButtonText}>New user? Join here</Text>
+        <Text style={styles.navButtonText}>Create an account? </Text>
       </TouchableOpacity>
+
     </View>
+
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#f2f4ff',
+    borderRadius: 10,
+    borderWidth: 0.5,
+    borderColor: '#000',
+    padding: 20,
+    margin: 30,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
   text: {
-    fontSize: 24,
-    marginBottom: 10
+    fontSize: 20,
+    marginBottom: 20,
+    color: '#4357ad'
   },
   navButton: {
     marginTop: 15
   },
   navButtonText: {
     fontSize: 20,
-    color: '#6646ee'
+    color: '#93acb5'
   }
 });

@@ -8,6 +8,7 @@ import { AuthContext } from '../navigation/AuthProvider';
 export default function SignupScreen({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const { register } = useContext(AuthContext);
 
@@ -36,19 +37,31 @@ export default function SignupScreen({navigation}) {
         onChangeText={userPassword => setPassword(userPassword)}
         secureTextEntry={true}
       />
+       <FormInput
+          value={confirmPassword}
+          placeholderText='Confirm Password'
+          onChangeText={userConfirmPassword => setConfirmPassword(userConfirmPassword)}
+          secureTextEntry={true}
+        />
       <FormButton buttonTitle='Signup' onPress={() => register(name, email, password)} />
     </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f5f5f5',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    backgroundColor: '#f2f4ff',
+        borderRadius: 10,
+        borderWidth: 0.5,
+        borderColor: '#000',
+        padding: 20,
+        margin: 30,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
   },
   text: {
     fontSize: 24,
-    marginBottom: 10
+    marginBottom: 10,
+    color: '#4357ad'
   }
 });

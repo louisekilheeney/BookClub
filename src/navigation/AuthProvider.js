@@ -2,13 +2,13 @@ import React, { createContext, useState } from 'react';
 import auth from '@react-native-firebase/auth';
 import { firebase } from '../config';
 
-
-
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState('');
   const [error, setError] = useState('');
+
+
   return (
     <AuthContext.Provider
       value={{
@@ -16,7 +16,10 @@ export const AuthProvider = ({ children }) => {
         setUser,
         login: async (email, password) => {
           try {
-            await auth().signInWithEmailAndPassword(email, password);
+            await auth().signInWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                setUser(userCredential.user);
+            });
           } catch (e) {
             setError("login error");
             alert("user name/password is incorrect")
@@ -25,34 +28,22 @@ export const AuthProvider = ({ children }) => {
         },
         register: async (name, email, password) => {
           try {
-            const usersTable = firebase.firestore().collection("users").add({
-                name: name,
-                email: email
-            });
 
-            await auth().createUserWithEmailAndPassword( email, password);
-            console.log("We are trying to reg a user." + email);
-            //console.log("current user:", firebase.auth());
-
-//            usersTable.get()
-//                        .then((snapshot) => {
-//                          const data = snapshot.docs.map((doc) => ({
-//                          ...doc.data(),
-//
-//                          }));
-//                          console.log("All data in 'users' collection", data);
-//                        });
-
-//            const promise = usersTable
-//              .add({
-//                name: name,
-//                email: email
-//              })
-              //console.log("Added the data and got a promise back", promise.id)
-              usersTable.then((ref) => {
-                console.log("Added doc with ID: ", ref.id);
-              });
-
+            auth().createUserWithEmailAndPassword( email, password)
+                .then((userCredential) => {
+                firebase.database().ref('Users/'+userCredential.user.uid).set({
+                                  email,
+                                  displayName: name
+                           }).then((data)=>{
+                                  //success callback
+                                  console.log('User data was added sucessfully' , data)
+                           }).catch((error)=>{
+                                  //error callback
+                                  console.log('error with adding user data' , error)
+                           });
+                           console.log("credential user: ", userCredential.user);
+                           console.log("We are trying to reg a user." + email);
+                });
           } catch (error) {
             console.log('Storing Error', error);
           }
@@ -67,25 +58,16 @@ export const AuthProvider = ({ children }) => {
         },
         addBook: async (user, bookName) => {
          try {
-//             const userInfo = firebase.firestore().collection("users").get().then((querySnapshot) => {
-//             querySnapshot.forEach((doc) => {
-//                 console.log("doc id: "`${doc.id} => ${doc.data()}`);
-//             })});
-            const userInfo = firebase.firestore().collection("users").get().then((querySnapshot) => {
-            querySnapshot.forEach((doc).then(response => response.json()).then(data => {
-                  console.log("data got", data);
-              }))});
-
-            console.log("user_info: ", userInfo);
-             //console.log("user_id: ", user.uid);
-            //console.log("user-email: ", user.email);
-            //var userid = "UoUBKeTEts9HWWbkQVMR";
-            const userbooks = firebase.firestore().collection("users").doc().collection('booksList').add({
-              bookName: bookName
+         console.log("user details:", user);
+            firebase.database().ref('Users/'+user.uid+'/BookList').push({
+              bookName,
+             }).then((data)=>{
+              //success callback
+              console.log('Adding book to users personal collection' , data)
+             }).catch((error)=>{
+              //error callback
+              console.log('error with adding book to personal list ' , error)
             });
-           console.log('Added book with name: ', bookName, "to user", user.email);
-
-
           }catch (e) {
            console.error(e);
          }
