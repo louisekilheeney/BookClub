@@ -12,6 +12,33 @@ export default function SignupScreen({navigation}) {
   const [name, setName] = useState('');
   const { register } = useContext(AuthContext);
 
+function validate(name, email, password, confirmPassword){
+        if(!name){
+            alert("please enter your name");
+            return;
+        }
+        if(!email){
+            alert("please enter your email address");
+            return;
+        }
+        if(!password){
+            alert("please enter your password");
+            return;
+        }
+        if(!confirmPassword){
+            alert("please confirm your password");
+            return;
+        }
+
+        if (password != confirmPassword && !password) {
+          alert("passwords don't match, try again");
+          return;
+        }
+        else{
+            register(name, email, password );
+            console.log("passwords match")
+        }
+    };
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Create an account</Text>
@@ -43,7 +70,7 @@ export default function SignupScreen({navigation}) {
           onChangeText={userConfirmPassword => setConfirmPassword(userConfirmPassword)}
           secureTextEntry={true}
         />
-      <FormButton buttonTitle='Signup' onPress={() => register(name, email, password)} />
+      <FormButton buttonTitle='Signup' onPress={() => validate(name, email, password, confirmPassword)} />
     </View>
   );
 }

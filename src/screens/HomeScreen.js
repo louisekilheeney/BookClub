@@ -8,16 +8,18 @@ import { NavigationContainer } from '@react-navigation/native';
 import PersonalAccount from '../screens/PersonalAccount';
 import SettingScreen from '../screens/SettingScreen';
 import BookClubAccount from '../screens/BookClubAccount';
+import HomeLandingScreen from '../screens/HomeLandingScreen';
+import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
     return (
         <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Personal" component={PersonalAccount} />
-        <Tab.Screen name="BookClub" component={BookClubAccount} />
-        <Tab.Screen name="Settings" component={SettingScreen} />
+            <Tab.Screen name="Home" component={HomeLandingScreen} options={{tabBarLabel: "Home", tabBarIcon: ({ color, size }) => (<Icons name="home" color={color} size={26} />), }} />
+            <Tab.Screen name="My Account" component={PersonalAccount}  options={{tabBarLabel: "My Account", tabBarIcon: ({ color, size }) => (<Icons name="account-circle" color={color} size={26} />), }} />
+            <Tab.Screen name="BookClub" component={BookClubAccount} options={{tabBarLabel: "BookClub", tabBarIcon: ({ color, size }) => (<Icons name="book" color={color} size={26} />), }} />
+            <Tab.Screen name="Settings" component={SettingScreen} options={{tabBarLabel: "Settings", tabBarIcon: ({ color, size }) => (<Icons name="account-settings" color={color} size={26} />), }} />
         </Tab.Navigator>
     );
 }

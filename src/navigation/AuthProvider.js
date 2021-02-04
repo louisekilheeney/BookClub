@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
         register: async (name, email, password) => {
           try {
 
-            auth().createUserWithEmailAndPassword( email, password)
+            auth().createUserWithEmailAndPassword(name, email, password)
                 .then((userCredential) => {
                 firebase.database().ref('Users/'+userCredential.user.uid).set({
                                   email,
