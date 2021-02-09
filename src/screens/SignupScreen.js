@@ -76,7 +76,7 @@ function validate(name, email, password, confirmPassword){
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f2f4ff',
+    backgroundColor: '#ebebeb',
         borderRadius: 10,
         borderWidth: 0.5,
         borderColor: '#000',
@@ -89,6 +89,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     marginBottom: 10,
-    color: '#4357ad'
+    color: '#003366'
   }
 });
