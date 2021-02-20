@@ -28,7 +28,7 @@ export default function LoginScreen({ navigation }) {
         onChangeText={userPassword => setPassword(userPassword)}
         secureTextEntry={true}
       />
-       <FormButton buttonTitle='Login' onPress={() => login(email, password)} />
+       <FormButton buttonTitle='Login' onPress={() => login(email, password, navigation)} />
        <TouchableOpacity
            style={styles.navButton}
            onPress={() => navigation.navigate('ForgetPassword')}
@@ -49,7 +49,7 @@ export default function LoginScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f2f4ff',
+    backgroundColor: '#ebebeb',
     borderRadius: 10,
     borderWidth: 0.5,
     borderColor: '#000',
@@ -62,13 +62,13 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     marginBottom: 20,
-    color: '#4357ad'
+    color: '#003366'
   },
   navButton: {
     marginTop: 15
   },
   navButtonText: {
     fontSize: 20,
-    color: '#93acb5'
+    color: '#457b9d'
   }
 });

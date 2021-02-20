@@ -7,25 +7,31 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import PersonalAccount from '../screens/PersonalAccount';
 import SettingScreen from '../screens/SettingScreen';
+import BookClubAccount from '../screens/BookClubAccount';
+import HomeLandingScreen from '../screens/HomeLandingScreen';
+//import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconsFeather from 'react-native-vector-icons/Feather';
+
+const Tab = createBottomTabNavigator();
+
+function MyTabs() {
+    return (
+        <Tab.Navigator>
+            <Tab.Screen name="Home" component={HomeLandingScreen} options={{tabBarLabel: "Home", tabBarIcon: ({ color, size }) => (<IconsFeather name="home" color={color} size={26} />), }} />
+            <Tab.Screen name="My Account" component={PersonalAccount}  options={{tabBarLabel: "My Account", tabBarIcon: ({ color, size }) => (<IconsFeather name="user" color={color} size={26} />), }} />
+            <Tab.Screen name="BookClub" component={BookClubAccount} options={{tabBarLabel: "BookClub", tabBarIcon: ({ color, size }) => (<IconsFeather name="book" color={color} size={26} />), }} />
+            <Tab.Screen name="Settings" component={SettingScreen} options={{tabBarLabel: "Settings", tabBarIcon: ({ color, size }) => (<IconsFeather name="settings" color={color} size={26} />), }} />
+        </Tab.Navigator>
+    );
+}
 
 export default function HomeScreen() {
-  const { user, logout } = useContext(AuthContext);
-  const navigation = useNavigation();
-  const Tab = createBottomTabNavigator();
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Welcome user {user.email}</Text>
-
-
-       <FormButton buttonTitle='Personal' onPress={() =>  navigation.navigate('PersonalAccount')} />
-       <FormButton buttonTitle='Bookclub' onPress={() => navigation.navigate("BookClubAccount")} />
-       <FormButton buttonTitle='Settings' onPress={() => navigation.navigate("SettingScreen")} />
-       <FormButton buttonTitle='Logout' onPress={() => logout()} />
-
-    </View>
-);
+        <MyTabs />
+    );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { windowHeight, windowWidth } from '../utils/Dimension';
 
-export default function FormButton({ buttonTitle, ...rest }) {
+export default function JoinButton({ buttonTitle, ...rest }) {
   return (
     <TouchableOpacity style={styles.buttonContainer} {...rest}>
       <Text style={styles.buttonText}>{buttonTitle}</Text>
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     borderRadius: 8
   },
   buttonText: {
-    fontSize: 28,
+    fontSize: 20,
     color: '#ffffff'
   }
 });

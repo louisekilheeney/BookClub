@@ -1,8 +1,8 @@
 import React, { createContext, useState } from 'react';
 import auth from '@react-native-firebase/auth';
 import { firebase } from '../config';
-
 export const AuthContext = createContext({});
+
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState('');
@@ -14,12 +14,20 @@ export const AuthProvider = ({ children }) => {
       value={{
         user,
         setUser,
-        login: async (email, password) => {
+        login: async (email, password, navigation) => {
           try {
-            await auth().signInWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-                setUser(userCredential.user);
-            });
+            auth().signInWithEmailAndPassword(email, password);
+            auth().onAuthStateChanged(function(user) {
+            if (user) {
+              console.log("User finally signed in");
+              console.log("user", user);
+
+            } else {
+              console.log("Dumbass user is still not logged in");
+              console.log("user", user);
+
+            }
+          });
           } catch (e) {
             setError("login error");
             alert("user name/password is incorrect")
@@ -56,6 +64,72 @@ export const AuthProvider = ({ children }) => {
             console.error(e);
           }
         },
+        readUserData: async (user) => {
+          try {
+          console.log("working on displaying booklist");
+          firebase.database().ref('Users/'+user.uid+'/BookList').on('value', function (snapshot) {
+              console.log(snapshot.val())
+
+          });
+         } catch (e) {
+            console.error(e);
+          }
+        },
+        RemoveUser: async (user) => {
+          try {
+
+            console.log("user details", user.uid);
+            console.log("Crrent auth user: ", auth().currentUser)
+
+            const removeThisId = user.uid;
+            auth().currentUser.delete().then(function() {
+              // User deleted.
+              console.log("user deleted");
+            }, function(error) {
+              // An error happened.
+              console.log("users still in the table", error);
+            });
+            firebase.database().ref('Users/'+removeThisId).remove();
+            console.log("User removed from DB");
+            await auth().signOut();
+          } catch (e) {
+            console.error(e);
+          }
+        },
+        addClub: async (user, clubName) => {
+         try {
+         console.log("user details:", user);
+
+            firebase.database().ref('BookClub/').push({
+              clubName,
+             }).then((data)=>{
+              //success callback
+              alert("Added Club" + " " + clubName);
+              console.log("lets check this", data);
+
+              var wordsId = JSON.stringify(data).split("/");
+              for (var i = 0; i < wordsId.length - 1; i++){
+                    wordsId[i] += " ";
+              }
+              console.log(wordsId);
+                //update bookclub in users details
+             firebase.database().ref('Users/'+user.uid+'/BookClub/'+wordsId[4].replace("\"","")).update({
+                               clubName, });
+              console.log('Adding a new book club' , data)
+             }).catch((error)=>{
+              //error callback
+              console.log('error with adding bookclub ' , error)
+            });
+          }catch (e) {
+           console.error(e);
+         }
+        },
+        JoinClub: async (user, clubName) => {
+         firebase.database().ref('Users/'+user.uid+'/BookClub').update({
+                                  clubName,
+                              });
+
+        },
         addBook: async (user, bookName) => {
          try {
          console.log("user details:", user);
@@ -63,9 +137,12 @@ export const AuthProvider = ({ children }) => {
               bookName,
              }).then((data)=>{
               //success callback
+              alert("Added Book" + " " + bookName);
+               return true;
               console.log('Adding book to users personal collection' , data)
              }).catch((error)=>{
               //error callback
+              return false;
               console.log('error with adding book to personal list ' , error)
             });
           }catch (e) {
