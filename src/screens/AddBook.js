@@ -12,6 +12,22 @@ export default function BookClubAccount() {
   const navigation = useNavigation();
   const [bookName, setBook] = useState('');
 
+function checkBookAdded(user, bookName){
+//    var isWorking = addBook(user, bookName);
+//    console.log("what do we get", isWorking.json())
+//    isWorking.json().then(data => {
+//        console.log(data);
+//    });
+     var someValue = addBook(user, bookName);
+        var test = addBook(user, bookName).catch(err=> { return reject(err); })
+         test.then(result=>console.log(result));
+      }
+
+
+//    if (isWorking) {
+//     navigation.navigate('PersonalAccount')}
+//    else{ console.log("this didnt work");
+//    }}
 
   return (
     <View style={styles.container}>
@@ -25,7 +41,7 @@ export default function BookClubAccount() {
              keyboardType='bookName'
              autoCorrect={false}
       />
-      <FormButton buttonTitle='Add' onPress={() => addBook(user, bookName)} />
+      <FormButton buttonTitle='Add' onPress={() => checkBookAdded(user, bookName)} />
 
     </View>
   );

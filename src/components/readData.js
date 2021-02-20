@@ -1,34 +1,19 @@
-import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
+
+import React, { useContext, Component } from 'react';
+import { Text, View, TouchableOpacity,ScrollView, StyleSheet } from 'react-native'
 import { windowHeight, windowWidth } from '../utils/Dimension';
+import auth from '@react-native-firebase/auth';
+import { firebase } from '../config';
 
 class List extends Component {
-   state = {
-      names: [
-         {
-            id: 0,
-            name: 'Ben',
-         },
-         {
-            id: 1,
-            name: 'Susan',
-         },
-         {
-            id: 2,
-            name: 'Robert',
-         },
-         {
-            id: 3,
-            name: 'Mary',
-         }
-      ]
-   }
+
    alertItemName = (item) => {
       alert(item.name)
    }
    render() {
       return (
          <View style={styles.list} >
+
             {
                this.state.names.map((item, index) => (
                   <TouchableOpacity
@@ -37,12 +22,12 @@ class List extends Component {
                      style = {styles.container}
                      onPress = {() => this.alertItemName(item)}>
                      <Text style = {styles.text}>
-                        {item.name}
+                        {item.bookName}
                      </Text>
-
                   </TouchableOpacity>
                ))
             }
+
          </View>
       )
    }

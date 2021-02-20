@@ -3,9 +3,11 @@ import auth from '@react-native-firebase/auth';
 import { firebase } from '../config';
 export const AuthContext = createContext({});
 
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState('');
   const [error, setError] = useState('');
+
 
   return (
     <AuthContext.Provider
@@ -24,13 +26,8 @@ export const AuthProvider = ({ children }) => {
               console.log("Dumbass user is still not logged in");
               console.log("user", user);
 
-              // No user is signed in.
             }
           });
-//            .then((userCredential) => {
-//                setUser(userCredential.user);
-
-
           } catch (e) {
             setError("login error");
             alert("user name/password is incorrect")
@@ -70,7 +67,10 @@ export const AuthProvider = ({ children }) => {
         readUserData: async (user) => {
           try {
           console.log("working on displaying booklist");
+          firebase.database().ref('Users/'+user.uid+'/BookList').on('value', function (snapshot) {
+              console.log(snapshot.val())
 
+          });
          } catch (e) {
             console.error(e);
           }
@@ -96,6 +96,40 @@ export const AuthProvider = ({ children }) => {
             console.error(e);
           }
         },
+        addClub: async (user, clubName) => {
+         try {
+         console.log("user details:", user);
+
+            firebase.database().ref('BookClub/').push({
+              clubName,
+             }).then((data)=>{
+              //success callback
+              alert("Added Club" + " " + clubName);
+              console.log("lets check this", data);
+
+              var wordsId = JSON.stringify(data).split("/");
+              for (var i = 0; i < wordsId.length - 1; i++){
+                    wordsId[i] += " ";
+              }
+              console.log(wordsId);
+                //update bookclub in users details
+             firebase.database().ref('Users/'+user.uid+'/BookClub/'+wordsId[4].replace("\"","")).update({
+                               clubName, });
+              console.log('Adding a new book club' , data)
+             }).catch((error)=>{
+              //error callback
+              console.log('error with adding bookclub ' , error)
+            });
+          }catch (e) {
+           console.error(e);
+         }
+        },
+        JoinClub: async (user, clubName) => {
+         firebase.database().ref('Users/'+user.uid+'/BookClub').update({
+                                  clubName,
+                              });
+
+        },
         addBook: async (user, bookName) => {
          try {
          console.log("user details:", user);
@@ -104,9 +138,11 @@ export const AuthProvider = ({ children }) => {
              }).then((data)=>{
               //success callback
               alert("Added Book" + " " + bookName);
+               return true;
               console.log('Adding book to users personal collection' , data)
              }).catch((error)=>{
               //error callback
+              return false;
               console.log('error with adding book to personal list ' , error)
             });
           }catch (e) {

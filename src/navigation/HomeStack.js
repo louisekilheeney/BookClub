@@ -5,6 +5,7 @@ import PersonalAccount from '../screens/PersonalAccount';
 import SettingScreen from '../screens/SettingScreen';
 import BookClubAccount from '../screens/BookClubAccount';
 import AddBook from '../screens/AddBook';
+import AddClub from '../screens/AddClub';
 const Stack = createStackNavigator();
 
 export default function HomeStack() {
@@ -15,6 +16,7 @@ export default function HomeStack() {
       <Stack.Screen name='SettingScreen' component={SettingScreen} />
       <Stack.Screen name='BookClubAccount' component={BookClubAccount} />
       <Stack.Screen name='AddBook' component={AddBook} />
+       <Stack.Screen name='AddClub' component={AddClub} />
     </Stack.Navigator>
   );
 }
