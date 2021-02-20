@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    color: '#333333'
+    color: '#333333',
+    padding: 10
   },
 
    buttonContainer: {

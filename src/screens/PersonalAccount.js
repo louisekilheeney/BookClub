@@ -11,14 +11,11 @@ import IconsMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const Item = ({ item, onPress, style }) => (
     <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
-
         <Text style={styles.bookName}> <IconsFeather name="book-open" size={20} /> {item.bookName}<IconsMaterialIcons name="keyboard-arrow-down" size={20} /></Text>
-
     </TouchableOpacity>
 );
 const renderItem = ({ item }) => (
    <Item bookName={item.bookName} />
-
 );
 
 export default function PersonalAccount() {
@@ -84,7 +81,6 @@ export default function PersonalAccount() {
         console.log("here is a book", bookList)
         addElement(bookList);
     }
-
 
     function showError(e){
         console.log("show error",e);
