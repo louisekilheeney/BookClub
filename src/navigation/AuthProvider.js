@@ -130,11 +130,16 @@ export const AuthProvider = ({ children }) => {
                               });
 
         },
-        addBook: async (user, bookName) => {
+        addBook: async (user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage) => {
          try {
          console.log("user details:", user);
             firebase.database().ref('Users/'+user.uid+'/BookList').push({
               bookName,
+              author,
+              bookSynopsis,
+              bookPub,
+              bookGenre,
+              bookImage
              }).then((data)=>{
               //success callback
               alert("Added Book" + " " + bookName);

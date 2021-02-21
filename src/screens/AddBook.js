@@ -8,41 +8,73 @@ import auth from '@react-native-firebase/auth';
 import { firebase } from '../config';
 
 export default function BookClubAccount() {
-  const { user, logout, addBook } = useContext(AuthContext);
-  const navigation = useNavigation();
-  const [bookName, setBook] = useState('');
+    const { user, logout, addBook } = useContext(AuthContext);
+    const navigation = useNavigation();
+    const [bookName, setBook] = useState('');
+    const [author, setAuthor] = useState('');
+    const [bookSynopsis, setSynopsis] = useState('');
+    const [bookPub, setPub] = useState('');
+    const [bookGenre, setGenre] = useState('');
+    const [bookImage, setImage] = useState('');
 
-function checkBookAdded(user, bookName){
-//    var isWorking = addBook(user, bookName);
-//    console.log("what do we get", isWorking.json())
-//    isWorking.json().then(data => {
-//        console.log(data);
-//    });
-     var someValue = addBook(user, bookName);
-        var test = addBook(user, bookName).catch(err=> { return reject(err); })
-         test.then(result=>console.log(result));
-      }
-
-
-//    if (isWorking) {
-//     navigation.navigate('PersonalAccount')}
-//    else{ console.log("this didnt work");
-//    }}
+    function checkBookAdded(user, bookName, author, bookSynopsis, bookPub,bookGenre, bookImage){
+        var test = addBook(user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage).catch(err=> { return reject(err); })
+        test.then(result=>console.log("the result of adding a book", result));
+    }
 
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Add book </Text>
 
       <FormInput
-             value={bookName}
-             placeholderText='bookName'
-             onChangeText={userBook => setBook(userBook)}
-             autoCapitalize='none'
-             keyboardType='bookName'
-             autoCorrect={false}
+         value={bookName}
+         placeholderText='Name'
+         onChangeText={userBook => setBook(userBook)}
+         autoCapitalize='none'
+         //keyboardType='bookName'
+         autoCorrect={false}
       />
-      <FormButton buttonTitle='Add' onPress={() => checkBookAdded(user, bookName)} />
-
+       <FormInput
+           value={author}
+           placeholderText='Author'
+           onChangeText={userAuthor => setAuthor(userAuthor)}
+           autoCapitalize='none'
+           //keyboardType='author'
+           autoCorrect={false}
+        />
+        <FormInput
+            value={bookSynopsis}
+            placeholderText='Synopsis'
+            onChangeText={userSynopsis => setSynopsis(userSynopsis)}
+            autoCapitalize='none'
+            //keyboardType='bookSynopsis'
+            autoCorrect={false}
+        />
+         <FormInput
+            value={bookPub}
+            placeholderText='Publisher'
+            onChangeText={userPub => setPub(userPub)}
+            autoCapitalize='none'
+           // keyboardType='bookPub'
+            autoCorrect={false}
+        />
+        <FormInput
+            value={bookGenre}
+            placeholderText='Genre'
+            onChangeText={userGenre => setGenre(userGenre)}
+            autoCapitalize='none'
+            //keyboardType='bookGenre'
+            autoCorrect={false}
+        />
+        <FormInput
+            value={bookImage}
+            placeholderText='BookArt'
+            onChangeText={userImage => setImage(userImage)}
+            autoCapitalize='none'
+            //keyboardType='bookGenre'
+            autoCorrect={false}
+          />
+      <FormButton buttonTitle='Add' onPress={() => checkBookAdded(user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage)} />
     </View>
   );
 }
@@ -54,7 +86,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f1'
   },
   text: {
-    fontSize: 20,
+    fontSize: 30,
     color: '#333333'
   }
 });

@@ -7,9 +7,12 @@ import { CommonActions, useNavigation } from '@react-navigation/native'
 export default function HomeScreen() {
   const { user, logout } = useContext(AuthContext);
   const navigation = useNavigation();
+  console.log(user);
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Welcome {user.email}</Text>
+
+
     </View>
   );
 }
