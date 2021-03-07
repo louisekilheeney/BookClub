@@ -4,13 +4,13 @@ import FormButton from '../components/FormButton';
 import { AuthContext } from '../navigation/AuthProvider';
 import { CommonActions, useNavigation } from '@react-navigation/native'
 
-export default function HomeScreen() {
+export default function GeneralScreen() {
   const { user, logout } = useContext(AuthContext);
   const navigation = useNavigation();
   console.log(user);
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Welcome {user.email}</Text>
+      <Text style={styles.text}>club Name</Text>
 
 
     </View>

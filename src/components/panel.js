@@ -1,12 +1,15 @@
 import React,{Component,StyleSheet,Text,View,Image,TouchableHighlight,Animated} from 'react-native';
+import IconsMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 class Panel extends Component{
     constructor(props){
         super(props);
-    this.icons = {
 
-'up'    : require('./images/Arrowhead-01-128.png'),
-'down'  : require('./images/Arrowhead-Down-01-128.png')};
+    this.icons = {
+        'up'   : <IconsMaterialIcons name="keyboard-arrow-up" size={20} />,
+        'down' : <IconsMaterialIcons name="keyboard-arrow-down" size={20} />
+        };
+
   this.state = {
 
    title : props.title,  expanded : true };}

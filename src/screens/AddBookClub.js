@@ -7,18 +7,23 @@ import { CommonActions, useNavigation } from '@react-navigation/native'
 import auth from '@react-native-firebase/auth';
 import { firebase } from '../config';
 
-export default function BookClubAccount() {
-    const { user, logout, addBook } = useContext(AuthContext);
-    const navigation = useNavigation();
+export default function AddBookClub({route,navigation}) {
+    const { user, logout, addBookToClub } = useContext(AuthContext);
+    //const navigation = useNavigation();
     const [bookName, setBook] = useState('');
     const [author, setAuthor] = useState('');
     const [bookSynopsis, setSynopsis] = useState('');
     const [bookPub, setPub] = useState('');
     const [bookGenre, setGenre] = useState('');
     const [bookImage, setImage] = useState('');
+    const {id} = route.params;
 
-    function checkBookAdded(user, bookName, author, bookSynopsis, bookPub,bookGenre, bookImage){
-        var test = addBook(user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage).catch(err=> { return reject(err); })
+
+    //console.log("Getting the routes in ADDBOOOOOOK using id:",id);
+
+    function checkBookAdded(user, bookName, author, bookSynopsis, bookPub,bookGenre, bookImage, id){
+        console.log("Getting the routes in checkBookAdded:",id);
+        var test = addBookToClub(user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage,id).catch(err=> { return reject(err); })
         test.then(result=>console.log("the result of adding a book", result));
     }
 
@@ -74,7 +79,7 @@ export default function BookClubAccount() {
             //keyboardType='bookGenre'
             autoCorrect={false}
           />
-      <FormButton buttonTitle='Add' onPress={() => checkBookAdded(user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage)} />
+      <FormButton buttonTitle='Add' onPress={() => checkBookAdded(user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage, id)} />
     </View>
   );
 }

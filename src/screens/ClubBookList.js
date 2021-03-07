@@ -2,14 +2,13 @@ import React, { useContext, Component, useState, useEffect} from 'react';
 import { View,Icon, Text,Body, StyleSheet, ScrollView, Link, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
 import FormButton from '../components/FormButton';
 import DisplayData from '../components/DisplayData';
-//import Panel from '../components/panel';
 import { AuthContext } from '../navigation/AuthProvider';
 import { CommonActions, useNavigation } from '@react-navigation/native'
-import List from '../components/readData';
 import auth from '@react-native-firebase/auth';
 import { firebase } from '../config';
 import IconsFeather from 'react-native-vector-icons/Feather';
 import IconsMaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 
     const Item = ({ item, onPress, style }) => (
         <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
@@ -19,12 +18,13 @@ import IconsMaterialIcons from 'react-native-vector-icons/MaterialIcons';
     const renderItem = ({ item }) => (
        <Item bookName={item.bookName} />
         );
-
-export default function PersonalAccount() {
+export default function ClubBookList({route}) {
     const { user, readUserData } = useContext(AuthContext);
     const navigation = useNavigation();
     var bookList = new Array();
 
+    console.log("item in club boooooooooooooooooooooooooooook list", route.params["item"]["id"]);
+    var clubId = route.params["item"]["id"];
     const [selectedId, setSelectedId] = useState(null);
     const [bookListState, setBookListState] = useState(bookList);
 
@@ -32,6 +32,7 @@ export default function PersonalAccount() {
         var newArray = bookList;
         setBookListState(newArray);
       }
+
 
     const renderItem = ({ item }) => {
     const backgroundColor = item.id === selectedId ? "#a3cef1" : "#6096ba";
@@ -45,15 +46,13 @@ export default function PersonalAccount() {
     };
 
     function getListings(){
-        console.log("Fetching data from db for PersonalAccount page for user: " + user.uid);
+        console.log("Fetching data from db for bookClub page for user: " + user.uid);
         firebase.database()
-            .ref('Users/'+user.uid+'/BookList')
+            .ref('Users/'+user.uid+'/BookClub/BookList')
                 .on('value', (snapshot) => {
                                                setListing(snapshot);
                                            });
-
     }
-
 
     function setListing(snapshot){
         console.log("Attempting to set the books for user: " + user.uid);
@@ -76,7 +75,7 @@ export default function PersonalAccount() {
             bookList[i]["id"] = id;
             Object.entries(snapValue[id]).forEach(([key, val]) => {
                 bookList[i][key] = val;
-                //console.log("Key:", key, "val:", val);
+                console.log("Key:", key, "val:", val);
             });
             i += 1;
         });
@@ -87,19 +86,18 @@ export default function PersonalAccount() {
         console.log("show error",e);
     }
 
-
+    function init(){
         getListings();
+    }
 
-
-//    useEffect(()=>{
-//         init();
-//       }, []);
+    useEffect(()=>{
+         init();
+       }, []);
   return (
 
     <View style={styles.container}>
-            <Text style={styles.HeadLine}>Personal Account</Text>
-            <FormButton buttonTitle='AddBook' onPress={() =>  navigation.navigate('AddBook')} />
-       <Text style={styles.HeadLine}>Current BookList </Text>
+        <Text style={styles.HeadLine}>Club Books</Text>
+        <FormButton buttonTitle='AddBook' onPress={() =>  navigation.navigate('AddBookClub', {id: route.params["item"]["id"]})} />
        <SafeAreaView  style = {styles.list} >
          <FlatList
            data={bookListState}
@@ -108,6 +106,8 @@ export default function PersonalAccount() {
            extraData={selectedId}
          />
        </SafeAreaView>
+
+
         </View>
 
   );
@@ -160,8 +160,7 @@ const styles = StyleSheet.create({
     },
    HeadLine:{
      fontSize: 25,
-     color: '#333333',
-     padding: 10
+     color: '#333333'
     }
 
 });

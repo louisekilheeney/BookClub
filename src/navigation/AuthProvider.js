@@ -7,7 +7,7 @@ export const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState('');
   const [error, setError] = useState('');
-
+  var clubId;
 
   return (
     <AuthContext.Provider
@@ -79,7 +79,7 @@ export const AuthProvider = ({ children }) => {
           try {
 
             console.log("user details", user.uid);
-            console.log("Crrent auth user: ", auth().currentUser)
+            console.log("Current auth user: ", auth().currentUser)
 
             const removeThisId = user.uid;
             auth().currentUser.delete().then(function() {
@@ -99,7 +99,7 @@ export const AuthProvider = ({ children }) => {
         addClub: async (user, clubName) => {
          try {
          console.log("user details:", user);
-
+         console.log("club id", clubId);
             firebase.database().ref('BookClub/').push({
               clubName,
              }).then((data)=>{
@@ -112,10 +112,16 @@ export const AuthProvider = ({ children }) => {
                     wordsId[i] += " ";
               }
               console.log(wordsId);
-                //update bookclub in users details
-             firebase.database().ref('Users/'+user.uid+'/BookClub/'+wordsId[4].replace("\"","")).update({
-                               clubName, });
+              clubId = wordsId[4].replace("\"","");
+
+             //update bookclub in users details
+             firebase.database().ref('Users/'+user.uid+'/BookClub/'+clubId).update({
+                               clubName,
+                                clubId,});
               console.log('Adding a new book club' , data)
+              console.log('this is the id' , clubId)
+              return clubId;
+
              }).catch((error)=>{
               //error callback
               console.log('error with adding bookclub ' , error)
@@ -128,13 +134,17 @@ export const AuthProvider = ({ children }) => {
          firebase.database().ref('Users/'+user.uid+'/BookClub').update({
                                   clubName,
                               });
-
         },
-        addBook: async (user, bookName) => {
+        addBook: async (user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage) => {
          try {
          console.log("user details:", user);
             firebase.database().ref('Users/'+user.uid+'/BookList').push({
               bookName,
+              author,
+              bookSynopsis,
+              bookPub,
+              bookGenre,
+              bookImage
              }).then((data)=>{
               //success callback
               alert("Added Book" + " " + bookName);
@@ -148,6 +158,34 @@ export const AuthProvider = ({ children }) => {
           }catch (e) {
            console.error(e);
          }
+        },
+         addBookToClub: async (user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage, id) => {
+         try {
+         console.log("checking value of id", id);
+                  firebase.database().ref('BookClub/'+id+'/BookList').push({
+                    bookName,
+                    author,
+                    bookSynopsis,
+                    bookPub,
+                    bookGenre,
+                    bookImage
+                   }).then((data)=>{
+                    //success callback
+                    alert("Added Book" + " " + bookName);
+                     return true;
+                    console.log('Adding book to users personal collection' , data)
+                   }).catch((error)=>{
+                    //error callback
+                    return false;
+                    console.log('error with adding book to personal list ' , error)
+                  });
+              }
+
+
+          catch (e) {
+           console.error(e);
+         }
+
         }
         }
       }
