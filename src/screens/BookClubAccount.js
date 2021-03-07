@@ -9,12 +9,9 @@ import { firebase } from '../config';
 import IconsFeather from 'react-native-vector-icons/Feather';
 import IconsFontAwesome from 'react-native-vector-icons/FontAwesome';
 
-
 const Item = ({ item, onPress, style }) => (
     <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
-
-        <Text style={styles.clubName}> <IconsFontAwesome name="group" size={20} /> {item.clubName}</Text>
-
+        <Text style={styles.clubName}> <IconsFontAwesome name="group" size={20} /> {item.clubName} </Text>
     </TouchableOpacity>
 );
 const renderItem = ({ item }) => (
@@ -39,18 +36,17 @@ export default function BookClubAccount() {
   return (
           <Item
               item={item}
-              onPress={() => setSelectedId(item.id)}
+              onPress={() =>  navigation.navigate('BookClubLandingScreen', {_item: item})}
               style={{ backgroundColor }}
           />
       );
   };
-
   var getListings = function(){
       console.log("working on displaying ClubList from personal account");
       firebase.database().ref('Users/'+user.uid+'/BookClub').on('value', (snapshot) => {
-                                                                                   setListing(snapshot);
-                                                                               });
+                                                                           setListing(snapshot); });
 }
+
   function setListing(snapshot){
           console.log("Attempting to set the book clubs registered for user: " + user.uid);
           var snapValue = snapshot.val()
@@ -58,7 +54,6 @@ export default function BookClubAccount() {
               console.log("Failed to get ook clubs registered response data for user: " + user.uid);
               return;
           }
-
           var ClubIds = Object.keys(snapValue);
           if(!ClubIds){
               console.log("Failed to get keys for user: " + user.uid);
@@ -78,49 +73,39 @@ export default function BookClubAccount() {
           });
           console.log("Completed the book club List for user: " + user.uid);
       }
-
-      function init(){
-          getListings();
-      }
-
-      useEffect(()=>{
-           init();
-         }, []);
+         getListings();
+//      useEffect(()=>{
+//          getListings();
+//         }, []);
 
   return (
-
     <View style={styles.container}>
       <Text style={styles.text}> BookClub </Text>
       <JoinButton buttonTitle='Create BookClub' onPress={() =>  navigation.navigate('AddClub')} />
-
       <Text style={styles.text}> Your Current BookClubs </Text>
-
       <SafeAreaView  style = {styles.list} >
         <FlatList
           data={clubListState}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
-          extraData={selectedId}
-        />
+          extraData={selectedId} />
        </SafeAreaView>
-
       <Text style={styles.text}> Join a book Club </Text>
-
     </View>
 
   );
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f1'
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#f5f5f1'
   },
   text: {
-    fontSize: 20,
-    color: '#333333',
-    padding : 10,
+        fontSize: 20,
+        color: '#333333',
+        padding : 10,
   },
    item: {
         backgroundColor: '#a3cef1',
@@ -150,8 +135,8 @@ const styles = StyleSheet.create({
        borderRadius: 10,
        borderWidth: 0.5,
        borderColor: '#000',
-       padding: 20,
-       margin: 30,
+       padding: 10,
+       margin: 40,
        flex: 1,
        justifyContent: 'center',
        alignItems: 'center'
