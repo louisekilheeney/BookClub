@@ -32,26 +32,28 @@ Alert.alert(
     <View style={styles.container}>
       <Text style={styles.text}>Settings</Text>
       <FormButton buttonTitle='Logout' onPress={() => logout()} />
-
-      <Text style={styles.text}>delete account from the database</Text>
       <RemoveButton buttonTitle='Remove Account' onPress={() => confirmDelete(user)}  />
     </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#ebebeb',
+    borderRadius: 10,
+    borderWidth: 0.5,
+    borderColor: '#000',
+    padding: 10,
+    margin: 20,
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f1'
+    alignItems: 'center'
   },
   text: {
-    fontSize: 20,
+    fontSize: 30,
     color: '#333333',
-    padding: 10
+    paddingBottom: 50
   },
-
-   buttonContainer: {
+  buttonContainer: {
      marginTop: 10,
      width: windowWidth / 2,
      height: windowHeight / 15,
@@ -61,8 +63,8 @@ const styles = StyleSheet.create({
      justifyContent: 'center',
      borderRadius: 8
     },
-    buttonText: {
-       fontSize: 20,
-       color: '#ffffff'
+  buttonText: {
+     fontSize: 20,
+     color: '#ffffff'
     }
 });

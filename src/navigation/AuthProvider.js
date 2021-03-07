@@ -122,6 +122,8 @@ export const AuthProvider = ({ children }) => {
               console.log('this is the id' , clubId)
               return clubId;
 
+
+
              }).catch((error)=>{
               //error callback
               console.log('error with adding bookclub ' , error)
@@ -180,8 +182,6 @@ export const AuthProvider = ({ children }) => {
                     console.log('error with adding book to personal list ' , error)
                   });
               }
-
-
           catch (e) {
            console.error(e);
          }

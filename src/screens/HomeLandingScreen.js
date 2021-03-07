@@ -12,19 +12,30 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <Text style={styles.text}>Welcome {user.email}</Text>
 
+      <Text style={styles.text}>Your Current books</Text>
+
+
+
+
 
     </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f1'
+   backgroundColor: '#ebebeb',
+   borderRadius: 10,
+   borderWidth: 0.5,
+   borderColor: '#000',
+   padding: 10,
+   margin: 20,
+   flex: 1,
+   justifyContent: 'center',
+   alignItems: 'center'
   },
   text: {
     fontSize: 20,
-    color: '#333333'
+    color: '#333333',
+    paddingBottom: 20
   }
 });

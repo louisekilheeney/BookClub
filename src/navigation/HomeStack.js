@@ -15,7 +15,7 @@ const Stack = createStackNavigator();
 export default function HomeStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name='bookClub' component={HomeScreen} />
+      <Stack.Screen name='BookClub' component={HomeScreen} />
       <Stack.Screen name='PersonalAccount' component={PersonalAccount} />
       <Stack.Screen name='SettingScreen' component={SettingScreen} />
       <Stack.Screen name='BookClubAccount' component={BookClubAccount} />

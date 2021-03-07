@@ -24,19 +24,26 @@ export default function BookClubAccount() {
   const [clubName, setClub] = useState('');
 
   var ClubList = new Array();
+  var ClubListClub = new Array();
   const [selectedId, setSelectedId] = useState(null);
   const [clubListState, setCLubListState] = useState(ClubList);
+  const [clubListStateClub, setCLubListStateClub] = useState(ClubListClub);
 
   const addElement = (ClubList) => {
       var newArray = ClubList;
       setCLubListState(newArray);
     }
+  const addElementClub = (ClubListClub) => {
+      var newArrayClub = ClubListClub;
+      setCLubListStateClub(newArrayClub);
+    }
+
   const renderItem = ({ item }) => {
   const backgroundColor = item.id === selectedId ? "#a3cef1" : "#6096ba";
   return (
           <Item
               item={item}
-              onPress={() =>  navigation.navigate('BookClubLandingScreen', {_item: item})}
+              onPress={() =>  navigation.navigate('BookClubLandingScreen', {_item: item}),setCLubListState,setCLubListStateClub}
               style={{ backgroundColor }}
           />
       );
@@ -45,6 +52,11 @@ export default function BookClubAccount() {
       console.log("working on displaying ClubList from personal account");
       firebase.database().ref('Users/'+user.uid+'/BookClub').on('value', (snapshot) => {
                                                                            setListing(snapshot); });
+}
+var getListingsForClub = function(){
+      console.log("working on displaying ClubList from personal account");
+      firebase.database().ref('BookClub').on('value', (snapshot) => {
+                                                                           setListingForClub(snapshot); });
 }
 
   function setListing(snapshot){
@@ -67,20 +79,45 @@ export default function BookClubAccount() {
               ClubList[i]["id"] = id;
               Object.entries(snapValue[id]).forEach(([key, val]) => {
                   ClubList[i][key] = val;
-                  //console.log("Key:", key, "val:", val);
+                  console.log("personal clubs Key:", key, "val:", val);
               });
               i += 1;
           });
           console.log("Completed the book club List for user: " + user.uid);
       }
+    function setListingForClub(snapshot){
+            console.log("Attempting to set the book clubs registered for user: " + user.uid);
+            var snapValue = snapshot.val()
+            if (!snapValue){
+                console.log("Failed to get ook clubs registered response data for user: " + user.uid);
+                return;
+            }
+            var ClubIds = Object.keys(snapValue);
+            if(!ClubIds){
+                console.log("Failed to get keys for user: " + user.uid);
+                return;
+            }
+
+            // Manipulating data into a form the view can understand.
+            var i = 0;
+            Object.entries(snapValue).forEach(([id, value]) => {
+                ClubListClub[i] = {};
+                ClubListClub[i]["id"] = id;
+                Object.entries(snapValue[id]).forEach(([key, val]) => {
+                    ClubListClub[i][key] = val;
+                    console.log("clubs not joined Key:", key, "val:", val);
+                });
+                i += 1;
+            });
+            //console.log("Completed the book club List for user: " + user.uid);
+        }
          getListings();
-//      useEffect(()=>{
-//          getListings();
-//         }, []);
+         getListingsForClub();
+
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}> BookClub </Text>
+      <Text style={styles.HeadLine}> BookClub </Text>
       <JoinButton buttonTitle='Create BookClub' onPress={() =>  navigation.navigate('AddClub')} />
       <Text style={styles.text}> Your Current BookClubs </Text>
       <SafeAreaView  style = {styles.list} >
@@ -91,16 +128,27 @@ export default function BookClubAccount() {
           extraData={selectedId} />
        </SafeAreaView>
       <Text style={styles.text}> Join a book Club </Text>
+        <SafeAreaView  style = {styles.list} >
+          <FlatList
+            data={clubListStateClub}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+            extraData={selectedId} />
+        </SafeAreaView>
     </View>
-
   );
 }
 const styles = StyleSheet.create({
   container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#f5f5f1'
+          backgroundColor: '#ebebeb',
+           borderRadius: 10,
+           borderWidth: 0.5,
+           borderColor: '#000',
+           padding: 10,
+           margin: 20,
+           flex: 1,
+           justifyContent: 'center',
+           alignItems: 'center'
   },
   text: {
         fontSize: 20,
@@ -132,13 +180,18 @@ const styles = StyleSheet.create({
       },
     list: {
        backgroundColor: '#ebebeb',
-       borderRadius: 10,
-       borderWidth: 0.5,
-       borderColor: '#000',
-       padding: 10,
-       margin: 40,
-       flex: 1,
-       justifyContent: 'center',
-       alignItems: 'center'
-      }
+            borderRadius: 20,
+            borderWidth: 0.5,
+            borderColor: '#000',
+            padding: 10,
+            margin: 10,
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center'
+          },
+         HeadLine:{
+           fontSize: 25,
+           color: '#333333',
+           padding: 10
+          }
 });

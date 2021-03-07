@@ -10,6 +10,8 @@ import auth from '@react-native-firebase/auth';
 import { firebase } from '../config';
 import IconsFeather from 'react-native-vector-icons/Feather';
 import IconsMaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Collapsible from 'react-native-collapsible';
+
 
     const Item = ({ item, onPress, style }) => (
         <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
@@ -23,6 +25,7 @@ import IconsMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 export default function PersonalAccount() {
     const { user, readUserData } = useContext(AuthContext);
     const navigation = useNavigation();
+    const [open, setOpen] = useState(false);
     var bookList = new Array();
 
     const [selectedId, setSelectedId] = useState(null);
@@ -38,7 +41,7 @@ export default function PersonalAccount() {
     return (
             <Item
                 item={item}
-                onPress={() => setSelectedId(item.id)}
+                onPress={() => setSelectedId(item.id),setBookListState}
                 style={{ backgroundColor }}
             />
         );
@@ -54,7 +57,6 @@ export default function PersonalAccount() {
 
     }
 
-
     function setListing(snapshot){
         console.log("Attempting to set the books for user: " + user.uid);
         var snapValue = snapshot.val()
@@ -68,7 +70,6 @@ export default function PersonalAccount() {
             console.log("Failed to get keys for user: " + user.uid);
             return;
         }
-
         // Manipulating data into a form the view can understand.
         var i = 0;
         Object.entries(snapValue).forEach(([id, value]) => {
@@ -86,14 +87,8 @@ export default function PersonalAccount() {
     function showError(e){
         console.log("show error",e);
     }
+    getListings();
 
-
-        getListings();
-
-
-//    useEffect(()=>{
-//         init();
-//       }, []);
   return (
 
     <View style={styles.container}>
@@ -114,11 +109,15 @@ export default function PersonalAccount() {
 }
 const styles = StyleSheet.create({
   container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#f5f5f1',
-        paddingTop: 10
+       backgroundColor: '#ebebeb',
+       borderRadius: 10,
+       borderWidth: 0.5,
+       borderColor: '#000',
+       padding: 10,
+       margin: 20,
+       flex: 1,
+       justifyContent: 'center',
+       alignItems: 'center'
   },
   text: {
        fontSize: 18,
@@ -149,11 +148,11 @@ const styles = StyleSheet.create({
     },
   list: {
      backgroundColor: '#ebebeb',
-     borderRadius: 10,
+     borderRadius: 20,
      borderWidth: 0.5,
      borderColor: '#000',
      padding: 10,
-     margin: 40,
+     margin: 10,
      flex: 1,
      justifyContent: 'center',
      alignItems: 'center'
