@@ -75,6 +75,14 @@ export const AuthProvider = ({ children }) => {
             console.error(e);
           }
         },
+        request: async (user,clubName, clubId) => {
+          try {
+          console.log("ask admin of club to be allowed to join")
+
+         } catch (e) {
+            console.error(e);
+          }
+        },
         RemoveUser: async (user) => {
           try {
 

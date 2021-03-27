@@ -43,11 +43,24 @@ export default function BookClubAccount() {
   return (
           <Item
               item={item}
-              onPress={() =>  navigation.navigate('BookClubLandingScreen', {_item: item}),setCLubListState,setCLubListStateClub}
+              onPress={() =>  navigation.navigate('BookClubLandingScreen', {_item: item},setCLubListState,setCLubListStateClub)}
               style={{ backgroundColor }}
           />
       );
   };
+
+  const joinClub = ({ item }) => {
+  const backgroundColor = item.id === selectedId ? "#a3cef1" : "#6096ba";
+  console.log("whats in here", item);
+  return (
+          <Item
+              item={item}
+              onPress={() =>  navigation.navigate('requestScreen', {clubItem: item},setCLubListState,setCLubListStateClub)}
+              style={{ backgroundColor }}
+          />
+      );
+  };
+
   var getListings = function(){
       console.log("working on displaying ClubList from personal account");
       firebase.database().ref('Users/'+user.uid+'/BookClub').on('value', (snapshot) => {
@@ -55,9 +68,8 @@ export default function BookClubAccount() {
 }
 var getListingsForClub = function(){
       console.log("working on displaying ClubList from personal account");
-      firebase.database().ref('BookClub').on('value', (snapshot) => {
-                                                                           setListingForClub(snapshot); });
-}
+      firebase.database().ref('BookClub').on('value', (snapshot) => {setListingForClub(snapshot); });
+    }
 
   function setListing(snapshot){
           console.log("Attempting to set the book clubs registered for user: " + user.uid);
@@ -71,7 +83,6 @@ var getListingsForClub = function(){
               console.log("Failed to get keys for user: " + user.uid);
               return;
           }
-
           // Manipulating data into a form the view can understand.
           var i = 0;
           Object.entries(snapValue).forEach(([id, value]) => {
@@ -131,7 +142,7 @@ var getListingsForClub = function(){
         <SafeAreaView  style = {styles.list} >
           <FlatList
             data={clubListStateClub}
-            renderItem={renderItem}
+            renderItem={joinClub}
             keyExtractor={(item) => item.id}
             extraData={selectedId} />
         </SafeAreaView>
@@ -180,18 +191,18 @@ const styles = StyleSheet.create({
       },
     list: {
        backgroundColor: '#ebebeb',
-            borderRadius: 20,
-            borderWidth: 0.5,
-            borderColor: '#000',
-            padding: 10,
-            margin: 10,
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center'
-          },
-         HeadLine:{
-           fontSize: 25,
-           color: '#333333',
-           padding: 10
-          }
+        borderRadius: 5,
+        borderWidth: 0.5,
+        borderColor: '#000',
+        padding: 10,
+        margin: 5,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+      },
+     HeadLine:{
+       fontSize: 25,
+       color: '#333333',
+       padding: 10
+      }
 });

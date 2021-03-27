@@ -2,7 +2,6 @@ import React, { useContext, Component, useState, useEffect} from 'react';
 import { View,Icon, Text,Body, StyleSheet, ScrollView, Link, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
 import FormButton from '../components/FormButton';
 import DisplayData from '../components/DisplayData';
-//import Panel from '../components/panel';
 import { AuthContext } from '../navigation/AuthProvider';
 import { CommonActions, useNavigation } from '@react-navigation/native'
 import List from '../components/readData';
@@ -12,24 +11,32 @@ import IconsFeather from 'react-native-vector-icons/Feather';
 import IconsMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Collapsible from 'react-native-collapsible';
 
-
-    const Item = ({ item, onPress, style }) => (
-        <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
-            <Text style={styles.bookName}> <IconsFeather name="book-open" size={20} /> {item.bookName}<IconsMaterialIcons name="keyboard-arrow-down" size={20} /></Text>
-        </TouchableOpacity>
-        );
-    const renderItem = ({ item }) => (
-       <Item bookName={item.bookName} />
-        );
-
 export default function PersonalAccount() {
     const { user, readUserData } = useContext(AuthContext);
     const navigation = useNavigation();
     const [open, setOpen] = useState(false);
+    const [toggle, setToggle] = useState(true);
+      const toggleFunction = () => {
+        setToggle(!toggle);
+      };
     var bookList = new Array();
 
     const [selectedId, setSelectedId] = useState(null);
     const [bookListState, setBookListState] = useState(bookList);
+
+      const [expandable, setExpandable] = useState(false);
+      //const [titleColor, setTitleColor] = useState(colors.blue.primary)
+
+      const onPress = () => {
+        if (!expandable) {
+          setExpandable(true);
+          //setTitleColor(colors.blue.secondary);
+        }
+        else {
+          setExpandable(false);
+          s//etTitleColor(colors.blue.primary);
+        }
+      };
 
     const addElement = (bookList) => {
         var newArray = bookList;
@@ -38,6 +45,16 @@ export default function PersonalAccount() {
 
     const renderItem = ({ item }) => {
     const backgroundColor = item.id === selectedId ? "#a3cef1" : "#6096ba";
+
+    const Item = ({ item, onPress, style }) => (
+        <TouchableOpacity onPress={() => toggleFunction()} style={[styles.item, style]}>
+            <Text style={styles.bookName}> <IconsFeather name="book-open" size={20} /> {item.bookName}<IconsMaterialIcons name="keyboard-arrow-down" size={20} /></Text>
+        </TouchableOpacity>
+        );
+    const renderItem = ({ item }) => (
+       <Item bookName={item.bookName} />
+        );
+
     return (
             <Item
                 item={item}
@@ -102,6 +119,7 @@ export default function PersonalAccount() {
            keyExtractor={(item) => item.id}
            extraData={selectedId}
          />
+
        </SafeAreaView>
         </View>
 

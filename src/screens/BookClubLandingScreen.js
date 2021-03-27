@@ -47,7 +47,7 @@ export default function BookClubLandingScreen({route}) {
 
   return (
         <TopTab.Navigator>
-                    <TopTab.Screen name="General" component={GeneralScreen} options={ {tabBarLabel: "General" }} />
+                    <TopTab.Screen name="General" component={GeneralScreen} options={ {tabBarLabel: "General" }} initialParams={{item: _item} } />
                     <TopTab.Screen name="books" component={ClubBookList} options={{tabBarLabel: "books" }} initialParams={{item: _item} } />
                     <TopTab.Screen name="Meeting" component={MeetingScreen} options={{tabBarLabel: "Meeting"}}/>
                     <TopTab.Screen name="GroupInfo" component={GroupInfo}  options={{tabBarLabel: "Group info"}} />
