@@ -21,11 +21,6 @@ export default function bookDetails() {
       <Text style={styles.text}>Book Publisher: </Text>
       <Text style={styles.text}>Book synopsis: </Text>
 
-//      <View style={styles.reviewContainer}>
-//              <Text style={styles.title} onPress={() => navigation.navigate('StarRating')}>Leave a review</Text>
-//      </View>
-
-
     </View>
   );
 }

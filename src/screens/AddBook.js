@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, RefreshControl } from 'react-native';
 import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
 import { AuthContext } from '../navigation/AuthProvider';
@@ -17,10 +17,12 @@ export default function BookClubAccount() {
     const [bookGenre, setGenre] = useState('');
     const [bookImage, setImage] = useState('');
 
+
     function checkBookAdded(user, bookName, author, bookSynopsis, bookPub,bookGenre, bookImage){
         var test = addBook(user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage).catch(err=> { return reject(err); })
         test.then(result=>console.log("the result of adding a book", result));
     }
+
 
   return (
     <View style={styles.container}>

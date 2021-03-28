@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
 import { AuthContext } from '../navigation/AuthProvider';
@@ -13,6 +13,7 @@ export default function LoginScreen({ navigation }) {
   return (
 
     <View style={styles.container}>
+    <Image style={styles.image} source={require('../logo/bookClubLogo.png')} />
       <Text style={styles.text}>Welcome to BookClub</Text>
       <FormInput
         value={email}
@@ -49,26 +50,27 @@ export default function LoginScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ebebeb',
+    backgroundColor: '#ffffff',
     borderRadius: 10,
     borderWidth: 0.5,
     borderColor: '#000',
-    padding: 20,
-    margin: 30,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
   text: {
-    fontSize: 20,
+    fontSize: 30,
     marginBottom: 20,
-    color: '#003366'
+    color: '#000000'
   },
   navButton: {
     marginTop: 15
   },
   navButtonText: {
     fontSize: 20,
-    color: '#457b9d'
-  }
+    color: '#005f4f'
+  },
+  image: {
+      width: 200, height: 200
+    }
 });
