@@ -11,6 +11,7 @@ import IconsFeather from 'react-native-vector-icons/Feather';
 import IconsMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Collapsible from 'react-native-collapsible';
 
+
 export default function PersonalAccount() {
     const { user, readUserData } = useContext(AuthContext);
     const navigation = useNavigation();
@@ -48,7 +49,7 @@ export default function PersonalAccount() {
 
     const Item = ({ item, onPress, style }) => (
         <TouchableOpacity onPress={() => toggleFunction()} style={[styles.item, style]}>
-            <Text style={styles.bookName}> <IconsFeather name="book-open" size={20} /> {item.bookName}<IconsMaterialIcons name="keyboard-arrow-down" size={20} /></Text>
+            <Text style={styles.bookName}> <IconsFeather name="book-open" size={20} /> {item.bookName}<IconsMaterialIcons name="keyboard-arrow-right" size={20} /></Text>
         </TouchableOpacity>
         );
     const renderItem = ({ item }) => (
@@ -58,7 +59,7 @@ export default function PersonalAccount() {
     return (
             <Item
                 item={item}
-                onPress={() => setSelectedId(item.id),setBookListState}
+                onPress={() => setSelectedId(item.id),setBookListState, navigation.navigate('bookDetails')}
                 style={{ backgroundColor }}
             />
         );
@@ -127,15 +128,11 @@ export default function PersonalAccount() {
 }
 const styles = StyleSheet.create({
   container: {
-       backgroundColor: '#ebebeb',
-       borderRadius: 10,
-       borderWidth: 0.5,
-       borderColor: '#000',
-       padding: 10,
-       margin: 20,
-       flex: 1,
-       justifyContent: 'center',
-       alignItems: 'center'
+   flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#f5f5f1',
+        paddingTop: 10
   },
   text: {
        fontSize: 18,

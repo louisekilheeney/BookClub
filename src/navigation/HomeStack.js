@@ -10,6 +10,7 @@ import AddBookClub from '../screens/AddBookClub';
 import MeetingScreen from '../screens/MeetingScreen';
 import GroupInfo from '../screens/GroupInfo';
 import requestScreen from '../screens/requestScreen';
+import bookDetails from '../screens/bookDetails';
 import BookClubLandingScreen from '../screens/BookClubLandingScreen';
 const Stack = createStackNavigator();
 
@@ -27,7 +28,7 @@ export default function HomeStack() {
        <Stack.Screen name='AddBookClub' component={AddBookClub} />
        <Stack.Screen name='GroupInfo' component={GroupInfo} />
        <Stack.Screen name='requestScreen' component={requestScreen} />
-
+       <Stack.Screen name='bookDetails' component={bookDetails} />
 
     </Stack.Navigator>
   );

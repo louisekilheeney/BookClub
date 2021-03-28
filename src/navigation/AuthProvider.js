@@ -75,6 +75,16 @@ export const AuthProvider = ({ children }) => {
             console.error(e);
           }
         },
+        getClubMembers: async (user) => {
+          try {
+          firebase.database().ref('Users/'+user.uid+'/BookList').on('value', function (snapshot) {
+              console.log(snapshot.val())
+
+          });
+         } catch (e) {
+            console.error(e);
+          }
+        },
         request: async (user,clubName, clubId) => {
           try {
           console.log("ask admin of club to be allowed to join")
@@ -125,7 +135,8 @@ export const AuthProvider = ({ children }) => {
              //update bookclub in users details
              firebase.database().ref('Users/'+user.uid+'/BookClub/'+clubId).update({
                                clubName,
-                                clubId,});
+                               clubId, });
+
               console.log('Adding a new book club' , data)
               console.log('this is the id' , clubId)
               return clubId;
@@ -172,24 +183,24 @@ export const AuthProvider = ({ children }) => {
          addBookToClub: async (user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage, id) => {
          try {
          console.log("checking value of id", id);
-                  firebase.database().ref('BookClub/'+id+'/BookList').push({
-                    bookName,
-                    author,
-                    bookSynopsis,
-                    bookPub,
-                    bookGenre,
-                    bookImage
-                   }).then((data)=>{
-                    //success callback
-                    alert("Added Book" + " " + bookName);
-                     return true;
-                    console.log('Adding book to users personal collection' , data)
-                   }).catch((error)=>{
-                    //error callback
-                    return false;
-                    console.log('error with adding book to personal list ' , error)
-                  });
-              }
+              firebase.database().ref('BookClub/'+id+'/BookList').push({
+                bookName,
+                author,
+                bookSynopsis,
+                bookPub,
+                bookGenre,
+                bookImage
+               }).then((data)=>{
+                //success callback
+                alert("Added Book" + " " + bookName);
+                 return true;
+                console.log('Adding book to users personal collection' , data)
+               }).catch((error)=>{
+                //error callback
+                return false;
+                console.log('error with adding book to personal list ' , error)
+              });
+          }
           catch (e) {
            console.error(e);
          }

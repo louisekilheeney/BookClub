@@ -51,7 +51,7 @@ export default function App() {
       </View>
      <TouchableOpacity style={styles.button} onPress={addEventToCalendar}>
        <Text style={[styles.text, { color: 'white' }]}>
-         Add this event to the calendar
+         Add event to calendar
        </Text>
      </TouchableOpacity>
     </View>

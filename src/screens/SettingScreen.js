@@ -38,15 +38,11 @@ Alert.alert(
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ebebeb',
-    borderRadius: 10,
-    borderWidth: 0.5,
-    borderColor: '#000',
-    padding: 10,
-    margin: 20,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+   flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#f5f5f1',
+        paddingTop: 10
   },
   text: {
     fontSize: 30,
