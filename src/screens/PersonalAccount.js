@@ -2,7 +2,6 @@ import React, { useContext, Component, useState, useEffect} from 'react';
 import { View,Icon, Text,Body, StyleSheet, ScrollView, Link, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
 import FormButton from '../components/FormButton';
 import DisplayData from '../components/DisplayData';
-//import Panel from '../components/panel';
 import { AuthContext } from '../navigation/AuthProvider';
 import { CommonActions, useNavigation } from '@react-navigation/native'
 import List from '../components/readData';
@@ -10,23 +9,35 @@ import auth from '@react-native-firebase/auth';
 import { firebase } from '../config';
 import IconsFeather from 'react-native-vector-icons/Feather';
 import IconsMaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Collapsible from 'react-native-collapsible';
 
-    const Item = ({ item, onPress, style }) => (
-        <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
-            <Text style={styles.bookName}> <IconsFeather name="book-open" size={20} /> {item.bookName}<IconsMaterialIcons name="keyboard-arrow-down" size={20} /></Text>
-        </TouchableOpacity>
-        );
-    const renderItem = ({ item }) => (
-       <Item bookName={item.bookName} />
-        );
 
 export default function PersonalAccount() {
     const { user, readUserData } = useContext(AuthContext);
     const navigation = useNavigation();
+    const [open, setOpen] = useState(false);
+    const [toggle, setToggle] = useState(true);
+      const toggleFunction = () => {
+        setToggle(!toggle);
+      };
     var bookList = new Array();
 
     const [selectedId, setSelectedId] = useState(null);
     const [bookListState, setBookListState] = useState(bookList);
+
+      const [expandable, setExpandable] = useState(false);
+      //const [titleColor, setTitleColor] = useState(colors.blue.primary)
+
+      const onPress = () => {
+        if (!expandable) {
+          setExpandable(true);
+          //setTitleColor(colors.blue.secondary);
+        }
+        else {
+          setExpandable(false);
+          s//etTitleColor(colors.blue.primary);
+        }
+      };
 
     const addElement = (bookList) => {
         var newArray = bookList;
@@ -35,10 +46,20 @@ export default function PersonalAccount() {
 
     const renderItem = ({ item }) => {
     const backgroundColor = item.id === selectedId ? "#a3cef1" : "#6096ba";
+
+    const Item = ({ item, onPress, style }) => (
+        <TouchableOpacity onPress={() => toggleFunction()} style={[styles.item, style]}>
+            <Text style={styles.bookName}> <IconsFeather name="book-open" size={20} /> {item.bookName}<IconsMaterialIcons name="keyboard-arrow-right" size={20} /></Text>
+        </TouchableOpacity>
+        );
+    const renderItem = ({ item }) => (
+       <Item bookName={item.bookName} />
+        );
+
     return (
             <Item
                 item={item}
-                onPress={() => setSelectedId(item.id)}
+                onPress={() => setSelectedId(item.id),setBookListState, navigation.navigate('bookDetails')}
                 style={{ backgroundColor }}
             />
         );
@@ -54,7 +75,6 @@ export default function PersonalAccount() {
 
     }
 
-
     function setListing(snapshot){
         console.log("Attempting to set the books for user: " + user.uid);
         var snapValue = snapshot.val()
@@ -68,7 +88,6 @@ export default function PersonalAccount() {
             console.log("Failed to get keys for user: " + user.uid);
             return;
         }
-
         // Manipulating data into a form the view can understand.
         var i = 0;
         Object.entries(snapValue).forEach(([id, value]) => {
@@ -86,14 +105,8 @@ export default function PersonalAccount() {
     function showError(e){
         console.log("show error",e);
     }
+    getListings();
 
-
-        getListings();
-
-
-//    useEffect(()=>{
-//         init();
-//       }, []);
   return (
 
     <View style={styles.container}>
@@ -107,6 +120,7 @@ export default function PersonalAccount() {
            keyExtractor={(item) => item.id}
            extraData={selectedId}
          />
+
        </SafeAreaView>
         </View>
 
@@ -114,7 +128,7 @@ export default function PersonalAccount() {
 }
 const styles = StyleSheet.create({
   container: {
-        flex: 1,
+   flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#f5f5f1',
@@ -149,11 +163,11 @@ const styles = StyleSheet.create({
     },
   list: {
      backgroundColor: '#ebebeb',
-     borderRadius: 10,
+     borderRadius: 20,
      borderWidth: 0.5,
      borderColor: '#000',
      padding: 10,
-     margin: 40,
+     margin: 10,
      flex: 1,
      justifyContent: 'center',
      alignItems: 'center'
