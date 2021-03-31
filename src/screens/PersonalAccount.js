@@ -1,5 +1,5 @@
 import React, { useContext, Component, useState, useEffect} from 'react';
-import { View,Icon, Text,Body, StyleSheet, ScrollView, Link, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
+import { View,Icon, Text,Body, StyleSheet, ScrollView, Link, TouchableOpacity, FlatList, SafeAreaView, RefreshControl } from 'react-native';
 import FormButton from '../components/FormButton';
 import DisplayData from '../components/DisplayData';
 import { AuthContext } from '../navigation/AuthProvider';
@@ -10,7 +10,6 @@ import { firebase } from '../config';
 import IconsFeather from 'react-native-vector-icons/Feather';
 import IconsMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Collapsible from 'react-native-collapsible';
-
 
 export default function PersonalAccount() {
     const { user, readUserData } = useContext(AuthContext);
@@ -24,6 +23,17 @@ export default function PersonalAccount() {
 
     const [selectedId, setSelectedId] = useState(null);
     const [bookListState, setBookListState] = useState(bookList);
+    const [refreshing, setRefreshing] = React.useState(false);
+
+
+    const wait = (timeout) => {
+      return new Promise(resolve => setTimeout(resolve, timeout));
+    }
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(200).then(() => setRefreshing(false));
+        getListings();
+    }, []);
 
       const [expandable, setExpandable] = useState(false);
       //const [titleColor, setTitleColor] = useState(colors.blue.primary)
@@ -59,12 +69,12 @@ export default function PersonalAccount() {
     return (
             <Item
                 item={item}
-                onPress={() => setSelectedId(item.id),setBookListState, navigation.navigate('bookDetails')}
+                onPress={() => setSelectedId(item.id),setBookListState}
                 style={{ backgroundColor }}
             />
         );
     };
-
+    //navigation.navigate('bookDetails')
     function getListings(){
         console.log("Fetching data from db for PersonalAccount page for user: " + user.uid);
         firebase.database()
@@ -108,22 +118,22 @@ export default function PersonalAccount() {
     getListings();
 
   return (
-
-    <View style={styles.container}>
+    <View style={styles.container}   >
             <Text style={styles.HeadLine}>Personal Account</Text>
             <FormButton buttonTitle='AddBook' onPress={() =>  navigation.navigate('AddBook')} />
        <Text style={styles.HeadLine}>Current BookList </Text>
-       <SafeAreaView  style = {styles.list} >
+       <SafeAreaView  style = {styles.list}   >
          <FlatList
            data={bookListState}
            renderItem={renderItem}
+           refreshControl={  <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
            keyExtractor={(item) => item.id}
            extraData={selectedId}
          />
 
-       </SafeAreaView>
-        </View>
+        </SafeAreaView>
 
+        </View>
   );
 }
 const styles = StyleSheet.create({

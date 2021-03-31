@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
 import { AuthContext } from '../navigation/AuthProvider';
@@ -41,6 +41,7 @@ function validate(name, email, password, confirmPassword){
     };
   return (
     <View style={styles.container}>
+    <Image style={styles.image} source={require('../logo/bookClubLogo.png')} />
       <Text style={styles.text}>Create an account</Text>
        <FormInput
           value={name}
@@ -76,12 +77,10 @@ function validate(name, email, password, confirmPassword){
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ebebeb',
+    backgroundColor: '#ffffff',
         borderRadius: 10,
         borderWidth: 0.5,
-        borderColor: '#000',
-        padding: 20,
-        margin: 30,
+        borderColor: '#0000',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
@@ -90,5 +89,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginBottom: 10,
     color: '#003366'
-  }
+  },
+     image: {
+         width: 200, height: 150
+       }
 });
