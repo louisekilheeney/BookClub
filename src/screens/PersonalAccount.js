@@ -55,7 +55,8 @@ export default function PersonalAccount() {
       }
 
     const renderItem = ({ item }) => {
-    const backgroundColor = item.id === selectedId ? "#a3cef1" : "#6096ba";
+    const backgroundColor = item.id === selectedId ? "#a3cef1" : "#00aaff";
+
 
     const Item = ({ item, onPress, style }) => (
         <TouchableOpacity onPress={() => toggleFunction()} style={[styles.item, style]}>
@@ -65,16 +66,15 @@ export default function PersonalAccount() {
     const renderItem = ({ item }) => (
        <Item bookName={item.bookName} />
         );
-
     return (
             <Item
                 item={item}
-                onPress={() => setSelectedId(item.id),setBookListState}
+                onPress={() => setSelectedId(item.id),setBookListState, navigation.navigate('bookDetails', {item: item})}
                 style={{ backgroundColor }}
             />
         );
     };
-    //navigation.navigate('bookDetails')
+
     function getListings(){
         console.log("Fetching data from db for PersonalAccount page for user: " + user.uid);
         firebase.database()
@@ -116,7 +116,7 @@ export default function PersonalAccount() {
         console.log("show error",e);
     }
     getListings();
-
+    //refreshControl={  <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
   return (
     <View style={styles.container}   >
             <Text style={styles.HeadLine}>Personal Account</Text>
@@ -126,7 +126,6 @@ export default function PersonalAccount() {
          <FlatList
            data={bookListState}
            renderItem={renderItem}
-           refreshControl={  <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
            keyExtractor={(item) => item.id}
            extraData={selectedId}
          />
@@ -141,12 +140,12 @@ const styles = StyleSheet.create({
    flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f5f5f1',
+        backgroundColor: '#e7ecef',
         paddingTop: 10
   },
   text: {
        fontSize: 18,
-       color: '#333333'
+       color: '#022b3a'
   },
   item: {
       backgroundColor: '#a3cef1',
@@ -156,6 +155,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       flex: 1,
       justifyContent: 'center',
+
     },
   scrollView: {
       marginHorizontal: 5,
@@ -170,6 +170,7 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignSelf:"center",
+          color: "white"
     },
   list: {
      backgroundColor: '#ebebeb',
@@ -184,7 +185,7 @@ const styles = StyleSheet.create({
     },
    HeadLine:{
      fontSize: 25,
-     color: '#333333',
+     color: '#022b3a',
      padding: 10
     }
 

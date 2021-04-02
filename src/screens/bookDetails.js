@@ -1,13 +1,17 @@
-import React, { useContext } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { View, Text, StyleSheet, Switch } from 'react-native';
 import FormButton from '../components/FormButton';
 import { AuthContext } from '../navigation/AuthProvider';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import StarRating from '../StarRating/starRating';
 
-export default function bookDetails() {
+export default function bookDetails({route}) {
   const { user, logout } = useContext(AuthContext);
   const navigation = useNavigation();
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const { item } = route.params;
+  console.log("item", item);
   console.log(user);
      const ratingObj = {
         ratings: 3,
@@ -15,12 +19,19 @@ export default function bookDetails() {
       }
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Book Name: </Text>
-      <Text style={styles.text}>Book Author: </Text>
-      <Text style={styles.text}>Book Genre: </Text>
-      <Text style={styles.text}>Book Publisher: </Text>
-      <Text style={styles.text}>Book synopsis: </Text>
-
+      <Text style={styles.text}>Book Name: {item.bookName} </Text>
+      <Text style={styles.text}>Book Author: {item.author} </Text>
+      <Text style={styles.text}>Book Genre: {item.bookGenre}</Text>
+      <Text style={styles.text}>Book Publisher: {item.bookPub}</Text>
+      <Text style={styles.text}>Book synopsis: {item.bookSynopsis} </Text>
+      <Text style={styles.text}>Current Book? </Text>
+      <Switch
+          trackColor={{ false: "#767577", true: "#81b0ff" }}
+          thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+        />
     </View>
   );
 }
@@ -29,15 +40,20 @@ const styles = StyleSheet.create({
   flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#F5FCFF',
+      backgroundColor: '#f1f1f1',
   },
+    synopsis: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#c0c0c0',
+    },
   text: {
     fontSize: 20,
-    color: '#333333',
+    color: '#274c77',
     paddingBottom: 20
   },
    reviewContainer: {
-      backgroundColor: "#FFFFFF",
+      backgroundColor: "#ebebeb",
       borderRadius: 10,
       paddingHorizontal: 30,
       paddingVertical: 40,
