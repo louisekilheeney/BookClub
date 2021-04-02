@@ -10,20 +10,17 @@ export default function bookDetails({route}) {
   const navigation = useNavigation();
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-  const { item } = route.params;
-  console.log("item", item);
+  const { _item } = route.params;
+  console.log("item", _item);
   console.log(user);
-     const ratingObj = {
-        ratings: 3,
-        views: 34000
-      }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Book Name: {item.bookName} </Text>
-      <Text style={styles.text}>Book Author: {item.author} </Text>
-      <Text style={styles.text}>Book Genre: {item.bookGenre}</Text>
-      <Text style={styles.text}>Book Publisher: {item.bookPub}</Text>
-      <Text style={styles.text}>Book synopsis: {item.bookSynopsis} </Text>
+      <Text style={styles.text}>Book Name: {_item.bookName} </Text>
+      <Text style={styles.text}>Book Author: {_item.author} </Text>
+      <Text style={styles.text}>Book Genre: {_item.bookGenre}</Text>
+      <Text style={styles.text}>Book Publisher: {_item.bookPub}</Text>
+      <Text style={styles.text}>Book synopsis: {_item.bookSynopsis} </Text>
       <Text style={styles.text}>Current Book? </Text>
       <Switch
           trackColor={{ false: "#767577", true: "#81b0ff" }}

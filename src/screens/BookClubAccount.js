@@ -40,7 +40,7 @@ export default function BookClubAccount() {
     }
 
   const renderItem = ({ item }) => {
-  const backgroundColor = item.id === selectedId ? "#a3cef1" : "#00aaff";
+  const backgroundColor = item.id === selectedId ? "#a3cef1" : "#1f7a8c";
   return (
           <Item
               item={item}
@@ -51,7 +51,7 @@ export default function BookClubAccount() {
   };
 
   const joinClub = ({ item }) => {
-  const backgroundColor = item.id === selectedId ? "#a3cef1" : "#00aaff";
+  const backgroundColor = item.id === selectedId ? "#a3cef1" : "#1f7a8c";
   console.log("whats in here", item);
   return (
           <Item

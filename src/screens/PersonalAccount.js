@@ -11,6 +11,15 @@ import IconsFeather from 'react-native-vector-icons/Feather';
 import IconsMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Collapsible from 'react-native-collapsible';
 
+    const Item = ({ item, onPress, style }) => (
+        <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
+            <Text style={styles.bookName}> <IconsFeather name="book-open" size={20} /> {item.bookName}<IconsMaterialIcons name="keyboard-arrow-right" size={20} /></Text>
+        </TouchableOpacity>
+        );
+    const renderItem = ({ item }) => (
+       <Item bookName={item.bookName} />
+        );
+
 export default function PersonalAccount() {
     const { user, readUserData } = useContext(AuthContext);
     const navigation = useNavigation();
@@ -55,21 +64,12 @@ export default function PersonalAccount() {
       }
 
     const renderItem = ({ item }) => {
-    const backgroundColor = item.id === selectedId ? "#a3cef1" : "#00aaff";
+    const backgroundColor = item.id === selectedId ? "#a3cef1" : "#1f7a8c";
 
-
-    const Item = ({ item, onPress, style }) => (
-        <TouchableOpacity onPress={() => toggleFunction()} style={[styles.item, style]}>
-            <Text style={styles.bookName}> <IconsFeather name="book-open" size={20} /> {item.bookName}<IconsMaterialIcons name="keyboard-arrow-right" size={20} /></Text>
-        </TouchableOpacity>
-        );
-    const renderItem = ({ item }) => (
-       <Item bookName={item.bookName} />
-        );
     return (
             <Item
                 item={item}
-                onPress={() => setSelectedId(item.id),setBookListState, navigation.navigate('bookDetails', {item: item})}
+                onPress={() =>  navigation.navigate('bookDetails', {_item: item},setBookListState) }
                 style={{ backgroundColor }}
             />
         );
@@ -82,7 +82,6 @@ export default function PersonalAccount() {
                 .on('value', (snapshot) => {
                                                setListing(snapshot);
                                            });
-
     }
 
     function setListing(snapshot){
