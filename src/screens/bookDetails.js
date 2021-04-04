@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, StyleSheet, Switch } from 'react-native';
+import { View, Text, StyleSheet, Switch, Link } from 'react-native';
 import FormButton from '../components/FormButton';
 import { AuthContext } from '../navigation/AuthProvider';
 import { CommonActions, useNavigation } from '@react-navigation/native';
@@ -13,6 +13,10 @@ export default function bookDetails({route}) {
   const { _item } = route.params;
   console.log("item", _item);
   console.log(user);
+    if(isEnabled == true){
+    console.log("this is a current book")
+
+    }
 
   return (
     <View style={styles.container}>

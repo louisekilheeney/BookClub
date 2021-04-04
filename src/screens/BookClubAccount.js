@@ -9,7 +9,6 @@ import { firebase } from '../config';
 import IconsFeather from 'react-native-vector-icons/Feather';
 import IconsFontAwesome from 'react-native-vector-icons/FontAwesome';
 
-
 const Item = ({ item, onPress, style }) => (
     <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
         <Text style={styles.clubName}> <IconsFontAwesome name="group" size={20} /> {item.clubName} </Text>
