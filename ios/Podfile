@@ -12,6 +12,8 @@ target 'BookClub' do
 
   pod 'react-native-appearance', :path => '../node_modules/react-native-appearance'
 
+  pod 'react-native-restart', :path => '../node_modules/react-native-restart'
+
   target 'BookClubTests' do
     inherit! :complete
     # Pods for testing

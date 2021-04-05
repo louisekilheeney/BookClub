@@ -11,6 +11,15 @@ import IconsFeather from 'react-native-vector-icons/Feather';
 import IconsMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Collapsible from 'react-native-collapsible';
 
+    const Item = ({ item, onPress, style }) => (
+        <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
+            <Text style={styles.bookName}> <IconsFeather name="book-open" size={20} /> {item.bookName}<IconsMaterialIcons name="keyboard-arrow-right" size={20} /></Text>
+        </TouchableOpacity>
+        );
+    const renderItem = ({ item }) => (
+       <Item bookName={item.bookName} />
+        );
+
 export default function PersonalAccount() {
     const { user, readUserData } = useContext(AuthContext);
     const navigation = useNavigation();
@@ -55,26 +64,17 @@ export default function PersonalAccount() {
       }
 
     const renderItem = ({ item }) => {
-    const backgroundColor = item.id === selectedId ? "#a3cef1" : "#6096ba";
-
-    const Item = ({ item, onPress, style }) => (
-        <TouchableOpacity onPress={() => toggleFunction()} style={[styles.item, style]}>
-            <Text style={styles.bookName}> <IconsFeather name="book-open" size={20} /> {item.bookName}<IconsMaterialIcons name="keyboard-arrow-right" size={20} /></Text>
-        </TouchableOpacity>
-        );
-    const renderItem = ({ item }) => (
-       <Item bookName={item.bookName} />
-        );
+    const backgroundColor = item.id === selectedId ? "#a3cef1" : "#1f7a8c";
 
     return (
             <Item
                 item={item}
-                onPress={() => setSelectedId(item.id),setBookListState}
+                onPress={() =>  navigation.navigate('bookDetails', {_item: item},setBookListState) }
                 style={{ backgroundColor }}
             />
         );
     };
-    //navigation.navigate('bookDetails')
+
     function getListings(){
         console.log("Fetching data from db for PersonalAccount page for user: " + user.uid);
         firebase.database()
@@ -82,7 +82,6 @@ export default function PersonalAccount() {
                 .on('value', (snapshot) => {
                                                setListing(snapshot);
                                            });
-
     }
 
     function setListing(snapshot){
@@ -116,7 +115,7 @@ export default function PersonalAccount() {
         console.log("show error",e);
     }
     getListings();
-
+    //refreshControl={  <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
   return (
     <View style={styles.container}   >
             <Text style={styles.HeadLine}>Personal Account</Text>
@@ -126,7 +125,6 @@ export default function PersonalAccount() {
          <FlatList
            data={bookListState}
            renderItem={renderItem}
-           refreshControl={  <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
            keyExtractor={(item) => item.id}
            extraData={selectedId}
          />
@@ -141,12 +139,12 @@ const styles = StyleSheet.create({
    flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f5f5f1',
+        backgroundColor: '#e7ecef',
         paddingTop: 10
   },
   text: {
        fontSize: 18,
-       color: '#333333'
+       color: '#022b3a'
   },
   item: {
       backgroundColor: '#a3cef1',
@@ -156,6 +154,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       flex: 1,
       justifyContent: 'center',
+
     },
   scrollView: {
       marginHorizontal: 5,
@@ -170,6 +169,7 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignSelf:"center",
+          color: "white"
     },
   list: {
      backgroundColor: '#ebebeb',
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     },
    HeadLine:{
      fontSize: 25,
-     color: '#333333',
+     color: '#022b3a',
      padding: 10
     }
 

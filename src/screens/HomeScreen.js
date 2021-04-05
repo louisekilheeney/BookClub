@@ -1,5 +1,5 @@
-import React, { useContext, Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useContext, Component, useState } from 'react';
+import { View, Text, StyleSheet, boolean } from 'react-native';
 import FormButton from '../components/FormButton';
 import { AuthContext } from '../navigation/AuthProvider';
 import { CommonActions, useNavigation } from '@react-navigation/native'
@@ -9,19 +9,22 @@ import PersonalAccount from '../screens/PersonalAccount';
 import SettingScreen from '../screens/SettingScreen';
 import BookClubAccount from '../screens/BookClubAccount';
 import HomeLandingScreen from '../screens/HomeLandingScreen';
-//import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconsFeather from 'react-native-vector-icons/Feather';
+import RNRestart from 'react-native-restart';
 
-const Tab = createBottomTabNavigator();
+  const Tab = createBottomTabNavigator();
+  const startReload = ()=> RNRestart.Restart();
+ ///options={{unmountOnBlur: true}} listeners={({navigation}) => ({blur: () => navigation.setParams({screen: undefined})})}
+ //
 
 function MyTabs() {
     return (
         <Tab.Navigator>
-            <Tab.Screen name="Home" component={HomeLandingScreen} options={{tabBarLabel: "Home", tabBarIcon: ({ color, size }) => (<IconsFeather name="home" color={color} size={26} />), }} />
-            <Tab.Screen name="My Account" component={PersonalAccount}  options={{tabBarLabel: "My Account", tabBarIcon: ({ color, size }) => (<IconsFeather name="user" color={color} size={26} />), }} />
-            <Tab.Screen name="BookClub" component={BookClubAccount} options={{tabBarLabel: "Book Clubs", tabBarIcon: ({ color, size }) => (<IconsFeather name="book" color={color} size={26} />), }} />
-            <Tab.Screen name="Messages" component={SettingScreen} options={{tabBarLabel: "Messages", tabBarIcon: ({ color, size }) => (<IconsFeather name="message-square" color={color} size={26} />), }} />
-            <Tab.Screen name="Settings" component={SettingScreen} options={{tabBarLabel: "Settings", tabBarIcon: ({ color, size }) => (<IconsFeather name="settings" color={color} size={26} />), }} />
+            <Tab.Screen name="Home" component={HomeLandingScreen} options={{tabBarLabel: "Home", tabBarIcon: ({ color, size }) => (<IconsFeather name="home" color={color} size={26} />), }} onPress={{unmountOnBlur: false}} listeners={({navigation}) => ({blur: () => navigation.setParams({screen: undefined})})}  />
+            <Tab.Screen name="My Account"  component={PersonalAccount} options={{tabBarLabel: "My Account", tabBarIcon: ({ color, size }) => (<IconsFeather name="user" color={color} size={26} />),}} onPress={{unmountOnBlur: false}} listeners={({navigation}) => ({blur: () => navigation.setParams({screen: undefined})})}  />
+            <Tab.Screen name="BookClub" component={BookClubAccount} options={ {tabBarLabel: "Book Clubs", tabBarIcon: ({ color, size }) => (<IconsFeather name="book" color={color} size={26} />), }} onPress={{unmountOnBlur: false}} listeners={({navigation}) => ({blur: () => navigation.setParams({screen: undefined})})} />
+            <Tab.Screen name="Messages" component={SettingScreen} options={{tabBarLabel: "Messages", tabBarIcon: ({ color, size }) => (<IconsFeather name="message-square" color={color} size={26} />), }} onPress={{unmountOnBlur: false}} listeners={({navigation}) => ({blur: () => navigation.setParams({screen: undefined})})}  />
+            <Tab.Screen name="Settings" component={SettingScreen} options={{tabBarLabel: "Settings", tabBarIcon: ({ color, size }) => (<IconsFeather name="settings" color={color} size={26} />), }} onPress={{unmountOnBlur: false}} listeners={({navigation}) => ({blur: () => navigation.setParams({screen: undefined})})}  />
         </Tab.Navigator>
     );
 }

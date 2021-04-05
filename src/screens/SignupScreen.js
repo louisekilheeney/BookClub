@@ -42,7 +42,7 @@ function validate(name, email, password, confirmPassword){
   return (
     <View style={styles.container}>
     <Image style={styles.image} source={require('../logo/bookClubLogo.png')} />
-      <Text style={styles.text}>Create an account</Text>
+      <Text style={styles.text}>Create an Account</Text>
        <FormInput
           value={name}
           placeholderText='Name'
@@ -86,9 +86,9 @@ const styles = StyleSheet.create({
         alignItems: 'center'
   },
   text: {
-    fontSize: 24,
+    fontSize: 30,
     marginBottom: 10,
-    color: '#003366'
+    color: '#022b3a'
   },
      image: {
          width: 200, height: 150

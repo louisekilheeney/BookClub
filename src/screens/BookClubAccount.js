@@ -9,7 +9,6 @@ import { firebase } from '../config';
 import IconsFeather from 'react-native-vector-icons/Feather';
 import IconsFontAwesome from 'react-native-vector-icons/FontAwesome';
 
-
 const Item = ({ item, onPress, style }) => (
     <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
         <Text style={styles.clubName}> <IconsFontAwesome name="group" size={20} /> {item.clubName} </Text>
@@ -40,7 +39,7 @@ export default function BookClubAccount() {
     }
 
   const renderItem = ({ item }) => {
-  const backgroundColor = item.id === selectedId ? "#a3cef1" : "#6096ba";
+  const backgroundColor = item.id === selectedId ? "#a3cef1" : "#1f7a8c";
   return (
           <Item
               item={item}
@@ -51,7 +50,7 @@ export default function BookClubAccount() {
   };
 
   const joinClub = ({ item }) => {
-  const backgroundColor = item.id === selectedId ? "#a3cef1" : "#6096ba";
+  const backgroundColor = item.id === selectedId ? "#a3cef1" : "#1f7a8c";
   console.log("whats in here", item);
   return (
           <Item
@@ -129,7 +128,7 @@ var getListingsForClub = function(){
 
   return (
     <View style={styles.container}>
-      <Text style={styles.HeadLine}> BookClub </Text>
+      <Text style={styles.HeadLine}> BookClubs </Text>
       <JoinButton buttonTitle='Create BookClub' onPress={() =>  navigation.navigate('AddClub')} />
       <Text style={styles.text}> Your Current BookClubs </Text>
       <SafeAreaView  style = {styles.list} >
@@ -148,6 +147,7 @@ var getListingsForClub = function(){
             extraData={selectedId} />
         </SafeAreaView>
     </View>
+
   );
 }
 const styles = StyleSheet.create({
@@ -155,12 +155,12 @@ const styles = StyleSheet.create({
    flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f5f5f1',
+        backgroundColor: '#e7ecef',
         paddingTop: 10
   },
   text: {
         fontSize: 20,
-        color: '#333333',
+        color: '#022b3a',
         padding : 10,
   },
    item: {
@@ -185,6 +185,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignSelf:"center",
+        color: 'white'
       },
     list: {
        backgroundColor: '#ebebeb',
@@ -199,7 +200,7 @@ const styles = StyleSheet.create({
       },
      HeadLine:{
        fontSize: 25,
-       color: '#333333',
+       color: '#022b3a',
        padding: 10
       }
 });
