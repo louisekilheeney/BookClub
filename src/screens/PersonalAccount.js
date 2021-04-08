@@ -13,7 +13,7 @@ import Collapsible from 'react-native-collapsible';
 
     const Item = ({ item, onPress, style }) => (
         <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
-            <Text style={styles.bookName}> <IconsFeather name="book-open" size={20} /> {item.bookName}<IconsMaterialIcons name="keyboard-arrow-right" size={20} /></Text>
+            <Text style={styles.bookName}> <IconsFeather name="book-open" size={20} /> {item.bookName} <IconsMaterialIcons name="keyboard-arrow-right" size={20}  iconContainerStyle={{position: 'absolute', left: 10}}  /></Text>
         </TouchableOpacity>
         );
     const renderItem = ({ item }) => (
@@ -44,19 +44,6 @@ export default function PersonalAccount() {
         getListings();
     }, []);
 
-      const [expandable, setExpandable] = useState(false);
-      //const [titleColor, setTitleColor] = useState(colors.blue.primary)
-
-      const onPress = () => {
-        if (!expandable) {
-          setExpandable(true);
-          //setTitleColor(colors.blue.secondary);
-        }
-        else {
-          setExpandable(false);
-          s//etTitleColor(colors.blue.primary);
-        }
-      };
 
     const addElement = (bookList) => {
         var newArray = bookList;
@@ -169,7 +156,7 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignSelf:"center",
-          color: "white"
+      color: "white"
     },
   list: {
      backgroundColor: '#ebebeb',
@@ -186,6 +173,9 @@ const styles = StyleSheet.create({
      fontSize: 25,
      color: '#022b3a',
      padding: 10
-    }
+    },
+   Icon: {
+   justifyContent: 'space-between'
+   },
 
 });

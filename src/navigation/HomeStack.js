@@ -29,7 +29,6 @@ export default function HomeStack() {
        <Stack.Screen name='GroupInfo' component={GroupInfo} />
        <Stack.Screen name='requestScreen' component={requestScreen} />
        <Stack.Screen name='bookDetails' component={bookDetails} />
-
     </Stack.Navigator>
   );
 }

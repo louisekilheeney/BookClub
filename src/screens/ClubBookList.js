@@ -47,11 +47,11 @@ export default function ClubBookList({route}) {
 
     function getListings(){
         console.log("Fetching data from db for bookClub page for user: " + user.uid);
+        console.log("id from club " + clubId);
         firebase.database()
-            .ref('Users/'+user.uid+'/BookClub/BookList')
-                .on('value', (snapshot) => {
-                                               setListing(snapshot);
-                                           });
+           // .ref('Users/'+user.uid+'/BookClub/BookList')
+            .ref('BookClub/'+clubId+'/BookList')
+                .on('value', (snapshot) => {setListing(snapshot); });
     }
 
     function setListing(snapshot){
@@ -96,7 +96,7 @@ export default function ClubBookList({route}) {
   return (
 
     <View style={styles.container}>
-        <Text style={styles.HeadLine}>Club Books</Text>
+        <Text style={styles.HeadLine}>Books</Text>
         <FormButton buttonTitle='AddBook' onPress={() =>  navigation.navigate('AddBookClub', {id: route.params["item"]["id"]})} />
        <SafeAreaView  style = {styles.list} >
          <FlatList
@@ -106,19 +106,17 @@ export default function ClubBookList({route}) {
            extraData={selectedId}
          />
        </SafeAreaView>
-
-
         </View>
 
   );
 }
 const styles = StyleSheet.create({
   container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#f5f5f1',
-        paddingTop: 10
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#e7ecef',
+    paddingTop: 10
   },
   text: {
        fontSize: 18,

@@ -23,35 +23,28 @@ const TopTab = createMaterialTopTabNavigator();
 function MyTabs() {
     return (
         <Tab.Navigator>
-            <Tab.Screen name="Home" component={HomeLandingScreen} options={{tabBarLabel: "Home", tabBarIcon: ({ color, size }) => (<IconsFeather name="home" color={color} size={26} />), }} />
-            <Tab.Screen name="My Account" component={PersonalAccount}  options={{tabBarLabel: "My Account", tabBarIcon: ({ color, size }) => (<IconsFeather name="user" color={color} size={26} />), }} />
-            <Tab.Screen name="BookClub" component={BookClubAccount} options={{tabBarLabel: "Book Clubs", tabBarIcon: ({ color, size }) => (<IconsFeather name="book" color={color} size={26} />), }} />
-            <Tab.Screen name="Messages" component={SettingScreen} options={{tabBarLabel: "Messages", tabBarIcon: ({ color, size }) => (<IconsFeather name="message-square" color={color} size={26} />), }} />
-            <Tab.Screen name="Settings" component={SettingScreen} options={{tabBarLabel: "Settings", tabBarIcon: ({ color, size }) => (<IconsFeather name="settings" color={color} size={26} />), }} />
+            <Tab.Screen name="Home" component={HomeLandingScreen} options={{tabBarLabel: "Home", tabBarIcon: ({ color, size }) => (<IconsFeather name="home" color={color} size={26} />), }}  onPress={{unmountOnBlur: false}} listeners={({navigation}) => ({blur: () => navigation.setParams({screen: undefined})})} />
+            <Tab.Screen name="My Account" component={PersonalAccount}  options={{tabBarLabel: "My Account", tabBarIcon: ({ color, size }) => (<IconsFeather name="user" color={color} size={26} />), }}  onPress={{unmountOnBlur: false}} listeners={({navigation}) => ({blur: () => navigation.setParams({screen: undefined})})} />
+            <Tab.Screen name="BookClub" component={BookClubAccount} options={{tabBarLabel: "Book Clubs", tabBarIcon: ({ color, size }) => (<IconsFeather name="book" color={color} size={26} />), }}   onPress={{unmountOnBlur: false}} listeners={({navigation}) => ({blur: () => navigation.setParams({screen: undefined})})}/>
+            <Tab.Screen name="Messages" component={SettingScreen} options={{tabBarLabel: "Messages", tabBarIcon: ({ color, size }) => (<IconsFeather name="message-square" color={color} size={26} />), }}  onPress={{unmountOnBlur: false}} listeners={({navigation}) => ({blur: () => navigation.setParams({screen: undefined})})} />
+            <Tab.Screen name="Settings" component={SettingScreen} options={{tabBarLabel: "Settings", tabBarIcon: ({ color, size }) => (<IconsFeather name="settings" color={color} size={26} />), }}  onPress={{unmountOnBlur: false}} listeners={({navigation}) => ({blur: () => navigation.setParams({screen: undefined})})} />
         </Tab.Navigator>
     );
 }
-//function MyTopTabs(items) {
-//    return (
-//
-//
-//    );
-//}
 
 export default function BookClubLandingScreen({route}) {
   const { _item } = route.params;
   console.log("item", _item);
   const navigation = useNavigation();
 
-  //MyTopTabs(_item)
 
   return (
         <TopTab.Navigator>
-                    <TopTab.Screen name="General" component={GeneralScreen} options={ {tabBarLabel: "General" }} initialParams={{item: _item} } />
-                    <TopTab.Screen name="books" component={ClubBookList} options={{tabBarLabel: "books" }} initialParams={{item: _item} } />
-                    <TopTab.Screen name="Meeting" component={MeetingScreen} options={{tabBarLabel: "Meeting"}}/>
-                    <TopTab.Screen name="GroupInfo" component={GroupInfo}  options={{tabBarLabel: "Group info"}}  initialParams={{item: _item} }/>
-                 </TopTab.Navigator>
+            <TopTab.Screen name="General" component={GeneralScreen} options={ {tabBarLabel: "General" }} initialParams={{item: _item} }  onPress={{unmountOnBlur: false}} listeners={({navigation}) => ({blur: () => navigation.setParams({screen: undefined})})} />
+            <TopTab.Screen name="books" component={ClubBookList} options={{tabBarLabel: "books" }} initialParams={{item: _item} }   onPress={{unmountOnBlur: false}} listeners={({navigation}) => ({blur: () => navigation.setParams({screen: undefined})})}/>
+            <TopTab.Screen name="Meeting" component={MeetingScreen} options={{tabBarLabel: "Meeting"}}  onPress={{unmountOnBlur: false}} listeners={({navigation}) => ({blur: () => navigation.setParams({screen: undefined})})}/>
+            <TopTab.Screen name="GroupInfo" component={GroupInfo}  options={{tabBarLabel: "Group info"}}  initialParams={{item: _item} }  onPress={{unmountOnBlur: false}} listeners={({navigation}) => ({blur: () => navigation.setParams({screen: undefined})})}/>
+         </TopTab.Navigator>
     );
 }
 
