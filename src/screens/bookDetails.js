@@ -7,17 +7,20 @@ import StarRating from '../StarRating/starRating';
 import { firebase } from '../config';
 
 export default function bookDetails({route}) {
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout, setCurrentBook } = useContext(AuthContext);
   const navigation = useNavigation();
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   const { _item } = route.params;
+  const [isEnabled, setIsEnabled] = useState(_item.currentBook);
   console.log("item", _item);
   console.log(user);
-    if(isEnabled == true){
+
+  function onToggleSwitch(toggled){
+        setIsEnabled(toggled);
+        _item.currentBook = toggled;
         console.log("this is a current book")
-        getCurrentBook(_item.bookName);
-     }
+        setCurrentBook(_item.author, _item.bookName, _item.bookSynopsis, _item.bookGenre, _item.id,
+         _item.bookImage, _item.bookPub, toggled);
+  }
 
   return (
     <View style={styles.container}>
@@ -29,9 +32,9 @@ export default function bookDetails({route}) {
       <Text style={styles.text}>Current Book? </Text>
       <Switch
           trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+          thumbColor={_item.isCurrentBook ? "#f5dd4b" : "#f4f3f4"}
           ios_backgroundColor="#3e3e3e"
-          onValueChange={toggleSwitch}
+          onValueChange={(isEnabled) => onToggleSwitch(isEnabled)}
           value={isEnabled}
         />
     </View>

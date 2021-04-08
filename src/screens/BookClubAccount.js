@@ -143,7 +143,7 @@ var getListingsForClub = function(){
         <SafeAreaView  style = {styles.list} >
           <FlatList
             data={clubListStateClub}
-            renderItem={joinClub}
+            renderItem={renderItem}
             keyExtractor={(item) => item.id}
             extraData={selectedId} />
         </SafeAreaView>

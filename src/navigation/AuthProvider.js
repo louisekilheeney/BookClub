@@ -85,6 +85,22 @@ export const AuthProvider = ({ children }) => {
             console.error(e);
           }
         },
+        setCurrentBook: async (author, bookName, bookSynopsis, bookGenre, id,
+                                        bookImage,bookPub, currentBook) => {
+          try {
+           firebase.database().ref('Users/'+user.uid+'/BookList/'+ id).update ({
+                author,
+                bookName,
+                bookSynopsis,
+                bookGenre,
+                bookImage,
+                bookPub,
+                currentBook
+            });
+         } catch (e) {
+            console.error(e);
+          }
+        },
 
         request: async (user,clubName, clubId) => {
           try {
@@ -160,7 +176,7 @@ export const AuthProvider = ({ children }) => {
                                   clubName,
                               });
         },
-        addBook: async (user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage) => {
+        addBook: async (user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage, currentBook) => {
          try {
          console.log("user details:", user);
             firebase.database().ref('Users/'+user.uid+'/BookList').push({
@@ -169,7 +185,8 @@ export const AuthProvider = ({ children }) => {
               bookSynopsis,
               bookPub,
               bookGenre,
-              bookImage
+              bookImage,
+              currentBook
              }).then((data)=>{
               //success callback
               alert("Added Book" + " " + bookName);

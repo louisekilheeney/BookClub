@@ -15,6 +15,7 @@ export default function HomeScreen() {
       <Text style={styles.text}>Welcome {user.email}</Text>
 
       <Text style={styles.text}>Your Current books</Text>
+       
     </View>
   );
 }
