@@ -22,15 +22,11 @@ export default function GeneralScreen({route}) {
 }
 const styles = StyleSheet.create({
   container: {
-   backgroundColor: '#ebebeb',
-   borderRadius: 10,
-   borderWidth: 0.5,
-   borderColor: '#000',
-   padding: 10,
-   margin: 20,
-   flex: 1,
-   justifyContent: 'center',
-   alignItems: 'center'
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#e7ecef',
+    paddingTop: 10
   },
   text: {
     fontSize: 20,
@@ -40,7 +36,7 @@ const styles = StyleSheet.create({
     header: {
       fontSize: 20,
       color: '#333333',
-     padding: 20,
+     padding: 40,
       flex: 0.5
     }
 });

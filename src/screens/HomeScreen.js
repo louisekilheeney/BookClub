@@ -14,8 +14,6 @@ import RNRestart from 'react-native-restart';
 
   const Tab = createBottomTabNavigator();
   const startReload = ()=> RNRestart.Restart();
- ///options={{unmountOnBlur: true}} listeners={({navigation}) => ({blur: () => navigation.setParams({screen: undefined})})}
- //
 
 function MyTabs() {
     return (
