@@ -5,24 +5,24 @@ import FormInput from '../components/FormInput';
 import { AuthContext } from '../navigation/AuthProvider';
 import { CommonActions, useNavigation } from '@react-navigation/native'
 
-
+ //<FormButton buttonTitle='Join Club' onPress={() => request(user,clubItem.clubName, clubItem.id, navigation.navigate('BookClubAccount'))} />
 export default function requestScreen({route}) {
   const { user, logout } = useContext(AuthContext);
    const { request } = useContext(AuthContext);
   const navigation = useNavigation();
   const {clubItem } = route.params;
-
   console.log("item in request page", clubItem);
 
   console.log(user);
+
   return (
     <View style={styles.container}>
 
       <Text style={styles.text}>ClubName: {clubItem.clubName}</Text>
 
       <Text style={styles.text}>Request to join CLub</Text>
-      <FormButton buttonTitle='Join Club' onPress={() => request(user,clubItem.clubName, clubItem.id, navigation.navigate('BookClubAccount'))} />
 
+      <FormButton buttonTitle='Join Club' onPress={() => navigation.navigate('BookClubLandingScreen',{clubItem: clubItem})} />
     </View>
   );
 }
