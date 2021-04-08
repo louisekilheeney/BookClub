@@ -4,6 +4,7 @@ import FormButton from '../components/FormButton';
 import { AuthContext } from '../navigation/AuthProvider';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import StarRating from '../StarRating/starRating';
+import { firebase } from '../config';
 
 export default function bookDetails({route}) {
   const { user, logout } = useContext(AuthContext);
@@ -14,9 +15,9 @@ export default function bookDetails({route}) {
   console.log("item", _item);
   console.log(user);
     if(isEnabled == true){
-    console.log("this is a current book")
-
-    }
+        console.log("this is a current book")
+        getCurrentBook(_item.bookName);
+     }
 
   return (
     <View style={styles.container}>

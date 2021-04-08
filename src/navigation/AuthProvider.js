@@ -85,6 +85,7 @@ export const AuthProvider = ({ children }) => {
             console.error(e);
           }
         },
+
         request: async (user,clubName, clubId) => {
           try {
           console.log("ask admin of club to be allowed to join")
@@ -118,12 +119,14 @@ export const AuthProvider = ({ children }) => {
          try {
          console.log("user details:", user);
          console.log("club id", clubId);
+         userDetails = user.uid;
             firebase.database().ref('BookClub/').push({
               clubName,
              }).then((data)=>{
               //success callback
               alert("Added Club" + " " + clubName);
               console.log("lets check this", data);
+
 
               var wordsId = JSON.stringify(data).split("/");
               for (var i = 0; i < wordsId.length - 1; i++){
@@ -139,6 +142,7 @@ export const AuthProvider = ({ children }) => {
 
               console.log('Adding a new book club' , data)
               console.log('this is the id' , clubId)
+
               return clubId;
 
 
