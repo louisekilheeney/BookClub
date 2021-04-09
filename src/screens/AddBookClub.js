@@ -21,9 +21,9 @@ export default function AddBookClub({route,navigation}) {
 
     //console.log("Getting the routes in ADDBOOOOOOK using id:",id);
 
-    function checkBookAdded(user, bookName, author, bookSynopsis, bookPub,bookGenre, bookImage, id){
+    function checkBookAdded(user, bookName, author, bookSynopsis, bookPub,bookGenre, bookImage, id, currentBook){
         console.log("Getting the routes in checkBookAdded:",id);
-        var test = addBookToClub(user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage,id).catch(err=> { return reject(err); })
+        var test = addBookToClub(user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage,id, currentBook).catch(err=> { return reject(err); })
         test.then(result=>console.log("the result of adding a book", result));
     }
 
@@ -79,7 +79,7 @@ export default function AddBookClub({route,navigation}) {
             //keyboardType='bookGenre'
             autoCorrect={false}
           />
-      <FormButton buttonTitle='Add' onPress={() => checkBookAdded(user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage, id)} />
+      <FormButton buttonTitle='Add' onPress={() => checkBookAdded(user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage, id, false)} />
     </View>
   );
 }

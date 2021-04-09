@@ -101,6 +101,24 @@ export const AuthProvider = ({ children }) => {
             console.error(e);
           }
         },
+        setCurrentBookClub: async (author, bookName, bookSynopsis, bookGenre, id,
+                                    bookImage,bookPub, currentBook, clubId) => {
+          //var bookclubid = '-MUF-XTkLJcu9DGPiizl'
+         console.log("checking value of id", id);
+        try {
+            firebase.database().ref('BookClub/'+clubId+'/BookList/'+ id).update ({
+                author,
+                bookName,
+                bookSynopsis,
+                bookGenre,
+                bookImage,
+                bookPub,
+                currentBook
+            });
+         } catch (e) {
+            console.error(e);
+          }
+        },
 
         request: async (user,clubName, clubId) => {
           try {
@@ -201,7 +219,7 @@ export const AuthProvider = ({ children }) => {
            console.error(e);
          }
         },
-         addBookToClub: async (user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage, id) => {
+         addBookToClub: async (user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage, id, currentBook) => {
          try {
          console.log("checking value of id", id);
               firebase.database().ref('BookClub/'+id+'/BookList').push({
@@ -210,7 +228,8 @@ export const AuthProvider = ({ children }) => {
                 bookSynopsis,
                 bookPub,
                 bookGenre,
-                bookImage
+                bookImage,
+                currentBook
                }).then((data)=>{
                 //success callback
                 alert("Added Book" + " " + bookName);

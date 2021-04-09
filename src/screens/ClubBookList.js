@@ -24,6 +24,7 @@ export default function ClubBookList({route}) {
     var bookList = new Array();
 
     console.log("item in club boooooooooooooooooooooooooooook list", route.params["item"]["id"]);
+    console.log("item in club boooooook list", route.params["item"]);
     var clubId = route.params["item"]["id"];
     const [selectedId, setSelectedId] = useState(null);
     const [bookListState, setBookListState] = useState(bookList);
@@ -39,7 +40,7 @@ export default function ClubBookList({route}) {
     return (
             <Item
                 item={item}
-                onPress={() => navigation.navigate('bookDetails', {_item: item}, setSelectedId(item.id))}
+                onPress={() => navigation.navigate('bookDetailsClub', {_item: item, _club: clubId}, setSelectedId(item.id))}
                 style={{ backgroundColor }}
             />
         );
