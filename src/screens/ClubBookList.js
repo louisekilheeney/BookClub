@@ -39,7 +39,7 @@ export default function ClubBookList({route}) {
     return (
             <Item
                 item={item}
-                onPress={() => setSelectedId(item.id)}
+                onPress={() => navigation.navigate('bookDetails', {_item: item}, setSelectedId(item.id))}
                 style={{ backgroundColor }}
             />
         );

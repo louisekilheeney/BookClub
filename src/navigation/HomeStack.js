@@ -17,18 +17,18 @@ const Stack = createStackNavigator();
 export default function HomeStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name='BookClub' component={HomeScreen} />
-      <Stack.Screen name='PersonalAccount' component={PersonalAccount} />
-      <Stack.Screen name='SettingScreen' component={SettingScreen} />
-      <Stack.Screen name='BookClubAccount' component={BookClubAccount} />
-      <Stack.Screen name='AddBook' component={AddBook} />
-       <Stack.Screen name='AddClub' component={AddClub} />
+      <Stack.Screen name='BookClub' component={HomeScreen}  options={{ title: 'BookClub' }}/>
+      <Stack.Screen name='PersonalAccount' component={PersonalAccount}  />
+      <Stack.Screen name='SettingScreen' component={SettingScreen}  />
+      <Stack.Screen name='BookClubAccount' component={BookClubAccount}  />
+      <Stack.Screen name='AddBook' component={AddBook} options={{ title: 'Add Book' }} />
+       <Stack.Screen name='AddClub' component={AddClub} options={{ title: 'Add Club' }} />
        <Stack.Screen name='MeetingScreen' component={MeetingScreen} />
-       <Stack.Screen name='BookClubLandingScreen' component={BookClubLandingScreen} />
+       <Stack.Screen name='BookClubLandingScreen' component={BookClubLandingScreen}  options={{ title: 'BookClub Account' }}/>
        <Stack.Screen name='AddBookClub' component={AddBookClub} />
        <Stack.Screen name='GroupInfo' component={GroupInfo} />
-       <Stack.Screen name='requestScreen' component={requestScreen} />
-       <Stack.Screen name='bookDetails' component={bookDetails} />
+       <Stack.Screen name='requestScreen' component={requestScreen} options={{ title: 'Request Screen' }} />
+       <Stack.Screen name='bookDetails' component={bookDetails} options={{ title: 'Book Details' }}/>
     </Stack.Navigator>
   );
 }

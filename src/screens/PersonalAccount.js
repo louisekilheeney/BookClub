@@ -21,28 +21,11 @@ import Collapsible from 'react-native-collapsible';
         );
 
 export default function PersonalAccount() {
-    const { user, readUserData } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const navigation = useNavigation();
-    const [open, setOpen] = useState(false);
-    const [toggle, setToggle] = useState(true);
-      const toggleFunction = () => {
-        setToggle(!toggle);
-      };
     var bookList = new Array();
-
     const [selectedId, setSelectedId] = useState(null);
     const [bookListState, setBookListState] = useState(bookList);
-    const [refreshing, setRefreshing] = React.useState(false);
-
-
-    const wait = (timeout) => {
-      return new Promise(resolve => setTimeout(resolve, timeout));
-    }
-    const onRefresh = React.useCallback(() => {
-        setRefreshing(true);
-        wait(200).then(() => setRefreshing(false));
-        getListings();
-    }, []);
 
 
     const addElement = (bookList) => {
@@ -102,7 +85,6 @@ export default function PersonalAccount() {
         console.log("show error",e);
     }
     getListings();
-    //refreshControl={  <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
   return (
     <View style={styles.container}   >
             <Text style={styles.HeadLine}>Personal Account</Text>

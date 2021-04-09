@@ -18,8 +18,8 @@ export default function BookClubAccount() {
     const [bookImage, setImage] = useState('');
 
 
-    function checkBookAdded(user, bookName, author, bookSynopsis, bookPub,bookGenre, bookImage){
-        var test = addBook(user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage).catch(err=> { return reject(err); })
+    function checkBookAdded(user, bookName, author, bookSynopsis, bookPub,bookGenre, bookImage, currentBook){
+        var test = addBook(user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage, currentBook).catch(err=> { return reject(err); })
         test.then(result=>console.log("the result of adding a book", result));
     }
 
@@ -76,7 +76,7 @@ export default function BookClubAccount() {
             //keyboardType='bookGenre'
             autoCorrect={false}
           />
-      <FormButton buttonTitle='Add' onPress={() => checkBookAdded(user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage)} />
+      <FormButton buttonTitle='Add' onPress={() => checkBookAdded(user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage, false)} />
     </View>
   );
 }

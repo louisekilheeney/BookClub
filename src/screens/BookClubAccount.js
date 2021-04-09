@@ -14,7 +14,7 @@ const Item = ({ item, onPress, style }) => (
         <Text style={styles.clubName}> <IconsFontAwesome name="group" size={20} /> {item.clubName} </Text>
     </TouchableOpacity>
 );
-const renderItem = ({ item }) => (
+const render = ({ item }) => (
    <Item clubName={item.clubName} />
 );
 
@@ -143,7 +143,7 @@ var getListingsForClub = function(){
         <SafeAreaView  style = {styles.list} >
           <FlatList
             data={clubListStateClub}
-            renderItem={joinClub}
+            renderItem={renderItem}
             keyExtractor={(item) => item.id}
             extraData={selectedId} />
         </SafeAreaView>
