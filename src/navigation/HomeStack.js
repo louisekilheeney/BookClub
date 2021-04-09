@@ -12,6 +12,7 @@ import GroupInfo from '../screens/GroupInfo';
 import requestScreen from '../screens/requestScreen';
 import bookDetails from '../screens/bookDetails';
 import BookClubLandingScreen from '../screens/BookClubLandingScreen';
+import bookDetailsClub from '../screens/bookDetailsClub';
 const Stack = createStackNavigator();
 
 export default function HomeStack() {
@@ -29,6 +30,7 @@ export default function HomeStack() {
        <Stack.Screen name='GroupInfo' component={GroupInfo} />
        <Stack.Screen name='requestScreen' component={requestScreen} options={{ title: 'Request Screen' }} />
        <Stack.Screen name='bookDetails' component={bookDetails} options={{ title: 'Book Details' }}/>
+       <Stack.Screen name='bookDetailsClub' component={bookDetailsClub} options={{ title: 'Book Details for Clubs' }}/>
     </Stack.Navigator>
   );
 }

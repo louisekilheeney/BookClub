@@ -86,15 +86,12 @@ export default function HomeLandingScreen() {
         console.log("Completed the book list for user: " + bookList);
     }
 
-
     function showError(e){
         console.log("show error",e);
     }
 
-     getListings();
-
+    getListings();
 //    useEffect(() => {
-//        // Update the document title using the browser API
 //        getListings();
 //      });
 
