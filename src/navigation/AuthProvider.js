@@ -152,8 +152,8 @@ export const AuthProvider = ({ children }) => {
         addClub: async (user, clubName) => {
          try {
          console.log("user details:", user);
-         console.log("club id", clubId);
-         userDetails = user.uid;
+         console.log("user id:", user.uid);
+         var userDetails = user.uid;
             firebase.database().ref('BookClub/').push({
               clubName,
              }).then((data)=>{
@@ -169,6 +169,9 @@ export const AuthProvider = ({ children }) => {
               console.log(wordsId);
               clubId = wordsId[4].replace("\"","");
 
+             firebase.database().ref('BookClub/'+clubId+'/Members').update({
+                                              userDetails,
+                                          });
              //update bookclub in users details
              firebase.database().ref('Users/'+user.uid+'/BookClub/'+clubId).update({
                                clubName,
@@ -189,11 +192,14 @@ export const AuthProvider = ({ children }) => {
            console.error(e);
          }
         },
-        JoinClub: async (user, clubName) => {
-         firebase.database().ref('Users/'+user.uid+'/BookClub').update({
-                                  clubName,
-                              });
-        },
+        JoinClub: async (user, clubItem, clubId) => {
+            console.log("adding new member to club with id", user.uid);
+            var member = user.uid;
+            console.log("adding new member to club " , clubId);
+             firebase.database().ref('BookClub/'+clubId+'/Members').update({
+                                      member,
+                                  });
+            },
         addBook: async (user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage, currentBook) => {
          try {
          console.log("user details:", user);
@@ -219,7 +225,7 @@ export const AuthProvider = ({ children }) => {
            console.error(e);
          }
         },
-         addBookToClub: async (user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage, id, currentBook) => {
+        addBookToClub: async (user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage, id, currentBook) => {
          try {
          console.log("checking value of id", id);
               firebase.database().ref('BookClub/'+id+'/BookList').push({

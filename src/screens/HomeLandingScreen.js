@@ -34,7 +34,7 @@ export default function HomeLandingScreen() {
       }
     const renderItem = ({ item }) => {
 
-    const backgroundColor = item.id === selectedId ? "#a3cef1" : "#1f7a8c";
+    const backgroundColor = item.id === selectedId ? "#1f7a8c" : "#1f7a8c";
     console.log("item data", item.currentBook);
 
     return (
@@ -94,13 +94,10 @@ export default function HomeLandingScreen() {
 //    useEffect(() => {
 //        getListings();
 //      });
-
    return (
       <View style={styles.container}>
         <Image style={styles.image} source={require('../logo/bookClubLogo.png')} />
-
         <Text style={styles.text}>Welcome {user.email}</Text>
-
         <Text style={styles.text}>Your Current books</Text>
           <SafeAreaView  style = {styles.list} >
               <FlatList
@@ -115,41 +112,40 @@ export default function HomeLandingScreen() {
   }
 const styles = StyleSheet.create({
   container: {
-   flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#e7ecef',
-        paddingTop: 10
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#e7ecef',
+    paddingTop: 10
   },
   text: {
-       fontSize: 18,
-       color: '#022b3a'
+    fontSize: 18,
+    color: '#022b3a'
   },
   item: {
-      backgroundColor: '#a3cef1',
-      padding: 5,
-      marginVertical: 1,
-      marginHorizontal: 0,
-      alignItems: 'center',
-      flex: 1,
-      justifyContent: 'center',
-
+    backgroundColor: '#a3cef1',
+    padding: 5,
+    marginVertical: 1,
+    marginHorizontal: 0,
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center'
     },
   scrollView: {
-      marginHorizontal: 5,
+     marginHorizontal: 5,
     },
   bookName: {
-      fontSize: 20,
-      marginVertical: 0,
-      marginHorizontal: 0,
-      height:24,
-      width:800,
-      padding: 0,
-      flex: 1,
-      justifyContent: 'center',
-      alignSelf:"center",
-      color: "white"
-    },
+     fontSize: 20,
+     marginVertical: 0,
+     marginHorizontal: 0,
+     height:24,
+     width:800,
+     padding: 0,
+     flex: 1,
+     justifyContent: 'center',
+     alignSelf:"center",
+     color: "white"
+   },
   list: {
      backgroundColor: '#ebebeb',
      borderRadius: 20,
@@ -161,16 +157,15 @@ const styles = StyleSheet.create({
      justifyContent: 'center',
      alignItems: 'center'
     },
-   HeadLine:{
+  HeadLine:{
      fontSize: 25,
      color: '#022b3a',
      padding: 10
-    },
-   Icon: {
-   justifyContent: 'space-between'
    },
-     image: {
+  Icon: {
+   justifyContent: 'space-between'
+  },
+  image: {
     width: 200, height: 200
   }
-
 });
