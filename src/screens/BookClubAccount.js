@@ -52,11 +52,13 @@ export default function BookClubAccount() {
 
   const joinClub = ({ item }) => {
   const backgroundColor = item.id === selectedId ? "#a3cef1" : "#1f7a8c";
-  console.log("whats in here", item);
+  console.log("whats in here in joinClub function", item);
+  console.log(" joinClub function id", item.id);
+  var clubId = item.id;
   return (
           <Item
               item={item}
-              onPress={() =>  navigation.navigate('requestScreen', {clubItem: item},setCLubListState,setCLubListStateClub)}
+              onPress={() =>  navigation.navigate('requestScreen', {clubItem: item, _club: clubId},setCLubListState,setCLubListStateClub)}
               style={{ backgroundColor }}
           />
       );
@@ -121,7 +123,7 @@ var getListingsForClub = function(){
                 });
                 i += 1;
             });
-            //console.log("Completed the book club List for user: " + user.uid);
+
         }
          getListings();
          getListingsForClub();
@@ -143,7 +145,7 @@ var getListingsForClub = function(){
         <SafeAreaView  style = {styles.list} >
           <FlatList
             data={clubListStateClub}
-            renderItem={renderItem}
+            renderItem={joinClub}
             keyExtractor={(item) => item.id}
             extraData={selectedId} />
         </SafeAreaView>
