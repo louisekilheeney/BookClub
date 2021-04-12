@@ -130,8 +130,8 @@ var getListingsForClub = function(){
             });
 
         }
-         getListings();
-         getListingsForClub();
+       getListings();
+       getListingsForClub();
 
      function isValueInClubList(id)
      {
@@ -144,7 +144,6 @@ var getListingsForClub = function(){
         }
         return false
      }
-
 
   return (
     <View style={styles.container}>

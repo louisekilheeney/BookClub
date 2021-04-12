@@ -127,6 +127,8 @@ export const AuthProvider = ({ children }) => {
 
            firebase.database().ref('BookClub/'+clubId).remove();
            console.log("removed club from DB");
+           firebase.database().ref('Users/'+user.uid+'/BookClub/'+clubId).remove();
+            console.log("removed  user from club in DB");
 
          } catch (e) {
             console.error(e);
@@ -211,9 +213,12 @@ export const AuthProvider = ({ children }) => {
         JoinClub: async (user, clubItem, clubId, clubName) => {
             console.log("adding new member to club with id", user.uid);
             var member = user.uid;
+            var userName = user.email;
             console.log("adding new member to club " , clubId);
-             firebase.database().ref('BookClub/'+clubId+'/Members/'+member).push({
+            console.log("adding new member to club " , userName);
+             firebase.database().ref('BookClub/'+clubId+'/Members/').push({
                                       member,
+                                      userName,
                                   });
              firebase.database().ref('Users/'+user.uid+'/BookClub/'+clubId).update({
                                             clubName,

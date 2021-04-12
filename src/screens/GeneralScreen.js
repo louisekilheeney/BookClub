@@ -39,11 +39,9 @@ export default function GeneralScreen({route}) {
         var newArray = bookList;
         setBookListState(newArray);
       }
+
     const renderItem = ({ item }) => {
-
     const backgroundColor = item.id === selectedId ? "#a3cef1" : "#1f7a8c";
-    console.log("item data", item.currentBook);
-
     return (
             <Item
                 item={item}
@@ -90,7 +88,6 @@ export default function GeneralScreen({route}) {
             }
         });
         console.log("Completed the book list for user: " + user.uid);
-        console.log("Completed the book list for user: " + bookList);
     }
 
     function showError(e){
@@ -100,8 +97,9 @@ export default function GeneralScreen({route}) {
 
    return (
       <View style={styles.container}>
+      <Image style={styles.image} source={require('../logo/bookClubLogo.png')} />
             <Text style={styles.header}> Welcome to {item.clubName} Book club</Text>
-            <Text style={styles.text}> Current book: bookname</Text>
+            <Text style={styles.text}> Current book:</Text>
               <SafeAreaView  style = {styles.list} >
                 <FlatList
                   data={bookListState}
@@ -110,13 +108,7 @@ export default function GeneralScreen({route}) {
                   extraData={selectedId}
                 />
                </SafeAreaView>
-            <Text style={styles.header}> Next Meeting is: </Text>
-               <Text style={styles.text}>
-               {moment
-                 .utc(TIME_NOW_IN_UTC)
-                 .local()
-                 .format('lll')}
-             </Text>
+
           </View>
     );
   }
@@ -161,7 +153,7 @@ const styles = StyleSheet.create({
   list: {
      backgroundColor: '#ebebeb',
      borderRadius: 20,
-     borderWidth: 0.5,
+
      borderColor: '#000',
      padding: 10,
      margin: 10,
@@ -174,6 +166,9 @@ const styles = StyleSheet.create({
      color: '#022b3a',
      paddingTop: 30,
      paddingBottom: 20
-    }
+    },
+   image: {
+    width: 200, height: 150
+  }
 
 });
