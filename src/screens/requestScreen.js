@@ -12,9 +12,10 @@ export default function requestScreen({route}) {
   const {clubItem,  _club } = route.params;
   console.log("detials club", clubItem, _club);
   console.log("item in request page", clubItem);
+  console.log("item in request page", clubItem.clubName);
   console.log("in request page");
   console.log(user);
-
+  var clubName =  clubItem.clubName;
   return (
     <View style={styles.container}>
 
@@ -22,7 +23,7 @@ export default function requestScreen({route}) {
 
       <Text style={styles.text}>Request to join club</Text>
 
-      <FormButton buttonTitle='Join Club' onPress={() =>  JoinClub(user, clubItem, _club)} />
+      <FormButton buttonTitle='Join Club' onPress={() =>  JoinClub(user, clubItem, _club, clubName)} />
     </View>
   );
 }

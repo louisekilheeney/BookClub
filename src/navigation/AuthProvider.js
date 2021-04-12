@@ -153,7 +153,7 @@ export const AuthProvider = ({ children }) => {
          try {
          console.log("user details:", user);
          console.log("user id:", user.uid);
-         var userDetails = user.uid;
+         var member = user.uid;
             firebase.database().ref('BookClub/').push({
               clubName,
              }).then((data)=>{
@@ -170,7 +170,7 @@ export const AuthProvider = ({ children }) => {
               clubId = wordsId[4].replace("\"","");
 
              firebase.database().ref('BookClub/'+clubId+'/Members').update({
-                                              userDetails,
+                                              member,
                                           });
              //update bookclub in users details
              firebase.database().ref('Users/'+user.uid+'/BookClub/'+clubId).update({
@@ -192,13 +192,16 @@ export const AuthProvider = ({ children }) => {
            console.error(e);
          }
         },
-        JoinClub: async (user, clubItem, clubId) => {
+        JoinClub: async (user, clubItem, clubId, clubName) => {
             console.log("adding new member to club with id", user.uid);
             var member = user.uid;
             console.log("adding new member to club " , clubId);
-             firebase.database().ref('BookClub/'+clubId+'/Members').update({
+             firebase.database().ref('BookClub/'+clubId+'/Members/'+member).push({
                                       member,
                                   });
+             firebase.database().ref('Users/'+user.uid+'/BookClub/'+clubId).update({
+                                            clubName,
+                                            clubId, });
             },
         addBook: async (user, bookName, author, bookSynopsis,bookPub,bookGenre,bookImage, currentBook) => {
          try {
