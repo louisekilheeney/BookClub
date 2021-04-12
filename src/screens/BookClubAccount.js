@@ -111,12 +111,14 @@ var getListingsForClub = function(){
                 console.log("Failed to get keys for user: " + user.uid);
                 return;
             }
+            console.log("clubids", ClubIds);
 
             // Manipulating data into a form the view can understand.
             var i = 0;
             Object.entries(snapValue).forEach(([id, value]) => {
-            // if(!id in ClubIds){
-
+            //console.log("Type of ClubList: ", typeof(ClubList), " is id in ClubIds: ", (id in ClubList), " ClubList: ", ClubList)
+            if(!isValueInClubList(id)){
+            console.log("got in here")
                     ClubListClub[i] = {};
                     ClubListClub[i]["id"] = id;
                     Object.entries(snapValue[id]).forEach(([key, val]) => {
@@ -124,14 +126,24 @@ var getListingsForClub = function(){
                         //console.log("clubs not joined Key:", key, "val:", val);
                     });
                     i += 1;
-
-
-
+                }
             });
 
         }
          getListings();
          getListingsForClub();
+
+     function isValueInClubList(id)
+     {
+        for( var i =0; i<ClubList.length; i++)
+        {
+            if(ClubList[i]["clubId"] == id)
+            {
+                return true
+            }
+        }
+        return false
+     }
 
 
   return (
