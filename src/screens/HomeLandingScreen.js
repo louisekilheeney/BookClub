@@ -77,7 +77,7 @@ export default function HomeLandingScreen() {
                 bookList[i]["id"] = id;
                 Object.entries(snapValue[id]).forEach(([key, val]) => {
                     bookList[i][key] = val;
-                    console.log("Key:", key, "val:", val);
+                    //console.log("Key:", key, "val:", val);
                 });
                 i += 1;
             }

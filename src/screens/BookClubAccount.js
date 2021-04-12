@@ -93,7 +93,7 @@ var getListingsForClub = function(){
               ClubList[i]["id"] = id;
               Object.entries(snapValue[id]).forEach(([key, val]) => {
                   ClubList[i][key] = val;
-                  console.log("personal clubs Key:", key, "val:", val);
+                 // console.log("personal clubs Key:", key, "val:", val);
               });
               i += 1;
           });
@@ -115,13 +115,18 @@ var getListingsForClub = function(){
             // Manipulating data into a form the view can understand.
             var i = 0;
             Object.entries(snapValue).forEach(([id, value]) => {
-                ClubListClub[i] = {};
-                ClubListClub[i]["id"] = id;
-                Object.entries(snapValue[id]).forEach(([key, val]) => {
-                    ClubListClub[i][key] = val;
-                    console.log("clubs not joined Key:", key, "val:", val);
-                });
-                i += 1;
+            // if(!id in ClubIds){
+
+                    ClubListClub[i] = {};
+                    ClubListClub[i]["id"] = id;
+                    Object.entries(snapValue[id]).forEach(([key, val]) => {
+                        ClubListClub[i][key] = val;
+                        //console.log("clubs not joined Key:", key, "val:", val);
+                    });
+                    i += 1;
+
+
+
             });
 
         }
