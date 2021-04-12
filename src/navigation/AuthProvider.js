@@ -120,9 +120,25 @@ export const AuthProvider = ({ children }) => {
           }
         },
 
-        request: async (user,clubName, clubId) => {
+        RemoveClub: async (user,clubName, clubId) => {
           try {
-          console.log("ask admin of club to be allowed to join")
+          console.log("removing club", clubName);
+          var member = user.uid;
+
+           firebase.database().ref('BookClub/'+clubId).remove();
+           console.log("removed club from DB");
+
+         } catch (e) {
+            console.error(e);
+          }
+        },
+        LeaveClub: async (user,clubName, clubId) => {
+          try {
+          console.log("removing club", clubName);
+          var member = user.uid;
+
+           firebase.database().ref('Users/'+user.uid+'/BookClub/'+clubId).remove();
+           console.log("removed  user from DB");
 
          } catch (e) {
             console.error(e);
