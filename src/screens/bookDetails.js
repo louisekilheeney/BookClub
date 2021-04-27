@@ -1,10 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, setState } from 'react';
 import { View, Text, StyleSheet, Switch, Link } from 'react-native';
 import FormButton from '../components/FormButton';
 import { AuthContext } from '../navigation/AuthProvider';
 import { CommonActions, useNavigation } from '@react-navigation/native';
-import StarRating from '../StarRating/starRating';
 import { firebase } from '../config';
+import { Rating, AirbnbRating } from 'react-native-elements';
+import StarRating from 'react-native-star-rating';
+
 
 export default function bookDetails({route}) {
   const { user, logout, setCurrentBook } = useContext(AuthContext);
@@ -13,6 +15,15 @@ export default function bookDetails({route}) {
   const [isEnabled, setIsEnabled] = useState(_item.currentBook);
   console.log("item", _item);
   console.log(user);
+  const state = { starCount: 2.5 };
+
+  function onStarRatingPress(rating) {
+  console.log('changing state');
+  console.log(rating);
+      ({ starCount: rating+1 });
+      console.log('after', rating);
+    }
+
 
   function onToggleSwitch(toggled){
         setIsEnabled(toggled);
@@ -37,6 +48,14 @@ export default function bookDetails({route}) {
           onValueChange={(isEnabled) => onToggleSwitch(isEnabled)}
           value={isEnabled}
         />
+      <Text style={styles.text}>Review</Text>
+      <Text style={styles.text}>Current review {state.starCount}</Text>
+      <StarRating
+            disabled={false}
+            maxStars={5}
+            rating={state.starCount}
+            selectedStar={(rating) => onStarRatingPress(rating)}
+       />
     </View>
   );
 }
