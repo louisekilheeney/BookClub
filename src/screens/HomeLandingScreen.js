@@ -24,6 +24,8 @@ export default function HomeLandingScreen() {
     const { user } = useContext(AuthContext);
     const navigation = useNavigation();
     var bookList = new Array();
+    var bookIdList = {};
+    var books = {};
     const [selectedId, setSelectedId] = useState(null);
     const [bookListState, setBookListState] = useState(bookList);
 
@@ -90,10 +92,40 @@ export default function HomeLandingScreen() {
         console.log("show error",e);
     }
 
+    function getBooks(){
+      firebase.database().ref('Users/').on('value', (usersIdsList) => {
+                       console.log("users", usersIdsList)
+                       getBookIds(usersIdsList)
+                   });
+    }
+
+    function getBookIds(usersIdsList){
+        var snapValue = usersIdsList.val()
+
+        if (!snapValue){
+            console.log("Failed to get books response data for user: " + user.uid);
+            return;
+        }
+        var i = 0;
+        Object.entries(snapValue).forEach(([id, value]) => {
+            console.log("id", id)
+            bookIdList[id] = {};
+            i += 1;
+        });
+        console.log("ids: " + Object.entries(bookIdList));
+        Object.entries(bookIdList).forEach(([key, value]) => {
+          console.log(key , value); // key ,value
+             firebase.database().ref('Users/'+key+'/BookList').on('value', (usersIdsBooks) => {
+                   console.log("book list for "+key+ " details: ", usersIdsBooks)
+                   books[key] = usersIdsBooks;
+                   console.log("final book list", books)
+              });
+        });
+    }
+
     getListings();
-//    useEffect(() => {
-//        getListings();
-//      });
+    getBooks();
+
    return (
       <View style={styles.container}>
         <Image style={styles.image} source={require('../logo/bookClubLogo.png')} />
@@ -107,6 +139,15 @@ export default function HomeLandingScreen() {
                 extraData={selectedId}
               />
              </SafeAreaView>
+        <Text style={styles.text}>Recommended for you</Text>
+          <SafeAreaView  style = {styles.list} >
+          <FlatList
+            data={bookListState}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+            extraData={selectedId}
+          />
+         </SafeAreaView>
       </View>
     );
   }
