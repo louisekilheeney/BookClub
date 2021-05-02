@@ -1,10 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, setState } from 'react';
 import { View, Text, StyleSheet, Switch, Link } from 'react-native';
 import FormButton from '../components/FormButton';
 import { AuthContext } from '../navigation/AuthProvider';
 import { CommonActions, useNavigation } from '@react-navigation/native';
-import StarRating from '../StarRating/starRating';
 import { firebase } from '../config';
+import { Rating, AirbnbRating } from 'react-native-elements';
+//import StarRating from 'react-native-star-rating';
+import Stars from '../components/Stars';
+
 
 export default function bookDetails({route}) {
   const { user, logout, setCurrentBook } = useContext(AuthContext);
@@ -13,6 +16,14 @@ export default function bookDetails({route}) {
   const [isEnabled, setIsEnabled] = useState(_item.currentBook);
   console.log("item", _item);
   console.log(user);
+  var starCount ="";
+  const state = { starCount: 0 };
+  const {updateReviewBook } = useContext(AuthContext)
+
+
+   var handleCallBack = (childData) => {
+        starCount = childData;
+   }
 
   function onToggleSwitch(toggled){
         setIsEnabled(toggled);
@@ -21,6 +32,36 @@ export default function bookDetails({route}) {
         setCurrentBook(_item.author, _item.bookName, _item.bookSynopsis, _item.bookGenre, _item.id,
          _item.bookImage, _item.bookPub, toggled);
   }
+
+    var bookList = 0;
+    const [selectedId, setSelectedId] = useState(null);
+    const [bookListState, setBookListState] = useState(bookList);
+    console.log(user);
+    var  bookId = _item.id;
+
+
+    function getListings(){
+        firebase.database().ref('Users/'+user.uid+'/BookList/'+bookId+'/review').on('value', (snapshot) => {
+                       setListing(snapshot);
+                   });
+    }
+
+    function setListing(snapshot){
+        var snapValue = snapshot.val()
+        console.log("review: ", snapValue);
+        if (!snapValue){
+            console.log("Failed to get members response data ");
+            return;
+        }
+        bookList = snapValue;
+        console.log("Completed the book list for user: " + user.uid);
+        console.log("review value: " + bookList);
+    }
+
+    function showError(e){
+        console.log("show error",e);
+    }
+    getListings();
 
   return (
     <View style={styles.container}>
@@ -37,6 +78,8 @@ export default function bookDetails({route}) {
           onValueChange={(isEnabled) => onToggleSwitch(isEnabled)}
           value={isEnabled}
         />
+      <Stars bookId={_item.id} userId={user} parentCallBack={updateReviewBook} getStars={bookList}/>
+      <Text> {starCount} </Text>
     </View>
   );
 }
