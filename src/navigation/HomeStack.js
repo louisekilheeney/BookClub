@@ -13,6 +13,7 @@ import requestScreen from '../screens/requestScreen';
 import bookDetails from '../screens/bookDetails';
 import BookClubLandingScreen from '../screens/BookClubLandingScreen';
 import bookDetailsClub from '../screens/bookDetailsClub';
+import messageScreen from '../screens/messageScreen';
 const Stack = createStackNavigator();
 
 export default function HomeStack() {
@@ -28,6 +29,7 @@ export default function HomeStack() {
        <Stack.Screen name='BookClubLandingScreen' component={BookClubLandingScreen}  options={{ title: 'BookClub Account' }}/>
        <Stack.Screen name='AddBookClub' component={AddBookClub} />
        <Stack.Screen name='GroupInfo' component={GroupInfo} />
+       <Stack.Screen name='messageScreen' component={messageScreen} />
        <Stack.Screen name='requestScreen' component={requestScreen} options={{ title: 'Request Screen' }} />
        <Stack.Screen name='bookDetails' component={bookDetails} options={{ title: 'Book Details' }}/>
        <Stack.Screen name='bookDetailsClub' component={bookDetailsClub} options={{ title: 'Book Details for Clubs' }}/>
