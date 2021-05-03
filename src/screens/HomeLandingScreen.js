@@ -19,9 +19,9 @@ import Collapsible from 'react-native-collapsible';
 //    const renderItem = ({ item }) => (
 //       <Item bookName={item.bookName} />
 //        );
-    const NextBook = ({ bookrec, onPress, style }) => (
+    const NextBook = ({ item, onPress, style }) => (
         <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
-            <Text style={styles.bookName}> <IconsFeather name="book-open" size={20} /> {bookrec.bookName} </Text>
+            <Text style={styles.bookName}> <IconsFeather name="book-open" size={20} /> {item.bookName} </Text>
         </TouchableOpacity>
         );
 
@@ -63,12 +63,12 @@ export default function HomeLandingScreen() {
         );
     };
 
-    const renderBook = ( {item} ) => {
+    const renderBook = ( bookrec ) => {
        const backgroundColor = "#1f7a8c";
-       console.log("item what is in there", item);
+       console.log("item what is in there", bookrec);
            return (
-               <NextBook
-                   item={item}
+               <Item
+                   bookrec={bookrec}
                    onPress={() =>  setBookState }
                    style={{ backgroundColor }}
                />
@@ -181,7 +181,7 @@ export default function HomeLandingScreen() {
                                 bookrec = nextBookVal;
                                 console.log("this is the book", bookrec)
                                 console.log("this is the bookName", bookrec.bookName)
-                                //renderBook(bookrec);
+                                renderBook(bookrec);
                             }
                       });
                    });
@@ -204,11 +204,8 @@ export default function HomeLandingScreen() {
               />
         </SafeAreaView>
         <Text style={styles.text}>Recommended for you</Text>
-         <SafeAreaView  style = {styles.list} >
-           <FlatList
-             data={bookState}
-             renderItem={renderBook}
-           />
+         <SafeAreaView  style = {styles.recBook} >
+             <Text style={styles.text}>{bookrec.bookName}</Text>
          </SafeAreaView>
       </View>
     );
@@ -257,6 +254,16 @@ const styles = StyleSheet.create({
      padding: 10,
      margin: 10,
      flex: 1,
+     justifyContent: 'center',
+     alignItems: 'center'
+    },
+    recBook: {
+     backgroundColor: '#ebebeb',
+     borderRadius: 20,
+     borderWidth: 0.5,
+     borderColor: '#000',
+     padding: 20,
+     margin: 10,
      justifyContent: 'center',
      alignItems: 'center'
     },
