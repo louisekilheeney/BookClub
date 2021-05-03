@@ -1,5 +1,5 @@
 import React, { useContext, Component, useState, useEffect} from 'react';
-import { View,Icon, Text,Body, StyleSheet, ScrollView, Link, TouchableOpacity, FlatList, SafeAreaView, RefreshControl, Image } from 'react-native';
+import { View,Icon, Text,Body, StyleSheet, ScrollView, Link, TouchableOpacity, FlatList, SafeAreaView, RefreshControl, Image, ListView } from 'react-native';
 import FormButton from '../components/FormButton';
 import DisplayData from '../components/DisplayData';
 import { AuthContext } from '../navigation/AuthProvider';
@@ -16,9 +16,16 @@ import Collapsible from 'react-native-collapsible';
             <Text style={styles.bookName}> <IconsFeather name="book-open" size={20} /> {item.bookName} </Text>
         </TouchableOpacity>
         );
-    const renderItem = ({ item }) => (
-       <Item bookName={item.bookName} />
+//    const renderItem = ({ item }) => (
+//       <Item bookName={item.bookName} />
+//        );
+    const NextBook = ({ bookrec, onPress, style }) => (
+        <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
+            <Text style={styles.bookName}> <IconsFeather name="book-open" size={20} /> {bookrec.bookName} </Text>
+        </TouchableOpacity>
         );
+
+
 
 export default function HomeLandingScreen() {
     const { user } = useContext(AuthContext);
@@ -26,20 +33,28 @@ export default function HomeLandingScreen() {
     var bookList = new Array();
     var bookIdList = {};
     var books = {};
+    var genre = ""
+    var bookrec  = new Array();
     const [selectedId, setSelectedId] = useState(null);
     const [bookListState, setBookListState] = useState(bookList);
+    const [bookState, setBookState] = useState(bookrec);
 
 
     const addElement = (bookList) => {
         var newArray = bookList;
         setBookListState(newArray);
       }
+
+    const addElementBook = (bookrec) => {
+        var newArray = bookrec;
+        setBookState(newArray);
+      }
+
     const renderItem = ({ item }) => {
+        const backgroundColor = item.id === selectedId ? "#1f7a8c" : "#1f7a8c";
+        console.log("item data", item.currentBook);
 
-    const backgroundColor = item.id === selectedId ? "#1f7a8c" : "#1f7a8c";
-    console.log("item data", item.currentBook);
-
-    return (
+        return (
             <Item
                 item={item}
                 onPress={() =>  setBookListState }
@@ -47,6 +62,18 @@ export default function HomeLandingScreen() {
             />
         );
     };
+
+    const renderBook = ( {item} ) => {
+       const backgroundColor = "#1f7a8c";
+       console.log("item what is in there", item);
+           return (
+               <NextBook
+                   item={item}
+                   onPress={() =>  setBookState }
+                   style={{ backgroundColor }}
+               />
+            );
+        };
 
     function getListings(){
         console.log("Fetching data from db for PersonalAccount page for user: " + user.uid);
@@ -79,7 +106,6 @@ export default function HomeLandingScreen() {
                 bookList[i]["id"] = id;
                 Object.entries(snapValue[id]).forEach(([key, val]) => {
                     bookList[i][key] = val;
-                    //console.log("Key:", key, "val:", val);
                 });
                 i += 1;
             }
@@ -94,9 +120,9 @@ export default function HomeLandingScreen() {
 
     function getBooks(){
       firebase.database().ref('Users/').on('value', (usersIdsList) => {
-                       console.log("users", usersIdsList)
-                       getBookIds(usersIdsList)
-                   });
+           console.log("users", usersIdsList)
+           getBookIds(usersIdsList)
+       });
     }
 
     function getBookIds(usersIdsList){
@@ -115,12 +141,50 @@ export default function HomeLandingScreen() {
         console.log("ids: " + Object.entries(bookIdList));
         Object.entries(bookIdList).forEach(([key, value]) => {
           console.log(key , value); // key ,value
+          if(user.uid != key){
              firebase.database().ref('Users/'+key+'/BookList').on('value', (usersIdsBooks) => {
                    console.log("book list for "+key+ " details: ", usersIdsBooks)
-                   books[key] = usersIdsBooks;
-                   console.log("final book list", books)
+                   if(usersIdsBooks.val()){
+                       Object.entries(usersIdsBooks.val()).forEach(([id, val]) => {
+                          books[id] = val;
+                          console.log(id,val);
+                       });
+                       console.log("final book list", books);
+                   }
               });
+          }
+        makeRecommendations(books);
         });
+    }
+    function makeRecommendations(books){
+        //if current user reviewed a genre high suggest another book from that same genre high and one random one from the collection of books
+        console.log("here is the collection of books", books);
+            firebase.database()
+            .ref('Users/'+user.uid+'/BookList')
+                .on('value', (snapshot) => {
+
+                      var randomBook = Math.floor(Math.random() * snapshot.numChildren());
+                      var t = 0;
+                      console.log("This is the users books", snapshot.child("-MWtJTwuftK5gO92P9TQ"));
+                      Object.entries(snapshot.val()).forEach(([id, val]) => {
+                          if (t == randomBook){
+                          console.log(val);
+                              genre = val["bookGenre"];
+                          }
+                          t += 1;
+                      });
+                      console.log("genre", genre);
+                      Object.entries(books).forEach(([nextBookId, nextBookVal]) => {
+                            if(nextBookVal.bookGenre == genre){
+                                console.log("books", nextBookId);
+                                console.log("books", nextBookVal);
+                                bookrec = nextBookVal;
+                                console.log("this is the book", bookrec)
+                                console.log("this is the bookName", bookrec.bookName)
+                                //renderBook(bookrec);
+                            }
+                      });
+                   });
     }
 
     getListings();
@@ -138,15 +202,13 @@ export default function HomeLandingScreen() {
                 keyExtractor={(item) => item.id}
                 extraData={selectedId}
               />
-             </SafeAreaView>
+        </SafeAreaView>
         <Text style={styles.text}>Recommended for you</Text>
-          <SafeAreaView  style = {styles.list} >
-          <FlatList
-            data={bookListState}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-            extraData={selectedId}
-          />
+         <SafeAreaView  style = {styles.list} >
+           <FlatList
+             data={bookState}
+             renderItem={renderBook}
+           />
          </SafeAreaView>
       </View>
     );
