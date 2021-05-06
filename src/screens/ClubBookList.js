@@ -36,7 +36,7 @@ export default function ClubBookList({route}) {
 
 
     const renderItem = ({ item }) => {
-    const backgroundColor = item.id === selectedId ? "#a3cef1" : "#1f7a8c";
+    const backgroundColor = item.id === selectedId ? "#1f7a8c" : "#1f7a8c";
     return (
             <Item
                 item={item}
