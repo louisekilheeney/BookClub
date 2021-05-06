@@ -205,7 +205,7 @@ export default function HomeLandingScreen() {
         </SafeAreaView>
         <Text style={styles.text}>Recommended for you</Text>
          <SafeAreaView  style = {styles.recBook} >
-             <Text style={styles.text}>{bookrec.bookName}</Text>
+             <Text style={styles.text}>{bookrec.bookName} By {bookrec.author}</Text>
          </SafeAreaView>
       </View>
     );

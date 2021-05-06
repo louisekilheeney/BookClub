@@ -69,7 +69,8 @@ export default function bookDetails({route}) {
       <Text style={styles.text}>Book Author: {_item.author} </Text>
       <Text style={styles.text}>Book Genre: {_item.bookGenre}</Text>
       <Text style={styles.text}>Book Publisher: {_item.bookPub}</Text>
-      <Text style={styles.text}>Book synopsis: {_item.bookSynopsis} </Text>
+      <Text style={styles.text}> Book synopsis: </Text>
+      <Text style={styles.text}> {_item.bookSynopsis} </Text>
       <Text style={styles.text}>Current Book? </Text>
       <Switch
           trackColor={{ false: "#767577", true: "#81b0ff" }}

@@ -99,7 +99,7 @@ export default function GeneralScreen({route}) {
       <View style={styles.container}>
       <Image style={styles.image} source={require('../logo/bookClubLogo.png')} />
             <Text style={styles.header}> Welcome to {item.clubName} Book club</Text>
-            <Text style={styles.text}> Current book:</Text>
+            <Text style={styles.text}> Current books:</Text>
               <SafeAreaView  style = {styles.list} >
                 <FlatList
                   data={bookListState}
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   list: {
      backgroundColor: '#ebebeb',
      borderRadius: 20,
-
+     borderWidth: 0.5,
      borderColor: '#000',
      padding: 10,
      margin: 10,
