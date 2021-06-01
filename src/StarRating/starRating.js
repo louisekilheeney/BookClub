@@ -1,3 +1,7 @@
+//code is derived/used and modified from: https://reactnativeexample.com/react-native-component-for-generating-and-displaying-interactive-star-ratings/
+// Author: React Native Example
+// last accessed on: 01/06/2021
+
 import React from "react";
 import PropTypes from "prop-types";
 import { View, TouchableOpacity, Text } from "react-native";

@@ -307,7 +307,21 @@ export const AuthProvider = ({ children }) => {
                 }catch (e) {
                  console.error(e);
                }
-              },
+            },
+       updateReviewBookClub: async ( bookId, user, review) => {
+          try {
+
+             firebase.database().ref('BookClub/'+user+'/BookList/'+bookId).update({
+               review
+              }).then((data)=>{
+               console.log('Adding review to users personal collection' , data)
+              }).catch((error)=>{
+               console.log('error with adding review to personal list ' , error)
+             });
+           }catch (e) {
+            console.error(e);
+          }
+         },
 
         }
       }
