@@ -1,3 +1,11 @@
+//code is derived/used and modified from: https://reactnative.dev/docs/flatlist
+// Author: React Native
+// last accessed on: 01/06/2021
+
+//code is derived/used and modified from: https://firebase.google.com/docs/database/web/read-and-write
+// Author: React Native
+// last accessed on: 01/06/2021
+
 import React, { useContext, Component, useState, useEffect} from 'react';
 import { View,Icon, Text,Body, StyleSheet, ScrollView, Link, TouchableOpacity, FlatList, SafeAreaView, Image } from 'react-native';
 import FormButton from '../components/FormButton';

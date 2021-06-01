@@ -1,3 +1,11 @@
+//code is derived/used and modified from: https://blog.logrocket.com/how-to-set-up-email-authentication-with-react-native-react-navigation-and-firebase/
+// Author: Aman Mittal
+// last accessed on: 01/06/2021
+
+//code is derived/used and modified from: https://reactnative.dev/docs/switch
+// Author: React Native
+// last accessed on: 01/06/2021
+
 import React, { useContext, useState } from 'react';
 import { Button, View, Text, StyleSheet,TouchableOpacity, Alert, Switch } from 'react-native';
 import FormButton from '../components/FormButton';
@@ -5,8 +13,6 @@ import RemoveButton from '../components/RemoveButton';
 import { AuthContext } from '../navigation/AuthProvider';
 import { CommonActions, useNavigation } from '@react-navigation/native'
 import { windowHeight, windowWidth } from '../utils/Dimension';
-
-
 
 
 export default function SettingScreen() {

@@ -1,3 +1,7 @@
+//code is derived/used and modified from: https://reactnavigation.org/docs/bottom-tab-navigator/
+// Author: React Navigation
+// last accessed on: 01/06/2021
+
 import React, { useContext, Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import FormButton from '../components/FormButton';
