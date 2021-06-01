@@ -9,7 +9,6 @@
 import React, { useContext, Component, useState, useEffect} from 'react';
 import { View,Icon, Text,Body, StyleSheet, ScrollView, Link, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
 import FormButton from '../components/FormButton';
-import DisplayData from '../components/DisplayData';
 import { AuthContext } from '../navigation/AuthProvider';
 import { CommonActions, useNavigation } from '@react-navigation/native'
 import auth from '@react-native-firebase/auth';
