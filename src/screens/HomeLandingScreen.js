@@ -1,3 +1,7 @@
+//code is derived/used and modified from: https://blog.logrocket.com/how-to-set-up-email-authentication-with-react-native-react-navigation-and-firebase/
+// Author: Aman Mittal
+// last accessed on: 01/06/2021
+
 import React, { useContext, Component, useState, useEffect} from 'react';
 import { View,Icon, Text,Body, StyleSheet, ScrollView, Link, TouchableOpacity, FlatList, SafeAreaView, RefreshControl, Image, ListView } from 'react-native';
 import FormButton from '../components/FormButton';
@@ -205,7 +209,7 @@ export default function HomeLandingScreen() {
         </SafeAreaView>
         <Text style={styles.text}>Recommended for you</Text>
          <SafeAreaView  style = {styles.recBook} >
-             <Text style={styles.text}>{bookrec.bookName}</Text>
+             <Text style={styles.text}>{bookrec.bookName} By {bookrec.author}</Text>
          </SafeAreaView>
       </View>
     );

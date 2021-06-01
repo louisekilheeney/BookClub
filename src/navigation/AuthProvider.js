@@ -1,3 +1,7 @@
+//code is derived/used and modified from: https://blog.logrocket.com/how-to-set-up-email-authentication-with-react-native-react-navigation-and-firebase/
+// Author: Aman Mittal
+// last accessed on: 01/06/2021
+
 import React, { createContext, useState } from 'react';
 import auth from '@react-native-firebase/auth';
 import { firebase } from '../config';

@@ -1,3 +1,7 @@
+//code is derived/used and modified from: https://medium.com/crowdbotics/how-to-integrate-custom-calendar-event-creation-in-a-react-native-app-548f08137c48
+// Author: John Bender
+// last accessed on: 01/06/2021
+
 import React, { useContext, useState } from 'react';
 import { View, Text, StyleSheet,TextInput, TouchableOpacity } from 'react-native';
 import FormButton from '../components/FormButton';

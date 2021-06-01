@@ -1,3 +1,5 @@
+
+
 import React, { useContext, useState } from 'react';
 import { View, Text, StyleSheet,  TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
 import FormButton from '../components/FormButton';
@@ -102,6 +104,7 @@ export default function GroupInfo({route}) {
        </SafeAreaView>
       <RemoveButton buttonTitle='Delete club' onPress={() => RemoveClub(user, clubName, clubId)} />
       <RemoveButton buttonTitle='Leave club' onPress={() => LeaveClub(user, clubName, clubId)} />
+
     </View>
   );
 }
@@ -145,9 +148,8 @@ const styles = StyleSheet.create({
       },
     list: {
        backgroundColor: '#ebebeb',
-       borderRadius: 20,
+       borderRadius: 10,
        borderWidth: 0.5,
-       borderColor: '#000',
        padding: 10,
        margin: 10,
        flex: 1,

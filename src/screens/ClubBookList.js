@@ -1,3 +1,11 @@
+//code is derived/used and modified from: https://reactnative.dev/docs/flatlist
+// Author: React Native
+// last accessed on: 01/06/2021
+
+//code is derived/used and modified from: https://firebase.google.com/docs/database/web/read-and-write
+// Author: React Native
+// last accessed on: 01/06/2021
+
 import React, { useContext, Component, useState, useEffect} from 'react';
 import { View,Icon, Text,Body, StyleSheet, ScrollView, Link, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
 import FormButton from '../components/FormButton';
@@ -23,8 +31,8 @@ export default function ClubBookList({route}) {
     const navigation = useNavigation();
     var bookList = new Array();
 
-    console.log("item in club boooooooooooooooooooooooooooook list", route.params["item"]["id"]);
-    console.log("item in club boooooook list", route.params["item"]);
+    //console.log("item in club boooooooooooooooooooooooooooook list", route.params["item"]["id"]);
+    //console.log("item in club boooooook list", route.params["item"]);
     var clubId = route.params["item"]["id"];
     const [selectedId, setSelectedId] = useState(null);
     const [bookListState, setBookListState] = useState(bookList);
@@ -36,7 +44,7 @@ export default function ClubBookList({route}) {
 
 
     const renderItem = ({ item }) => {
-    const backgroundColor = item.id === selectedId ? "#a3cef1" : "#1f7a8c";
+    const backgroundColor = item.id === selectedId ? "#1f7a8c" : "#1f7a8c";
     return (
             <Item
                 item={item}
@@ -80,7 +88,7 @@ export default function ClubBookList({route}) {
             });
             i += 1;
         });
-        console.log("Completed the book list for user: " + user.uid);
+        //console.log("Completed the book list for user: " + user.uid);
     }
 
     function showError(e){
@@ -97,8 +105,8 @@ export default function ClubBookList({route}) {
   return (
 
     <View style={styles.container}>
-        <Text style={styles.HeadLine}>Books</Text>
         <FormButton buttonTitle='AddBook' onPress={() =>  navigation.navigate('AddBookClub', {id: route.params["item"]["id"]})} />
+        <Text style={styles.HeadLine}>Books</Text>
        <SafeAreaView  style = {styles.list} >
          <FlatList
            data={bookListState}
@@ -145,6 +153,7 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignSelf:"center",
+      color: "white",
     },
   list: {
      backgroundColor: '#ebebeb',
@@ -159,6 +168,7 @@ const styles = StyleSheet.create({
     },
    HeadLine:{
      fontSize: 25,
+     paddingTop: 20,
      color: '#333333'
     }
 

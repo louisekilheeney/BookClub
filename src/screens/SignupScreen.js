@@ -1,9 +1,12 @@
+//code is derived/used and modified from: https://blog.logrocket.com/how-to-set-up-email-authentication-with-react-native-react-navigation-and-firebase/
+// Author: Aman Mittal
+// last accessed on: 01/06/2021
+
 import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
 import { AuthContext } from '../navigation/AuthProvider';
-
 
 export default function SignupScreen({navigation}) {
   const [email, setEmail] = useState('');

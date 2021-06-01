@@ -1,3 +1,11 @@
+//code is derived/used and modified from: https://reactnative.dev/docs/flatlist
+// Author: React Native
+// last accessed on: 01/06/2021
+
+//code is derived/used and modified from: https://firebase.google.com/docs/database/web/read-and-write
+// Author: React Native
+// last accessed on: 01/06/2021
+
 import React, { useContext, Component, useState, useEffect} from 'react';
 import { View,Icon, Text,Body, StyleSheet, ScrollView, Link, TouchableOpacity, FlatList, SafeAreaView, Image } from 'react-native';
 import FormButton from '../components/FormButton';
@@ -99,7 +107,7 @@ export default function GeneralScreen({route}) {
       <View style={styles.container}>
       <Image style={styles.image} source={require('../logo/bookClubLogo.png')} />
             <Text style={styles.header}> Welcome to {item.clubName} Book club</Text>
-            <Text style={styles.text}> Current book:</Text>
+            <Text style={styles.text}> Current books:</Text>
               <SafeAreaView  style = {styles.list} >
                 <FlatList
                   data={bookListState}
@@ -153,7 +161,7 @@ const styles = StyleSheet.create({
   list: {
      backgroundColor: '#ebebeb',
      borderRadius: 20,
-
+     borderWidth: 0.5,
      borderColor: '#000',
      padding: 10,
      margin: 10,

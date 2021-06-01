@@ -1,3 +1,15 @@
+//code is derived/used and modified from: https://reactnavigation.org/docs/bottom-tab-navigator/
+// Author: React Navigation
+// last accessed on: 01/06/2021
+
+//code is derived/used and modified from: https://reactnativeexample.com/react-native-component-for-generating-and-displaying-interactive-star-ratings/
+// Author: React Native Example
+// last accessed on: 01/06/2021
+
+//code is derived/used and modified from: https://reactnative.dev/docs/switch
+// Author: React Native
+// last accessed on: 01/06/2021
+
 import React, { useContext, useState, setState } from 'react';
 import { View, Text, StyleSheet, Switch, Link } from 'react-native';
 import FormButton from '../components/FormButton';
@@ -69,7 +81,8 @@ export default function bookDetails({route}) {
       <Text style={styles.text}>Book Author: {_item.author} </Text>
       <Text style={styles.text}>Book Genre: {_item.bookGenre}</Text>
       <Text style={styles.text}>Book Publisher: {_item.bookPub}</Text>
-      <Text style={styles.text}>Book synopsis: {_item.bookSynopsis} </Text>
+      <Text style={styles.text}> Book synopsis: </Text>
+      <Text style={styles.text}> {_item.bookSynopsis} </Text>
       <Text style={styles.text}>Current Book? </Text>
       <Switch
           trackColor={{ false: "#767577", true: "#81b0ff" }}
