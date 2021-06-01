@@ -17,7 +17,6 @@ import { AuthContext } from '../navigation/AuthProvider';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import { firebase } from '../config';
 import { Rating, AirbnbRating } from 'react-native-elements';
-//import StarRating from 'react-native-star-rating';
 import Stars from '../components/Stars';
 
 
